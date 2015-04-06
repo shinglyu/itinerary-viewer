@@ -6,7 +6,7 @@ r.onreadystatechange = function () {
     if (r.readyState != 4 || r.status != 200) return; 
       
       console.log(r.responseText)
-      nodes = parser.parse(r.responseText)[0]; //Depends on parser and app.jsx
-      console.log(nodes[0])
+      days= parser.parse(r.responseText); //Depends on parser and app.jsx
+      console.log(days)
 };
 r.send();

@@ -27,6 +27,17 @@ var NodeIcon = React.createClass({
     return (<div className="icon"><img src={"pic/icon-" + this.props.type + ".png"} /></div>)
   }
 });
+
+var DayTimelines = React.createClass({
+  render: function(){
+    days = this.props.days.map(function(day){return(<DayTimeline nodes={day}/>)});
+    return (
+      <div>
+      {days}
+      </div>
+    )
+  }
+});
 /*
 nodes = [
       { type: 'T:', title: '捷運凹仔底 => 紅32/紅33/168 => 美術館'  },
@@ -41,5 +52,7 @@ nodes = [
 */
 
 
-React.render(<DayTimeline nodes={nodes}/>, document.body);
+
+//React.render(<DayTimeline nodes={nodes}/>, document.body);
+React.render(<DayTimelines days={days}/>, document.body);
 
