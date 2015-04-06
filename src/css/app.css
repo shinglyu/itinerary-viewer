@@ -90,15 +90,17 @@ div.container {
 }
 
 
-ul {
-  display:flex;
-  flex-direction:column;
-  flex-wrap:wrap;
-  /*flex-wrap:wrap;*/
-}
-
 @media print  {
 div.container {
   -moz-columns:2 ;
+  -moz-column-fill:balance;
 }
+.timeline{
+
+    display:inline;
+  vertical-align: top;
+}
+  div.node{
+    display:iblock;
+  }
 }

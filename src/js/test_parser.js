@@ -1,5 +1,4 @@
 var parser = require('./localparser.js')
-/*
 var result = parser.parse(
   "\
   4/3\n\
@@ -7,7 +6,7 @@ var result = parser.parse(
     T: 嘉義 => 台鐵 => 高雄\n\
     S: 康橋雄中館; 高雄市三民區建國三路44號; +886-7-9698899  Booking ID 66020786\n\
   \n\
-  ----- \n\
+  -----\n\
   4/4\n\
     T: 捷運凹仔底 => 紅32/紅33/168 => 美術館\n\
     S: 美術館\n\
@@ -29,12 +28,11 @@ var result = parser.parse(
     S: //蓮池潭 捷運左營 => 舊城假日文化公車\n\
     S: //衛武營\n\
     T: 高鐵 18:30\n\
-  -----\n\
+  -----n\
   腳踏車: 信用卡借 60 分鐘免費\n\
   公車: 可用\n\
   "
 )
-*/
 
-var result = parser.parse("abc\n-----\ndec\n-----\nabd:efje\n")
+//var result = parser.parse("abc fff\ndef T:\n-----\ndec\n-----\nabd:efje\n")
 console.log(result)
