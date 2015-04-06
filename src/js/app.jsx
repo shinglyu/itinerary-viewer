@@ -3,13 +3,13 @@ var DayTimeline = React.createClass({
     nodes = this.props.nodes.map(function(node){
       return (
         <li>
-          <div className="icon"><img src="pic/icon.png"/></div>
+          <NodeIcon type={node.type[0]}/>
           <div className="content">
-            <h3 className="time">{node.node.time}</h3>
-            <h2 className="title">{node.node.title}</h2>
+            <h3 className="time">{node.time}</h3>
+            <h2 className="title">{node.title}</h2>
             <span>&nbsp;&nbsp;&nbsp;</span>
-            <p className="address">{node.node.address}</p>
-            <p className="description">{node.node.description}</p>
+            <p className="address">{node.address}</p>
+            <p className="description">{node.description}</p>
           </div>
         </li>
       )
@@ -22,24 +22,24 @@ var DayTimeline = React.createClass({
   }
 });
 
+var NodeIcon = React.createClass({
+  render: function(){
+    return (<div className="icon"><img src={"pic/icon-" + this.props.type + ".png"} /></div>)
+  }
+});
+/*
 nodes = [
-  {
-  'type':'sight',
-  'node':{
-    'title':'Bar',
-    'time':'2015/3/31',
-    'address': '1st street, NY',
-    'description': 'foo bar',
-    }
-  },
-  {
-  'type':'sight',
-  'node':{
-    'title':'Bar',
-    'time':'2015/3/31',
-    'address': '1st street, NY',
-    'description': 'foo bar',
-    }
-  },
+      { type: 'T:', title: '捷運凹仔底 => 紅32/紅33/168 => 美術館'  },
+      { type: 'S:', title: '美術館'  },
+      { type: 'T:', title: '捷運西子灣'  },
+      { type: 'F:', title: '哈瑪星廟口正老牌汕頭麵'  },
+      { type: 'S:', title: '英國領事館, 中山大學'  },
+      { type: 'S:', title: '駁二特區, 真愛碼頭, 光榮碼頭 '  },
+      { type: 'T:', title: '捷運鹽埕埔 or 中央公園'  },
+      { type: 'S:', title: '三多商圈/中央公園/85 大樓'  }, 
 ]; //TODO:read and parse file
+*/
+
+
 React.render(<DayTimeline nodes={nodes}/>, document.body);
+
