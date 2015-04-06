@@ -11,11 +11,14 @@
 .timeline {
 	margin: 30px 0 0 0;
 	padding: 0;
-	list-style: none;
 	position: relative;
+  display:flex;
+  flex-flow:column wrap;
+  max-height:90vh;
 }
 
 /* The Line */
+/*
 .timeline:before{
   content:'';
 	position: absolute;
@@ -27,33 +30,75 @@
 	margin-left: -10px;
   z-index: -1
 }
-
-.timeline > li > div{
-  display:inline-block;
-  vertical-align:top;
+*/
+div.node{
+  position:relative;
+}
+div.line {
+  
+  position:absolute;
+  background:#afdcf8;
+  width:10px;
+  height:100%;
+  margin-left:-40px;
+  z-index:-1;
+  border: 1px solid;
+ border-radius: 10px;
 }
 
-.timeline > li > div > img{
+.timeline > li {
+  display: flex;
+  white-space:normal;
+}
+
+div.icon {
+  display:inline-block;
+}
+
+div.icon > img{
   height: 40px;
   width:40px;
 }
 
-.timeline > li > div.content {
-  padding-left:5%;
+div.content {
+  padding-left: 15px;
   min-height: 60px;
-}
-
-.timeline > li > div.content > h3{
+  display:inline-block;
+  vertical-align:top;
+ max-width:90%;
+  white-space: normal;
   margin-top:5px;
 }
-.timeline > li > div.content > .title,.address,.description{
+
+div.content > h3{
+  margin-top:5px;
+}
+ div.content > .title,.address,.description{
   margin-top: 1%;
   margin-bottom: 1%;
   display:inline-block;
 }
 
-.timeline > li > div.content > .description{
+div.content > .description{
   color: grey;
   margin-left: 5%;
 }
 
+div.container {
+  white-space:nowrap;
+
+}
+
+
+ul {
+  display:flex;
+  flex-direction:column;
+  flex-wrap:wrap;
+  /*flex-wrap:wrap;*/
+}
+
+@media print  {
+div.container {
+  -moz-columns:2 ;
+}
+}

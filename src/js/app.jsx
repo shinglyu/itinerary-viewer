@@ -1,23 +1,28 @@
 var DayTimeline = React.createClass({
   render: function(){
-    nodes = this.props.nodes.map(function(node){
+    nodes = this.props.nodes.map(function(node, index, array){
+      var line = <div className="line"/>
+      if (index == array.length -1){
+        line = undefined;
+      }
       return (
-        <li>
+        <div className="node">
           <NodeIcon type={node.type[0]}/>
           <div className="content">
-            <h3 className="time">{node.time}</h3>
-            <h2 className="title">{node.title}</h2>
+            {line}
+            <h3 className="title">{node.title}</h3>
+            <h4 className="time">{node.time}</h4>
             <span>&nbsp;&nbsp;&nbsp;</span>
             <p className="address">{node.address}</p>
             <p className="description">{node.description}</p>
           </div>
-        </li>
+        </div>
       )
     });
     return (
-      <ul className="timeline">
+      <div className="timeline">
         {nodes}
-      </ul>
+      </div>
     );
   }
 });
@@ -32,7 +37,7 @@ var DayTimelines = React.createClass({
   render: function(){
     days = this.props.days.map(function(day){return(<DayTimeline nodes={day}/>)});
     return (
-      <div>
+      <div className="container">
       {days}
       </div>
     )

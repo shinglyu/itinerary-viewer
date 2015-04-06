@@ -2,6 +2,7 @@
 
 var r = new XMLHttpRequest(); 
 r.open("GET", "plan.txt", true); //FIXME: hardcoded file name
+//r.open("GET", "test.txt", true); //FIXME: hardcoded file name
 r.onreadystatechange = function () {
     if (r.readyState != 4 || r.status != 200) return; 
       
