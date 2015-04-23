@@ -35,7 +35,12 @@ var NodeIcon = React.createClass({
 
 var DayTimelines = React.createClass({
   render: function(){
-    days = this.props.days.map(function(day){return(<DayTimeline nodes={day}/>)});
+    days = this.props.days.map(function(day){return(
+      <div>
+      <DayTimeline nodes={day}/>
+      <hr/>
+      </div>
+    )});
     return (
       <div className="container">
       {days}

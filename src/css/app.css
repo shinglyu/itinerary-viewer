@@ -99,6 +99,8 @@ div.container {
 
     display:inline;
   vertical-align: top;
+    border-bottom:1px solid;
+  padding-bottom:10px;
 }
   div.node{
     display:iblock;

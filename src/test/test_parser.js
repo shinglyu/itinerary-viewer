@@ -42,7 +42,7 @@ mock_nodes = [
 describe('User story', function(){
   describe('parse the whole file', function(){
     it('Parse the whole file', function(){
-      var nodes = parse(mock_txt);
+      var nodes = parser.parse(mock_txt);
       expect(nodes).to.be.equal(mock_nodes);
     })
   })
@@ -50,16 +50,79 @@ describe('User story', function(){
 
 describe('Parse a single line', function(){
   it('Parse a sight', function(){
-    var mock_txt = 'S: 駁二特區, 真愛碼頭, 光榮碼頭; 西子灣站; bla';
-    var mock_obj = {
-      'type': 'sight',
+    var mock_txt = 'S: 駁二特區 真愛碼頭 光榮碼頭, 1215 , 西子灣站 , bla foo;';
+    var mock_obj = [[{
+      'type': 'S:',
       'title': '駁二特區, 真愛碼頭, 光榮碼頭',
+      'time': '1215',
       'address': '西子灣站',
-      'description': 'bla',
-    };
+      'description': 'bla foo',
+    }]];
 
-    var obj = parseLine(mock_txt);
-    console.log(obj)
-    expect(obj).to.be.eql(mock_obj);
+    var obj = parser.parse(mock_txt);
+    expect(obj).to.be.deep.equal(mock_obj);
+  });
+
+  it('Parse a info line', function(){
+    var mock_txt = '4/12';
+    var mock_obj = [[{
+      'type': 'NOTE',
+      'title': '4/12',
+    }]];
+
+    var obj = parser.parse(mock_txt);
+    expect(obj).to.be.deep.equal(mock_obj);
   })
+})
+
+describe('Parse multiple lines', function(){
+  it('Parse multiple days', function(){
+    var mock_txt = "xyz\n-----\n112\n-----\n18\n-----\nabc";
+    var mock_obj = [
+      ['xyz'],
+      ['112'],
+      ['18' ],
+      ['abc']
+    ];
+
+    var obj = parser.parse(mock_txt);
+    console.log(obj)
+    expect(obj).to.be.deep.equal(mock_obj);
+  });
+  it('Parse multiple simple line', function(){
+    var mock_txt = "112\n18";
+    var mock_obj = [[
+      {
+      'type': 'NOTE',
+      'title': '4/12',
+      },
+      {
+      'type': 'NOTE',
+      'title': '4/8',
+      },
+    ]];
+
+    var obj = parser.parse(mock_txt);
+    console.log(obj)
+    expect(obj).to.be.deep.equal(mock_obj);
+  });
+  it('Parse multiple simple line', function(){
+    var mock_txt = "4/12\nS: 駁二特區 真愛碼頭 光榮碼頭, 12:15 , 西子灣站 , bla foo;";
+    var mock_obj = [[
+      {
+      'type': 'NOTE',
+      'title': '4/12',
+      },
+      {
+      'type': 'S:',
+      'title': '駁二特區, 真愛碼頭, 光榮碼頭',
+      'time': '12:15',
+      'address': '西子灣站',
+      'description': 'bla foo',
+      }
+    ]];
+
+    var obj = parser.parse(mock_txt);
+    expect(obj).to.be.deep.equal(mock_obj);
+  });
 })

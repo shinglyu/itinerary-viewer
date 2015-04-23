@@ -6,11 +6,10 @@
 
 \s+                   /* skip whitespace */
 ";"                   return 'LINESEP'
-[STF]":"                   return 'TYPESEP'
+/*[STF]":"                   return 'TYPESEP'*/
 "-----"               return 'DAYSEP'
 <<EOF>>               return 'EOF'
-.*                    return 'CHAR'
-/* [0-9]+("."[0-9]+)?\b  return 'NUMBER' */
+[a-zA-Z0-9:]*                    return 'CHAR'
 
 /lex
 
@@ -18,9 +17,6 @@
 
 /*
 %left '+' '-'
-%left '*' '/'
-%left '^'
-%left UMINUS
 */
 
 %start expressions
@@ -33,24 +29,18 @@ expressions
     ;
 
 days 
-    : day 'DAYSEP' days
-        {$$ = [$1].concat($3)}
+    : days 'DAYSEP' day
+        {$$ = $1.concat([[$3]])}
     
+    | day 'DAYSEP' day
+        {$$ = [[$1]].concat([[$3]])}
     | day
         {$$ = [$1]}
     ;
 
 day 
-    : line day
-        {$$ = [$1].concat($2)}
-    | line 
-        {$$ = [$1]}
+    : CHAR
+        {$$ = $1;}
     ;
 
-line
-    : TYPESEP CHAR 
-        {{$$ = {"type": $1, "title": $2} }}
-    | CHAR 
-        {$$ = {"type": "NOTE", "title": $1}  }
-    ;
 

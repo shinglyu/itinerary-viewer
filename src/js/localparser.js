@@ -72,12 +72,12 @@
   }
 */
 var parser = (function(){
-var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[1,5],$V1=[1,6],$V2=[5,7],$V3=[5,7,9,10];
+var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[1,4],$V1=[5,6];
 var parser = {trace: function trace() { },
 yy: {},
-symbols_: {"error":2,"expressions":3,"days":4,"EOF":5,"day":6,"DAYSEP":7,"line":8,"TYPESEP":9,"CHAR":10,"$accept":0,"$end":1},
-terminals_: {2:"error",5:"EOF",7:"DAYSEP",9:"TYPESEP",10:"CHAR"},
-productions_: [0,[3,2],[4,3],[4,1],[6,2],[6,1],[8,2],[8,1]],
+symbols_: {"error":2,"expressions":3,"days":4,"EOF":5,"DAYSEP":6,"day":7,"CHAR":8,"$accept":0,"$end":1},
+terminals_: {2:"error",5:"EOF",6:"DAYSEP",8:"CHAR"},
+productions_: [0,[3,2],[4,3],[4,3],[4,1],[7,1]],
 performAction: function anonymous(yytext, yyleng, yylineno, yy, yystate /* action[1] */, $$ /* vstack */, _$ /* lstack */) {
 /* this == yyval */
 
@@ -87,24 +87,21 @@ case 1:
 return $$[$0-1];
 break;
 case 2:
-this.$ = [$$[$0-2]].concat($$[$0])
+this.$ = $$[$0-2].concat([[$$[$0]]])
 break;
-case 3: case 5:
-this.$ = [$$[$0]]
+case 3:
+this.$ = [[$$[$0-2]]].concat([[$$[$0]]])
 break;
 case 4:
-this.$ = [$$[$0-1]].concat($$[$0])
+this.$ = [$$[$0]]
 break;
-case 6:
-this.$ = {"type": $$[$0-1], "title": $$[$0]} 
-break;
-case 7:
-this.$ = {"type": "NOTE", "title": $$[$0]}  
+case 5:
+this.$ = $$[$0];
 break;
 }
 },
-table: [{3:1,4:2,6:3,8:4,9:$V0,10:$V1},{1:[3]},{5:[1,7]},{5:[2,3],7:[1,8]},o($V2,[2,5],{8:4,6:9,9:$V0,10:$V1}),{10:[1,10]},o($V3,[2,7]),{1:[2,1]},{4:11,6:3,8:4,9:$V0,10:$V1},o($V2,[2,4]),o($V3,[2,6]),{5:[2,2]}],
-defaultActions: {7:[2,1],11:[2,2]},
+table: [{3:1,4:2,7:3,8:$V0},{1:[3]},{5:[1,5],6:[1,6]},{5:[2,4],6:[1,7]},o($V1,[2,5]),{1:[2,1]},{7:8,8:$V0},{7:9,8:$V0},o($V1,[2,2]),o($V1,[2,3])],
+defaultActions: {5:[2,1]},
 parseError: function parseError(str, hash) {
     if (hash.recoverable) {
         this.trace(str);
@@ -581,18 +578,16 @@ case 0:/* skip whitespace */
 break;
 case 1:return 'LINESEP'
 break;
-case 2:return 9
+case 2:return 6
 break;
-case 3:return 7
+case 3:return 5
 break;
-case 4:return 5
-break;
-case 5:return 10
+case 4:return 8
 break;
 }
 },
-rules: [/^(?:\s+)/,/^(?:;)/,/^(?:[STF]:)/,/^(?:-----)/,/^(?:$)/,/^(?:.*)/],
-conditions: {"INITIAL":{"rules":[0,1,2,3,4,5],"inclusive":true}}
+rules: [/^(?:\s+)/,/^(?:;)/,/^(?:-----)/,/^(?:$)/,/^(?:[a-zA-Z0-9:]*)/],
+conditions: {"INITIAL":{"rules":[0,1,2,3,4],"inclusive":true}}
 });
 return lexer;
 })();
