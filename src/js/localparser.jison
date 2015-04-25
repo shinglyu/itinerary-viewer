@@ -4,7 +4,8 @@
 %lex
 %%
 
-\s+                   /* skip whitespace */
+\w+                   /* skip whitespace */
+\n                    return 'NEWLINE'
 ";"                   return 'LINESEP'
 /*[STF]":"                   return 'TYPESEP'*/
 "-----"               return 'DAYSEP'
@@ -32,15 +33,24 @@ days
     : days 'DAYSEP' day
         {$$ = $1.concat([[$3]])}
     
-    | day 'DAYSEP' day
-        {$$ = [[$1]].concat([[$3]])}
+    /*| day 'DAYSEP' day
+        {$$ = [[$1]].concat([[$3]])}*/
     | day
-        {$$ = [$1]}
+        {$$ = [[$1]]}
     ;
 
 day 
-    : CHAR
+    /*: day line
+        {$$ = $1;}*/
+    : lines
         {$$ = $1;}
     ;
+
+lines
+    : lines NEWLINE CHAR
+        {$$ = $1;}
+    | CHAR
+    ;
+
 
 

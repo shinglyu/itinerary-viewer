@@ -7,14 +7,17 @@ var DayTimeline = React.createClass({
       }
       return (
         <div className="node">
+          <div className="content">
+            <h4 className="time">{node.time}</h4>
+          </div>
           <NodeIcon type={node.type[0]}/>
           <div className="content">
             {line}
             <h3 className="title">{node.title}</h3>
-            <h4 className="time">{node.time}</h4>
-            <span>&nbsp;&nbsp;&nbsp;</span>
-            <p className="address">{node.address}</p>
-            <p className="description">{node.description}</p>
+            <div className="info_section">
+              <p className="address">{node.address}</p>
+              <p className="description">{node.description}</p>
+            </div>
           </div>
         </div>
       )

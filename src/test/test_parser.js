@@ -50,16 +50,17 @@ describe('User story', function(){
 
 describe('Parse a single line', function(){
   it('Parse a sight', function(){
-    var mock_txt = 'S: 駁二特區 真愛碼頭 光榮碼頭, 1215 , 西子灣站 , bla foo;';
+    var mock_txt = 'S: 駁二特區 真愛碼頭 光榮碼頭; 12:15 ; 西子灣站 ; bla foo';
     var mock_obj = [[{
       'type': 'S:',
-      'title': '駁二特區, 真愛碼頭, 光榮碼頭',
-      'time': '1215',
+      'title': '駁二特區 真愛碼頭 光榮碼頭',
+      'time': '12:15',
       'address': '西子灣站',
       'description': 'bla foo',
     }]];
 
     var obj = parser.parse(mock_txt);
+    console.log(obj)
     expect(obj).to.be.deep.equal(mock_obj);
   });
 
@@ -79,47 +80,38 @@ describe('Parse multiple lines', function(){
   it('Parse multiple days', function(){
     var mock_txt = "xyz\n-----\n112\n-----\n18\n-----\nabc";
     var mock_obj = [
-      ['xyz'],
-      ['112'],
-      ['18' ],
-      ['abc']
+      [{
+      'type': 'NOTE',
+      'title': 'xyz',
+      }],
+      [{
+      'type': 'NOTE',
+      'title': '112',
+      }],
+      [{
+      'type': 'NOTE',
+      'title': '18',
+      }],
+      [{
+      'type': 'NOTE',
+      'title': 'abc',
+      }],
     ];
 
     var obj = parser.parse(mock_txt);
-    console.log(obj)
     expect(obj).to.be.deep.equal(mock_obj);
   });
   it('Parse multiple simple line', function(){
-    var mock_txt = "112\n18";
+    var mock_txt = "112\n\n18";
     var mock_obj = [[
       {
       'type': 'NOTE',
-      'title': '4/12',
+      'title': '112',
       },
       {
       'type': 'NOTE',
-      'title': '4/8',
+      'title': '18',
       },
-    ]];
-
-    var obj = parser.parse(mock_txt);
-    console.log(obj)
-    expect(obj).to.be.deep.equal(mock_obj);
-  });
-  it('Parse multiple simple line', function(){
-    var mock_txt = "4/12\nS: 駁二特區 真愛碼頭 光榮碼頭, 12:15 , 西子灣站 , bla foo;";
-    var mock_obj = [[
-      {
-      'type': 'NOTE',
-      'title': '4/12',
-      },
-      {
-      'type': 'S:',
-      'title': '駁二特區, 真愛碼頭, 光榮碼頭',
-      'time': '12:15',
-      'address': '西子灣站',
-      'description': 'bla foo',
-      }
     ]];
 
     var obj = parser.parse(mock_txt);

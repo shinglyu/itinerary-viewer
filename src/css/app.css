@@ -71,38 +71,53 @@ div.content {
 }
 
 div.content > h3{
-  margin-top:5px;
+  margin-top:0px;
 }
- div.content > .title,.address,.description{
-  margin-top: 1%;
+ div.content > .title{
   margin-bottom: 1%;
   display:inline-block;
 }
 
-div.content > .description{
+div.content > div.info_section > p {
+  margin-top:0px;
+  margin-bottom:0px;
+}
+div.content > div.info_section {
+  padding-left: 1.5em;
+}
+div.content > div.info_section > .address{
+  font-style: italic;
+}
+div.content > div.info_section > .description{
   color: grey;
-  margin-left: 5%;
 }
 
 div.container {
   white-space:nowrap;
+}
 
+.time {
+display:inline-block;
+width:4em;
+margin-top:1%
 }
 
 
 @media print  {
-div.container {
-  -moz-columns:2 ;
-  -moz-column-fill:balance;
-}
-.timeline{
+  div.container {
+    -moz-columns:2 ;
+    -moz-column-fill:balance;
+  }
+  .timeline{
 
     display:inline;
-  vertical-align: top;
+    vertical-align: top;
     border-bottom:1px solid;
-  padding-bottom:10px;
-}
+    padding-bottom:10px;
+  }
+
   div.node{
     display:iblock;
   }
 }
+
