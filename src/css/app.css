@@ -33,6 +33,7 @@
 */
 div.node{
   position:relative;
+  max-width:50vw;
 }
 div.line {
   
@@ -65,7 +66,7 @@ div.content {
   min-height: 60px;
   display:inline-block;
   vertical-align:top;
- max-width:90%;
+  width:85%;
   white-space: normal;
   margin-top:5px;
 }
@@ -84,14 +85,23 @@ div.content > div.info_section > p {
 }
 div.content > div.info_section {
   padding-left: 1.5em;
-}
-div.content > div.info_section > .address{
-  font-style: italic;
-}
-div.content > div.info_section > .description{
-  color: grey;
+  max-width: 50vw;
 }
 
+div.content > div.info_section > .text {
+  vertical-align: top;
+}
+div.content > div.info_section > .text > .address{
+  font-style: italic;
+}
+div.content > div.info_section > .text > .description{
+  margin-top:2%;
+  color: grey;
+}
+div.content > div.info_section > .map{
+min-width:200px;  
+float:right
+}
 div.container {
   white-space:nowrap;
 }
@@ -99,7 +109,8 @@ div.container {
 .time {
 display:inline-block;
 width:4em;
-margin-top:1%
+margin:0px;
+font-weight:normal;
 }
 
 

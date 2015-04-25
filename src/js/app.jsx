@@ -5,18 +5,32 @@ var DayTimeline = React.createClass({
       if (index == array.length -1){
         line = undefined;
       }
+      //var mapsrc="http://maps.googleapis.com/maps/api/staticmap?center=" + encodeURI(node.address) + "zoom=13&size=600x300&key=AIzaSyBGagqiIEihpnzPp_2xYPImM8jDryx9tlU"/>
+      var mapsrc = undefined;
+      if (typeof node.address !== "undefined"){
+        var mapsrc="http://maps.googleapis.com/maps/api/staticmap?center=" + encodeURI(node.address) + 
+        "&size=200x200" + 
+        "&markers=size:small|color:red|label:A|" + encodeURI(node.address)
+        "&key=AIzaSyBGagqiIEihpnzPp_2xYPImM8jDryx9tlU";
+        //var mapsrc="http://placehold.it/200x200";
+      }
       return (
         <div className="node">
-          <div className="content">
-            <h4 className="time">{node.time}</h4>
-          </div>
           <NodeIcon type={node.type[0]}/>
           <div className="content">
             {line}
-            <h3 className="title">{node.title}</h3>
+            <h3 className="title">{node.title}</h3>&nbsp;&nbsp;&nbsp;
+
+
+            <h3 className="time">{node.time}</h3>
             <div className="info_section">
-              <p className="address">{node.address}</p>
-              <p className="description">{node.description}</p>
+              <div className="map">
+                <img src={mapsrc}/>
+              </div>
+              <div className="text">
+                <p className="address">{node.address}</p>
+                <p className="description">{node.description}</p>
+              </div>
             </div>
           </div>
         </div>
