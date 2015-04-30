@@ -11,9 +11,13 @@ r.onreadystatechange = function () {
       console.log(r.responseText)
       //days = parser.parse(r.responseText); //Depends on parser and app.jsx
       var YAML = window.YAML
-      console.log(YAML)
-      console.log(YAML.parse(r.responseText))
-      days = YAML.parse(r.responseText); //Depends on parser and app.jsx
-      console.log(days)
+      try {
+        days = YAML.parse(r.responseText); //Depends on parser and app.jsx
+      } catch (e) {
+        var msg = e.rawMessage + "\n line " + e.parsedLine + "\n " + e.snippet
+        alert(msg)
+        console.error(msg)
+        /* handle error */
+      }
 };
 r.send();

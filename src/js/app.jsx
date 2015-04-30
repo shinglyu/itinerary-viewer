@@ -1,6 +1,9 @@
 var DayTimeline = React.createClass({
   render: function(){
-    nodes = this.props.nodes.map(function(node, index, array){
+    var rawnodes = [{title: this.props.date, type:"N"}]
+    rawnodes = rawnodes.concat(this.props.nodes)
+
+    nodes = rawnodes.map(function(node, index, array){
       var line = <div className="line"/>
       if (index == array.length -1){
         line = undefined;
@@ -70,14 +73,24 @@ var NodeIcon = React.createClass({
 
 var DayTimelines = React.createClass({
   render: function(){
-    console.log(this.props.days)
-    console.log(this.props.days.map)
+    days = []
+    for (var date in this.props.days){
+      days.push(
+        <div>
+          <DayTimeline nodes={this.props.days[date]} date={date}/>
+          <hr/>
+        </div>
+      )
+    }
+    /*
     days = this.props.days.map(function(day){return(
       <div>
       <DayTimeline nodes={day}/>
       <hr/>
       </div>
     )});
+    */
+
     return (
       <div className="container">
       {days}

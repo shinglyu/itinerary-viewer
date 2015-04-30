@@ -1,6 +1,16 @@
-- 
-  - title: 6/22
-    type: info
+6/22:
+  - title: YVR Airport
+    type: "S"
+    time: "11:50"
+    address: "3211 Grant McConachie Way, Richmond, BC V7B 0A4加拿大"
+    description: "+1 604-207-7077"
+  - title: YVR Airport
+    type: "S"
+    time: "11:50"
+    address: "3211 Grant McConachie Way, Richmond, BC V7B 0A4加拿大"
+    description: "+1 604-207-7077"
+
+6/23:
   - title: YVR Airport
     type: "S"
     time: "11:50"
