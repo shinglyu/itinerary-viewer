@@ -79,26 +79,26 @@ div.content > h3{
   display:inline-block;
 }
 
-div.content > div.info_section > p {
+div.content > p {
   margin-top:0px;
   margin-bottom:0px;
 }
-div.content > div.info_section {
+div.content >  {
   padding-left: 1.5em;
   max-width: 50vw;
 }
 
-div.content > div.info_section > .text {
+div.content >  .text {
   vertical-align: top;
 }
 div.content > div.info_section > .text > .address{
   font-style: italic;
 }
-div.content > div.info_section > .text > .description{
+div.content > .text > .description{
   margin-top:2%;
   color: grey;
 }
-div.content > div.info_section > .map{
+div.content > .map{
 min-width:200px;  
 float:right
 }
