@@ -1,6 +1,6 @@
 var DayTimeline = React.createClass({
   render: function(){
-    var rawnodes = [{title: this.props.date, type:"N"}]
+    var rawnodes = [{title: this.props.date, type:"D"}]
     rawnodes = rawnodes.concat(this.props.nodes)
 
     nodes = rawnodes.map(function(node, index, array){
@@ -21,7 +21,7 @@ var DayTimeline = React.createClass({
       }
       return (
         <div className="node">
-          <NodeIcon type={node.type[0]}/>
+          <NodeIcon type={node.type[0]/*FIXME*/}/>
           <div className="content">
             {line}
             <h3 className="title">{node.title}</h3>&nbsp;&nbsp;&nbsp;
@@ -61,6 +61,9 @@ var NodeIcon = React.createClass({
         break;
       case "N":
         icon_name += "info"
+        break;
+      case "D":
+        icon_name += "calendar"
         break;
       default:
         icon_name += "info"
