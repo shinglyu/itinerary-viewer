@@ -8,7 +8,6 @@ var DayTimeline = React.createClass({
       if (index == array.length -1){
         line = undefined;
       }
-      //var mapsrc="http://maps.googleapis.com/maps/api/staticmap?center=" + encodeURI(node.address) + "zoom=13&size=600x300&key=AIzaSyBGagqiIEihpnzPp_2xYPImM8jDryx9tlU"/>
       var mapsrc = undefined;
       if (typeof node.address !== "undefined"){
         var mapsrc="http://maps.googleapis.com/maps/api/staticmap?center=" + encodeURI(node.address) + 
@@ -67,7 +66,6 @@ var NodeIcon = React.createClass({
         icon_name += "info"
         break;
     }
-    //return (<div className="icon"><img src={"pic/icon-" + this.props.type + ".png"} /></div>)
     return (<div className="icon"><i className={"fa fa-2x " + icon_name}/></div>)
   }
 });
@@ -83,14 +81,6 @@ var DayTimelines = React.createClass({
         </div>
       )
     }
-    /*
-    days = this.props.days.map(function(day){return(
-      <div>
-      <DayTimeline nodes={day}/>
-      <hr/>
-      </div>
-    )});
-    */
 
     return (
       <div className="container">
@@ -101,15 +91,6 @@ var DayTimelines = React.createClass({
 });
 
 var FileSelector = React.createClass({
-  /*
-  readFile: function(e){
-    var reader = new FileReader();
-    reader.onload = function(){
-      console.log(this.result)
-    }
-    reader.readAsText(e.target.files[0])
-  },
-  */
   render: function(){
     return (
       <div className="fileSelector">
@@ -131,7 +112,6 @@ var Page = React.createClass({
   loadNewData: function(e){
     var reader = new FileReader();
     reader.onload = function(e){
-      //console.log(e.target.result)
       this.setState({"days": window.YAML.parse(e.target.result)})
     }.bind(this);
     reader.readAsText(e.target.files[0])
@@ -146,9 +126,5 @@ var Page = React.createClass({
   }
 })
 
-
-
-//React.render(<DayTimeline nodes={nodes}/>, document.body);
-//React.render(<DayTimelines days={days}/>, document.body);
 React.render(<Page/>, document.body);
 
