@@ -95,7 +95,7 @@ var FileSelector = React.createClass({
     return (
       <div className="fileSelector">
         <input type="file" id="file" onChange={this.props.loadNewData}/>
-        <a href="./example.yaml">Download an example</a>
+        <a href="./example.yaml.txt">Download an example</a>
       </div>
     )
   }
