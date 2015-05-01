@@ -1,5 +1,6 @@
 /* Fetch the source file */
 
+var days
 var r = new XMLHttpRequest(); 
 //r.open("GET", "plan.txt", true); //FIXME: hardcoded file name
 //r.open("GET", "201506Whistler.txt", true); //FIXME: hardcoded file name

@@ -56,9 +56,8 @@ div.icon {
   display:inline-block;
 }
 
-div.icon > img{
-  height: 40px;
-  width:40px;
+div.icon > i {
+  margin-top:2px;
 }
 
 div.content {
