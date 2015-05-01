@@ -17,24 +17,11 @@
   max-height:90vh;
 }
 
-/* The Line */
-/*
-.timeline:before{
-  content:'';
-	position: absolute;
-	top: 0;
-  bottom: 0;
-	left: 25px;
-	width: 10px;
-	background: #afdcf8;
-	margin-left: -10px;
-  z-index: -1
-}
-*/
 div.node{
   position:relative;
   max-width:50vw;
 }
+
 div.line {
   
   position:absolute;
@@ -90,17 +77,21 @@ div.content >  {
 div.content >  .text {
   vertical-align: top;
 }
+
 div.content > div.info_section > .text > .address{
   font-style: italic;
 }
+
 div.content > .text > .description{
   margin-top:2%;
   color: grey;
 }
+
 div.content > .map{
 min-width:200px;  
 float:right
 }
+
 div.container {
   white-space:nowrap;
 }
@@ -111,7 +102,6 @@ width:4em;
 margin:0px;
 font-weight:normal;
 }
-
 
 @media print  {
   div.container {
