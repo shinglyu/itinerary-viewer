@@ -101,21 +101,56 @@ var DayTimelines = React.createClass({
     )
   }
 });
-/*
-nodes = [
-      { type: 'T:', title: '捷運凹仔底 => 紅32/紅33/168 => 美術館'  },
-      { type: 'S:', title: '美術館'  },
-      { type: 'T:', title: '捷運西子灣'  },
-      { type: 'F:', title: '哈瑪星廟口正老牌汕頭麵'  },
-      { type: 'S:', title: '英國領事館, 中山大學'  },
-      { type: 'S:', title: '駁二特區, 真愛碼頭, 光榮碼頭 '  },
-      { type: 'T:', title: '捷運鹽埕埔 or 中央公園'  },
-      { type: 'S:', title: '三多商圈/中央公園/85 大樓'  }, 
-]; //TODO:read and parse file
-*/
+
+var FileSelector = React.createClass({
+  /*
+  readFile: function(e){
+    var reader = new FileReader();
+    reader.onload = function(){
+      console.log(this.result)
+    }
+    reader.readAsText(e.target.files[0])
+  },
+  */
+  render: function(){
+    return (
+      <div className="fileSelector">
+        <input type="file" id="file" onChange={this.props.loadNewData}/>
+        <a href="./example.yaml">Download an example</a>
+      </div>
+    )
+  }
+  
+})
+
+var Page = React.createClass({
+  getInitialState: function(){
+     return {days:{"Please select a plan file":[]}}
+  },
+  componentDidMoung: function(){
+    
+  },
+  loadNewData: function(e){
+    var reader = new FileReader();
+    reader.onload = function(e){
+      //console.log(e.target.result)
+      this.setState({"days": window.YAML.parse(e.target.result)})
+    }.bind(this);
+    reader.readAsText(e.target.files[0])
+  },
+  render: function(){
+    return (
+      <div>
+        <FileSelector loadNewData={this.loadNewData}/>
+        <DayTimelines days={this.state.days} />
+      </div>
+    )
+  }
+})
 
 
 
 //React.render(<DayTimeline nodes={nodes}/>, document.body);
-React.render(<DayTimelines days={days}/>, document.body);
+//React.render(<DayTimelines days={days}/>, document.body);
+React.render(<Page/>, document.body);
 
