@@ -11,13 +11,11 @@ var DayTimeline = React.createClass({
       //var mapsrc="http://maps.googleapis.com/maps/api/staticmap?center=" + encodeURI(node.address) + "zoom=13&size=600x300&key=AIzaSyBGagqiIEihpnzPp_2xYPImM8jDryx9tlU"/>
       var mapsrc = undefined;
       if (typeof node.address !== "undefined"){
-        /*
         var mapsrc="http://maps.googleapis.com/maps/api/staticmap?center=" + encodeURI(node.address) + 
         "&size=200x200" + 
         "&markers=size:small|color:red|label:A|" + encodeURI(node.address)
         "&key=AIzaSyBGagqiIEihpnzPp_2xYPImM8jDryx9tlU";
-        */
-        var mapsrc="http://placehold.it/200x200";
+        //var mapsrc="http://placehold.it/200x200";
       }
       return (
         <div className="node">
