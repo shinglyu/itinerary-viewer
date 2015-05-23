@@ -8,13 +8,26 @@ var DayTimeline = React.createClass({
       if (index == array.length -1){
         line = undefined;
       }
+      if (typeof node.type == "undefined"){
+        node.type == "S";
+      }
       var mapsrc = undefined;
-      if (typeof node.address !== "undefined"){
+      if (typeof node.address !== "undefined" && node.address !== null && node.address.trim() !== ""){
         var mapsrc="http://maps.googleapis.com/maps/api/staticmap?center=" + encodeURI(node.address) + 
         "&size=200x200" + 
         "&markers=size:small|color:red|label:A|" + encodeURI(node.address)
         "&key=AIzaSyBGagqiIEihpnzPp_2xYPImM8jDryx9tlU";
         //var mapsrc="http://placehold.it/200x200";
+      }
+      else {
+        if (typeof node.title !== "undefined" && (node.type == "S" || node.type == "F" )){
+          var mapsrc="http://maps.googleapis.com/maps/api/staticmap?center=" + encodeURI(node.title) + 
+          "&size=200x200" + 
+          "&markers=size:small|color:red|label:A|" + encodeURI(node.title)
+          "&key=AIzaSyBGagqiIEihpnzPp_2xYPImM8jDryx9tlU";
+          //var mapsrc="http://placehold.it/200x200";
+          console.log(mapsrc)
+        }
       }
       return (
         <div className="node">
@@ -102,17 +115,50 @@ var FileSelector = React.createClass({
   
 })
 
+function parseQueryStrings(){
+  queryStringObjs = {};
+  queryStrings = document.location.search.substring(1).split('&');
+  for (queryString of queryStrings){
+    keyval = queryString.split('=');
+    //queryStringObjs.push({keyval[0], keyval[1]});
+    queryStringObjs[keyval[0].trim("?")] = keyval[1]
+  }
+  return queryStringObjs;
+}
 var Page = React.createClass({
   getInitialState: function(){
-     return {days:{"Please select a plan file":[]}}
+    console.log(parseQueryStrings())
+    queryStrings = parseQueryStrings()
+    if (typeof queryStrings['data'] !== "undefined"){
+      try {
+        var state = ({
+          "days": window.YAML.parse(decodeURIComponent(queryStrings['data'])),
+          "rawdata": queryStrings['data']
+        })
+        console.log(state)
+        return state
+      } catch (e) {
+        console.error(e)
+        /* handle error */
+      }
+    }
+   return {days:{"Please select a plan file":[]}}
   },
-  componentDidMoung: function(){
+  componentDidMount: function(){
     
   },
   loadNewData: function(e){
     var reader = new FileReader();
     reader.onload = function(e){
-      this.setState({"days": window.YAML.parse(e.target.result)})
+      try {
+        this.setState({
+          "days": window.YAML.parse(e.target.result),
+          "rawdata": e.target.result
+        })
+      } catch (e) {
+        console.error(e)
+        /* handle error */
+      }
     }.bind(this);
     reader.readAsText(e.target.files[0])
   },
@@ -120,6 +166,7 @@ var Page = React.createClass({
     return (
       <div>
         <FileSelector loadNewData={this.loadNewData}/>
+        <a href={"index.html?data=" + encodeURIComponent(this.state.rawdata)}>Share</a>
         <DayTimelines days={this.state.days} />
       </div>
     )
