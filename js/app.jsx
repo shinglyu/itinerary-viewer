@@ -1,3 +1,25 @@
+var AutoLinkText = React.createClass({
+  render: function(){
+    var re = /(http[s]?:\/\/[^\s]*)/g; 
+    if (typeof this.props.data == "undefined"){
+      return <div/>
+    }
+    var text_blocks = this.props.data.split(" ")
+    var texts = text_blocks.map(function(text){
+      if (text.match(re)){
+        return <a href={text} target="_blank">{text}</a>
+      }
+      else {
+        return text + " "
+      }
+    })
+
+    return (
+      <span>{texts}</span>
+    )
+  }
+});
+
 var DayTimeline = React.createClass({
   render: function(){
     var rawnodes = [{title: this.props.date, type:"D"}]
@@ -16,6 +38,8 @@ var DayTimeline = React.createClass({
         "&key=AIzaSyBGagqiIEihpnzPp_2xYPImM8jDryx9tlU";
         //var mapsrc="http://placehold.it/200x200";
       }
+
+      //var descriptions = "foo " + <a href="https://google.com">google</a> + " bar"
       return (
         <div className="node">
           <NodeIcon type={node.type[0]/*FIXME*/}/>
@@ -28,7 +52,7 @@ var DayTimeline = React.createClass({
             </div>
               <div className="text">
                 <p className="address">{node.address}</p>
-                <p className="description">{node.description}</p>
+                <p className="description"><AutoLinkText data={node.description}/></p>
               </div>
           </div>
         </div>
@@ -45,7 +69,7 @@ var DayTimeline = React.createClass({
 var NodeIcon = React.createClass({
   render: function(){
     var icon_name="fa-"
-    console.log(this.props.type)
+    //console.log(this.props.type)
     switch (this.props.type){
       case "S":
         icon_name += "street-view"
@@ -135,8 +159,8 @@ var Page = React.createClass({
       return resp.text()
     })
     .then(function(text){
-      console.log(text)
-      console.log(this)
+      //console.log(text)
+      //console.log(this)
       this.setState({"days": window.YAML.parse(text)})
     }.bind(this))
   },
