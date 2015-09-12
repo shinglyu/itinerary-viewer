@@ -102,12 +102,43 @@ var FileSelector = React.createClass({
   
 })
 
+/* Thanks http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript */
+//Get query string
+ var qs = (function(a) {
+   if (a == "") return {};
+   var b = {};
+   for (var i = 0; i < a.length; ++i)
+   {
+     var p=a[i].split('=', 2);
+     if (p.length == 1)
+       b[p[0]] = "";
+     else
+       b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+   }
+   return b;
+ })(window.location.search.substr(1).split('&'));
+
 var Page = React.createClass({
   getInitialState: function(){
      return {days:{"Please select a plan file":[]}}
   },
-  componentDidMoung: function(){
-    
+  componentDidMount: function(){
+    var source = ""
+    if (typeof qs['file'] == "undefined"){
+      source = "source_files/default.yml";
+    }
+    else {
+      source = qs['file']
+    }
+    fetch(source)
+    .then(function(resp){
+      return resp.text()
+    })
+    .then(function(text){
+      console.log(text)
+      console.log(this)
+      this.setState({"days": window.YAML.parse(text)})
+    }.bind(this))
   },
   loadNewData: function(e){
     var reader = new FileReader();
