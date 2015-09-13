@@ -58,14 +58,20 @@ var NodeIcon = React.createClass({
 
 var Map = React.createClass({
   render: function(){
-    var address = ""
-    if (typeof this.props.node.address !== "undefined"){
-      address = this.props.node.address;
-    }
-    else {
-      if (typeof this.props.node.title!== "undefined"){
-        address = this.props.node.title;
+    var address = undefined;
+    console.log(qs)
+    if (typeof qs['no_map'] == "undefined"){
+      if (typeof this.props.node.address !== "undefined"){
+        address = this.props.node.address;
+        console.log("Used address " + address)
+       }
+      else {
+        if (typeof this.props.node.title !== "undefined" && typeof qs['no_auto_map'] == "undefined"){
+          address = this.props.node.title;
+          console.log("Used title" + address)
+        }
       }
+
     }
     var map_img_src="http://maps.googleapis.com/maps/api/staticmap?center=" + encodeURI(address) + 
     "&size=200x200" + 
@@ -74,7 +80,10 @@ var Map = React.createClass({
     //var mapsrc="http://placehold.it/200x200";
     var external_link ="http://maps.google.com/maps?q=" + encodeURI(address);
 
-    if (this.props.node.type == "S" || typeof this.props.node.type == "undefined"){
+    if ((this.props.node.type != "S" && typeof this.props.node.type !== "undefined") || typeof address == "undefined"){
+      return <div/>
+    }
+    else {
       return (
         <div className="map">
           <a href={external_link} target="_blank">
@@ -82,9 +91,6 @@ var Map = React.createClass({
           </a>
         </div>
       )
-    }
-    else {
-      return <div/>
     }
   }
 })
