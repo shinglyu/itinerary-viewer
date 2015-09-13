@@ -95,6 +95,38 @@ var Map = React.createClass({
   }
 })
 
+var DayMap = React.createClass({
+  render: function(){
+    //FIXME: ES6
+
+    var map_img_src="https://maps.googleapis.com/maps/api/staticmap?" + 
+    "&size=700x300" + 
+    "&key=AIzaSyBGagqiIEihpnzPp_2xYPImM8jDryx9tlU";
+    //var mapsrc="http://placehold.it/200x200";
+    //
+    this.props.nodes.map(function(node){
+      if (typeof qs['no_map'] == "undefined"){
+        if (typeof node.address !== "undefined"){
+          address = node.address;
+          map_img_src += "&markers=size:small|color:red|label:A|" + encodeURI(address)  
+        }
+        else {
+          if (typeof node.title !== "undefined" && typeof qs['no_auto_map'] == "undefined"){
+            address = node.title;
+            map_img_src += "&markers=size:small|color:red|label:A|" + encodeURI(address)  
+          }
+        }
+      }
+    })
+
+    return (
+      <div className="daymap">
+      <img src={map_img_src}/>
+      </div>
+    )
+  }
+})
+
 var Day = React.createClass({
   render: function(){
     var rawnodes = [{title: this.props.date, type:"D"}]
@@ -139,6 +171,7 @@ var Days= React.createClass({
       days.push(
         <div>
           <Day nodes={this.props.days[date]} date={date}/>
+          <DayMap nodes={this.props.days[date]}/>
           <hr/>
         </div>
       )
