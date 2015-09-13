@@ -20,52 +20,6 @@ var AutoLinkText = React.createClass({
   }
 });
 
-var DayTimeline = React.createClass({
-  render: function(){
-    var rawnodes = [{title: this.props.date, type:"D"}]
-    rawnodes = rawnodes.concat(this.props.nodes)
-
-    nodes = rawnodes.map(function(node, index, array){
-      var line = <div className="line"/>
-      if (index == array.length -1){
-        line = undefined;
-      }
-      var mapsrc = undefined;
-      if (typeof node.address !== "undefined"){
-        var mapsrc="http://maps.googleapis.com/maps/api/staticmap?center=" + encodeURI(node.address) + 
-        "&size=200x200" + 
-        "&markers=size:small|color:red|label:A|" + encodeURI(node.address)
-        "&key=AIzaSyBGagqiIEihpnzPp_2xYPImM8jDryx9tlU";
-        //var mapsrc="http://placehold.it/200x200";
-      }
-
-      //var descriptions = "foo " + <a href="https://google.com">google</a> + " bar"
-      //FIXME: move this if else to node type componenet
-      return (
-        <div className="node">
-          <NodeIcon type={node.type}/>
-          <div className="content">
-            {line}
-            <h3 className="title">{node.title}</h3>&nbsp;&nbsp;&nbsp;
-            <h3 className="time">{node.time}</h3>
-            <div className="map">
-              <img src={mapsrc}/>
-            </div>
-              <div className="text">
-                <p className="address">{node.address}</p>
-                <p className="description"><AutoLinkText data={node.description}/></p>
-              </div>
-          </div>
-        </div>
-      )
-    });
-    return (
-      <div className="timeline">
-        {nodes}
-      </div>
-    );
-  }
-});
 
 var NodeIcon = React.createClass({
   render: function(){
@@ -102,13 +56,79 @@ var NodeIcon = React.createClass({
   }
 });
 
-var DayTimelines = React.createClass({
+var Map = React.createClass({
+  render: function(){
+    if (typeof this.props.node.address !== "undefined"){
+        var mapsrc="http://maps.googleapis.com/maps/api/staticmap?center=" + encodeURI(this.props.node.address) + 
+        "&size=200x200" + 
+        "&markers=size:small|color:red|label:A|" + encodeURI(this.props.node.address)
+        "&key=AIzaSyBGagqiIEihpnzPp_2xYPImM8jDryx9tlU";
+        //var mapsrc="http://placehold.it/200x200";
+        var external_link ="http://maps.google.com/maps?q=" + encodeURI(this.props.node.address);
+    }
+
+    return (
+      <div className="map">
+        <a href={external_link} target="_blank">
+          <img src={mapsrc}/>
+        </a>
+      </div>
+    )
+  }
+})
+
+var Day = React.createClass({
+  render: function(){
+    var rawnodes = [{title: this.props.date, type:"D"}]
+    rawnodes = rawnodes.concat(this.props.nodes)
+
+    nodes = rawnodes.map(function(node, index, array){
+      var line = <div className="line"/>
+      if (index == array.length -1){
+        line = undefined;
+      }
+      var mapsrc = undefined;
+      if (typeof node.address !== "undefined"){
+        var mapsrc="http://maps.googleapis.com/maps/api/staticmap?center=" + encodeURI(node.address) + 
+        "&size=200x200" + 
+        "&markers=size:small|color:red|label:A|" + encodeURI(node.address)
+        "&key=AIzaSyBGagqiIEihpnzPp_2xYPImM8jDryx9tlU";
+        //var mapsrc="http://placehold.it/200x200";
+      }
+
+      //var descriptions = "foo " + <a href="https://google.com">google</a> + " bar"
+      //FIXME: move this if else to node type componenet
+      return (
+        <div className="node">
+          <NodeIcon type={node.type}/>
+          <div className="content">
+            {line}
+            <h3 className="title">{node.title}</h3>&nbsp;&nbsp;&nbsp;
+            <h3 className="time">{node.time}</h3>
+            <Map node={node}/>
+              <div className="text">
+                <p className="address">{node.address}</p>
+                <p className="description"><AutoLinkText data={node.description}/></p>
+              </div>
+          </div>
+        </div>
+      )
+    });
+    return (
+      <div className="timeline">
+        {nodes}
+      </div>
+    );
+  }
+});
+
+var Days= React.createClass({
   render: function(){
     days = []
     for (var date in this.props.days){
       days.push(
         <div>
-          <DayTimeline nodes={this.props.days[date]} date={date}/>
+          <Day nodes={this.props.days[date]} date={date}/>
           <hr/>
         </div>
       )

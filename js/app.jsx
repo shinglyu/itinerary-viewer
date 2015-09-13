@@ -59,7 +59,7 @@ var Page = React.createClass({
     return (
       <div>
         <FileSelector loadNewData={this.loadNewData}/>
-        <DayTimelines days={this.state.days} />
+        <Days days={this.state.days} />
       </div>
     )
   }
