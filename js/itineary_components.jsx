@@ -58,22 +58,34 @@ var NodeIcon = React.createClass({
 
 var Map = React.createClass({
   render: function(){
+    var address = ""
     if (typeof this.props.node.address !== "undefined"){
-        var mapsrc="http://maps.googleapis.com/maps/api/staticmap?center=" + encodeURI(this.props.node.address) + 
-        "&size=200x200" + 
-        "&markers=size:small|color:red|label:A|" + encodeURI(this.props.node.address)
-        "&key=AIzaSyBGagqiIEihpnzPp_2xYPImM8jDryx9tlU";
-        //var mapsrc="http://placehold.it/200x200";
-        var external_link ="http://maps.google.com/maps?q=" + encodeURI(this.props.node.address);
+      address = this.props.node.address;
     }
+    else {
+      if (typeof this.props.node.title!== "undefined"){
+        address = this.props.node.title;
+      }
+    }
+    var map_img_src="http://maps.googleapis.com/maps/api/staticmap?center=" + encodeURI(address) + 
+    "&size=200x200" + 
+    "&markers=size:small|color:red|label:A|" + encodeURI(address)
+    "&key=AIzaSyBGagqiIEihpnzPp_2xYPImM8jDryx9tlU";
+    //var mapsrc="http://placehold.it/200x200";
+    var external_link ="http://maps.google.com/maps?q=" + encodeURI(address);
 
-    return (
-      <div className="map">
-        <a href={external_link} target="_blank">
-          <img src={mapsrc}/>
-        </a>
-      </div>
-    )
+    if (this.props.node.type == "S" || typeof this.props.node.type == "undefined"){
+      return (
+        <div className="map">
+          <a href={external_link} target="_blank">
+            <img src={map_img_src}/>
+          </a>
+        </div>
+      )
+    }
+    else {
+      return <div/>
+    }
   }
 })
 
@@ -86,14 +98,6 @@ var Day = React.createClass({
       var line = <div className="line"/>
       if (index == array.length -1){
         line = undefined;
-      }
-      var mapsrc = undefined;
-      if (typeof node.address !== "undefined"){
-        var mapsrc="http://maps.googleapis.com/maps/api/staticmap?center=" + encodeURI(node.address) + 
-        "&size=200x200" + 
-        "&markers=size:small|color:red|label:A|" + encodeURI(node.address)
-        "&key=AIzaSyBGagqiIEihpnzPp_2xYPImM8jDryx9tlU";
-        //var mapsrc="http://placehold.it/200x200";
       }
 
       //var descriptions = "foo " + <a href="https://google.com">google</a> + " bar"
