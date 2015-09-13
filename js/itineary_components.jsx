@@ -96,22 +96,31 @@ var Map = React.createClass({
 })
 
 var DayMap = React.createClass({
+  getInitialState: function(){
+    return {"size": "300x300"};
+  },
+
+  handleClick: function(){
+    // FIXME: what't the upper limit?
+    this.setState({"size": "1200x1200"});
+  },
+
   render: function(){
     //FIXME: ES6
 
     var map_img_src="https://maps.googleapis.com/maps/api/staticmap?" + 
-    "&size=700x300" + 
+    "&size=" + this.state['size']
     "&key=AIzaSyBGagqiIEihpnzPp_2xYPImM8jDryx9tlU";
     //var mapsrc="http://placehold.it/200x200";
     //
     this.props.nodes.map(function(node){
       if (typeof qs['no_map'] == "undefined"){
-        if (typeof node.address !== "undefined"){
+        if (typeof node.address !== "undefined" && (node.type == "S" || typeof node.type == "undefined")){
           address = node.address;
           map_img_src += "&markers=size:small|color:red|label:A|" + encodeURI(address)  
         }
         else {
-          if (typeof node.title !== "undefined" && typeof qs['no_auto_map'] == "undefined"){
+          if (typeof node.title !== "undefined" && typeof qs['no_auto_map'] == "undefined" && (node.type == "S" || typeof node.type == "undefined")){
             address = node.title;
             map_img_src += "&markers=size:small|color:red|label:A|" + encodeURI(address)  
           }
@@ -120,8 +129,8 @@ var DayMap = React.createClass({
     })
 
     return (
-      <div className="daymap">
-      <img src={map_img_src}/>
+      <div className="daymap" onClick={this.handleClick}>
+        <img src={map_img_src}/>
       </div>
     )
   }

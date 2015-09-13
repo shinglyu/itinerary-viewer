@@ -133,6 +133,10 @@ font-weight:normal;
 }
 
 .daymap {
-  margin:3%;
   text-align:center;
+}
+
+.daymap > img{
+  margin:3%;
+  cursor: pointer;
 }
