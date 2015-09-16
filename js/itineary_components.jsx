@@ -140,6 +140,35 @@ var DayMap = React.createClass({
   }
 })
 
+var Node = React.createClass({
+  render: function(){
+    var node = this.props.node;
+    var line;
+    if (this.props.drawVertLine){
+      line = <div className="line"/>;
+    }
+    var desc = <AutoLinkText data={node.description}/>
+    if (node.type == "SG-route"){
+      desc = <a href={node.description} target="_blank">Find route</a>;
+    }
+    return (
+      <div className="node">
+        <NodeIcon type={node.type}/>
+        <div className="content">
+          {line}
+          <h3 className="title">{node.title}</h3>&nbsp;&nbsp;&nbsp;
+          <h3 className="time">{node.time}</h3>
+          <Map node={node}/>
+          <div className="text">
+            <p className="address">{node.address}</p>
+            <p className="description">{desc}</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+})
+
 var Day = React.createClass({
   fillEmptyTypes: function(nodes){
     return nodes.map(function(node){ 
@@ -156,7 +185,7 @@ var Day = React.createClass({
     for (var idx =0; idx < nodes.length-1; idx++){
       if (nodes[idx]['type'] == "S" && nodes[idx+1]['type'] == "S"){
         nodes.splice(idx+1, 0, {
-          "type": "T",
+          "type": "SG-route",
           "title":"Find route",
           "description":"http://maps.google.com/maps?saddr=" + encodeURI(nodes[idx]['address']) + "&daddr=" + encodeURI(nodes[idx+1]['address']) + "&dirflg=r"
         })
@@ -174,13 +203,13 @@ var Day = React.createClass({
     var nodes = this.insertTransitSuggestions(nodes);
     console.log(nodes)
     nodes = nodes.map(function(node, index, array){
-      var line = <div className="line"/>
-      if (index == array.length -1){
-        line = undefined;
-      }
+
+      return (
+        <Node node={node} drawVertLine={(index != array.length-1)}/>)
 
       //var descriptions = "foo " + <a href="https://google.com">google</a> + " bar"
       //FIXME: move this if else to node type componenet
+      /*
       return (
         <div className="node">
           <NodeIcon type={node.type}/>
@@ -196,6 +225,7 @@ var Day = React.createClass({
           </div>
         </div>
       )
+      */
     });
 
     return (
@@ -229,3 +259,4 @@ var Days= React.createClass({
 
 module.exports.Day = Day;
 module.exports.NodeIcon = NodeIcon;
+module.exports.Node = Node;
