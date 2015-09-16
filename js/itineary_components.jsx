@@ -1,3 +1,5 @@
+var React = require('react')
+//https://www.google.com.tw/maps/dir/University+of+Taipei,+Zhongzheng+District,+Taipei+City,+Taiwan/%E5%8F%B0%E5%8C%97%E5%B8%82%E4%BF%A1%E7%BE%A9%E5%8D%80%E8%87%BA%E5%8C%97101%E8%B3%BC%E7%89%A9%E4%B8%AD%E5%BF%83/@25.0321477,121.5204559,14z/data=!3m1!4b1!4m13!4m12!1m5!1m1!1s0x3442a9a02f53dd45:0x38f05d6edd6d3845!2m2!1d121.5138046!2d25.0366038!1m5!1m1!1s0x3442abb6da80a7ad:0xacc4d11dc963103c!2m2!1d121.56481!2d25.033718
 var AutoLinkText = React.createClass({
   render: function(){
     var re = /(http[s]?:\/\/[^\s]*)/g; 
@@ -137,11 +139,39 @@ var DayMap = React.createClass({
 })
 
 var Day = React.createClass({
+  fillEmptyTypes: function(nodes){
+    return nodes.map(function(node){ 
+      if (typeof node['type'] == "undefined") {
+        node['type'] = "S";
+      }
+      if (typeof node['address'] == "undefined") {
+        node['address'] = node['title'];
+      }
+      return node
+    });
+  },
+  insertTransitSuggestions: function(nodes){
+    for (var idx =0; idx < nodes.length-1; idx++){
+      if (nodes[idx]['type'] == "S" && nodes[idx+1]['type'] == "S"){
+        nodes.splice(idx+1, 0, {
+          "type": "T",
+          "title":"Find route",
+          "description":"http://maps.google.com/maps?saddr=" + encodeURI(nodes[idx]['address']) + "&daddr=" + encodeURI(nodes[idx+1]['address']) + "&dirflg=r"
+        })
+      }
+    }
+    return nodes;
+  },
   render: function(){
     var rawnodes = [{title: this.props.date, type:"D"}]
     rawnodes = rawnodes.concat(this.props.nodes)
 
-    nodes = rawnodes.map(function(node, index, array){
+    console.log(rawnodes)
+    var nodes = this.fillEmptyTypes(rawnodes);
+    console.log(nodes)
+    var nodes = this.insertTransitSuggestions(nodes);
+    console.log(nodes)
+    nodes = nodes.map(function(node, index, array){
       var line = <div className="line"/>
       if (index == array.length -1){
         line = undefined;
@@ -165,6 +195,7 @@ var Day = React.createClass({
         </div>
       )
     });
+
     return (
       <div className="timeline">
         {nodes}
@@ -194,3 +225,5 @@ var Days= React.createClass({
   }
 });
 
+module.exports.Day = Day;
+module.exports.NodeIcon = NodeIcon;
