@@ -163,7 +163,7 @@ var Node = React.createClass({
     }
     var desc = <AutoLinkText data={node.description}/>
     if (node.type == "SG-route"){
-      desc = <a href={node.description} target="_blank">Find route</a>;
+      desc = <a href={node.description} target="_blank">Find route on Google Map</a>;
     }
     return (
       <div className="node">
