@@ -33,7 +33,8 @@ var NodeIcon = React.createClass({
       var nodetype = "S";
     }
     else {
-      var nodetype = this.props.type[0];
+      //var nodetype = this.props.type[0];
+      var nodetype = this.props.type;
     }
 
     switch (nodetype){
@@ -51,6 +52,9 @@ var NodeIcon = React.createClass({
         break;
       case "D":
         icon_name += "calendar"
+        break;
+      case "SG-route":
+        icon_name += "map-signs"
         break;
       default:
         icon_name += "info"
