@@ -11,31 +11,33 @@ var FileSelector = React.createClass({
 
 /* Thanks http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript */
 //Get query string
- var qs = (function(a) {
-   if (a == "") return {};
-   var b = {};
-   for (var i = 0; i < a.length; ++i)
-   {
-     var p=a[i].split('=', 2);
-     if (p.length == 1)
-       b[p[0]] = "";
-     else
-       b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
-   }
-   return b;
- })(window.location.search.substr(1).split('&'));
-
 var Page = React.createClass({
   getInitialState: function(){
-     return {days:{"Please select a plan file":[]}}
+     var qs = (function(a) {
+       if (a == "") return {};
+       var b = {};
+       for (var i = 0; i < a.length; ++i)
+       {
+         var p=a[i].split('=', 2);
+         if (p.length == 1)
+           b[p[0]] = "";
+         else
+           b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+       }
+       return b;
+     })(window.location.search.substr(1).split('&'));
+
+
+     console.log(qs)
+     return {days:{"Please select a plan file":[]}, config:qs}
   },
   componentDidMount: function(){
     var source = ""
-    if (typeof qs['file'] == "undefined"){
+    if (typeof this.state.config['file'] == "undefined"){
       source = "source_files/default.yml";
     }
     else {
-      source = qs['file']
+      source = this.state.config['file']
     }
     fetch(source)
     .then(function(resp){
@@ -55,10 +57,11 @@ var Page = React.createClass({
     reader.readAsText(e.target.files[0])
   },
   render: function(){
+    console.log(this.state.config)
     return (
       <div>
         <FileSelector loadNewData={this.loadNewData}/>
-        <Days days={this.state.days} />
+        <Days days={this.state.days} config={this.state.config}/>
       </div>
     )
   }

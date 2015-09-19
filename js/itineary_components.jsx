@@ -63,20 +63,26 @@ var NodeIcon = React.createClass({
 var Map = React.createClass({
   render: function(){
     var address = undefined;
-    console.log(qs)
+    //console.log(qs)
+    //Rewrite this
+    /*
     if (typeof qs['no_map'] == "undefined"){
+    */
       if (typeof this.props.node.address !== "undefined"){
         address = this.props.node.address;
-        console.log("Used address " + address)
+        //console.log("Used address " + address)
        }
       else {
-        if (typeof this.props.node.title !== "undefined" && typeof qs['no_auto_map'] == "undefined"){
+        //if (typeof this.props.node.title !== "undefined" && typeof qs['no_auto_map'] == "undefined"){
+        //TODO: disable auto infer 
+        if (typeof this.props.node.title !== "undefined"){
           address = this.props.node.title;
-          console.log("Used title" + address)
+          //console.log("Used title" + address)
         }
       }
-
+/*
     }
+    */
     var map_img_src="http://maps.googleapis.com/maps/api/staticmap?center=" + encodeURI(address) + 
     "&size=200x200" + 
     "&markers=size:small|color:red|label:A|" + encodeURI(address)
@@ -118,18 +124,20 @@ var DayMap = React.createClass({
     //var mapsrc="http://placehold.it/200x200";
     //
     this.props.nodes.map(function(node){
-      if (typeof qs['no_map'] == "undefined"){
+      //if (typeof qs['no_map'] == "undefined"){
         if (typeof node.address !== "undefined" && (node.type == "S" || typeof node.type == "undefined")){
           address = node.address;
           map_img_src += "&markers=size:small|color:red|label:A|" + encodeURI(address)  
         }
         else {
-          if (typeof node.title !== "undefined" && typeof qs['no_auto_map'] == "undefined" && (node.type == "S" || typeof node.type == "undefined")){
+          //if (typeof node.title !== "undefined" && typeof qs['no_auto_map'] == "undefined" && (node.type == "S" || typeof node.type == "undefined")){
+          //TODO:disable auto infer
+          if (typeof node.title !== "undefined"){
             address = node.title;
             map_img_src += "&markers=size:small|color:red|label:A|" + encodeURI(address)  
           }
         }
-      }
+      //}
     })
 
     return (
@@ -142,6 +150,8 @@ var DayMap = React.createClass({
 
 var Node = React.createClass({
   render: function(){
+    console.log("config:")
+    console.log(this.props.config)
     var node = this.props.node;
     var line;
     if (this.props.drawVertLine){
@@ -197,37 +207,19 @@ var Day = React.createClass({
     var rawnodes = [{title: this.props.date, type:"D"}]
     rawnodes = rawnodes.concat(this.props.nodes)
 
-    console.log(rawnodes)
+    //console.log(rawnodes)
     var nodes = this.fillEmptyTypes(rawnodes);
-    console.log(nodes)
+    //console.log(nodes)
     var nodes = this.insertTransitSuggestions(nodes);
-    console.log(nodes)
+    //console.log(this)
+    var config = this.props.config;
+    console.log(config)
     nodes = nodes.map(function(node, index, array){
-
       return (
-        <Node node={node} drawVertLine={(index != array.length-1)}/>)
-
-      //var descriptions = "foo " + <a href="https://google.com">google</a> + " bar"
-      //FIXME: move this if else to node type componenet
-      /*
-      return (
-        <div className="node">
-          <NodeIcon type={node.type}/>
-          <div className="content">
-            {line}
-            <h3 className="title">{node.title}</h3>&nbsp;&nbsp;&nbsp;
-            <h3 className="time">{node.time}</h3>
-            <Map node={node}/>
-              <div className="text">
-                <p className="address">{node.address}</p>
-                <p className="description"><AutoLinkText data={node.description}/></p>
-              </div>
-          </div>
-        </div>
+        //<Node node={node} drawVertLine={(index != array.length-1)}  />
+        <Node node={node} config={config} drawVertLine={(index != array.length-1)}  />
       )
-      */
-    });
-
+    }) 
     return (
       <div className="timeline">
         {nodes}
@@ -238,11 +230,12 @@ var Day = React.createClass({
 
 var Days= React.createClass({
   render: function(){
+    console.log(this.props.config)
     days = []
     for (var date in this.props.days){
       days.push(
         <div>
-          <Day nodes={this.props.days[date]} date={date}/>
+          <Day nodes={this.props.days[date]} date={date} config={this.props.config}/>
           <DayMap nodes={this.props.days[date]}/>
           <hr/>
         </div>
