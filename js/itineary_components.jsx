@@ -152,18 +152,50 @@ var DayMap = React.createClass({
   }
 })
 
+var Suggestions = React.createClass({
+  render: function(){
+    var suggestions = []
+    //console.log("Address")
+    //console.log(this.props.node.address)
+    if (typeof this.props.node.address == "undefined" || this.props.node.address == this.props.node.title){
+      suggestions.push(<li><a target="_blank" href={"https://www.google.com/search?q=" + encodeURI(this.props.node.title) + "+address"}>Find address</a></li>)
+      //console.log(suggestions)
+    }
+    if (typeof this.props.node.description == "undefined" || this.props.node.description == ""){
+      suggestions.push(<li><a target="_blank" href={"https://www.google.com/search?q=" + encodeURI(this.props.node.title)}>Find detail</a></li>)
+      //console.log(suggestions)
+    }
+    return (
+      <div className="suggestions">
+        <ul>
+          {suggestions}
+        </ul>
+      </div>
+    )
+  }
+
+})
+
 var Node = React.createClass({
   render: function(){
-    console.log("config:")
-    console.log(this.props.config)
+    //console.log("config:")
+    //console.log(this.props.config)
     var node = this.props.node;
+    console.log(node)
     var line;
     if (this.props.drawVertLine){
       line = <div className="line"/>;
     }
+    //console.log(node.description)
     var desc = <AutoLinkText data={node.description}/>
+    //console.log(desc)
     if (node.type == "SG-route"){
       desc = <a href={node.description} target="_blank">Find route on Google Map</a>;
+    }
+
+    var suggestions;
+    if (typeof this.props.config['planningMode'] !== "undefined"){
+      suggestions = (<Suggestions node={node}/>)
     }
     return (
       <div className="node">
@@ -176,6 +208,7 @@ var Node = React.createClass({
           <div className="text">
             <p className="address">{node.address}</p>
             <p className="description">{desc}</p>
+            {suggestions}
           </div>
         </div>
       </div>
@@ -217,7 +250,7 @@ var Day = React.createClass({
     var nodes = this.insertTransitSuggestions(nodes);
     //console.log(this)
     var config = this.props.config;
-    console.log(config)
+    //console.log(config)
     nodes = nodes.map(function(node, index, array){
       return (
         //<Node node={node} drawVertLine={(index != array.length-1)}  />
@@ -234,7 +267,7 @@ var Day = React.createClass({
 
 var Days= React.createClass({
   render: function(){
-    console.log(this.props.config)
+    //console.log(this.props.config)
     days = []
     for (var date in this.props.days){
       days.push(
@@ -257,3 +290,4 @@ var Days= React.createClass({
 module.exports.Day = Day;
 module.exports.NodeIcon = NodeIcon;
 module.exports.Node = Node;
+module.exports.Suggestions = Suggestions;
