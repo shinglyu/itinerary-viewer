@@ -1,9 +1,9 @@
 .icon {
-	width: 40px;
-	height: 40px;
+	width: 20px;
+	height: 20px;
 	text-align: center;
-	border-radius: 50%;
-	box-shadow: 0 0 0 8px #afdcf8;
+	border-radius: 2px;
+	box-shadow: 0 0 0 4px #afdcf8;
   left:20%;
   background: #FFFFFF;
 }
@@ -37,9 +37,9 @@ div.line {
   
   position:absolute;
   background:#afdcf8;
-  width:10px;
+  width:4px;
   height:100%;
-  margin-left:-40px;
+  margin-left:-28px;
   z-index:-1;
   border: 1px solid;
   border-radius: 10px;
@@ -68,7 +68,7 @@ div.content {
   margin-top:5px;
 }
 
-div.content > h3{
+div.content > h4{
   margin-top:0px;
 }
  div.content > .title{

@@ -60,7 +60,7 @@ var NodeIcon = React.createClass({
         icon_name += "info"
         break;
     }
-    return (<div className={"icon " + "icon-" + this.props.type}><i className={"fa fa-2x " + icon_name}/></div>)
+    return (<div className={"icon " + "icon-" + this.props.type}><i className={"fa " + icon_name}/></div>)
   }
 });
 
@@ -91,7 +91,7 @@ var Map = React.createClass({
     "&size=200x200" + 
     "&markers=size:small|color:red|label:A|" + encodeURI(address)
     "&key=AIzaSyBGagqiIEihpnzPp_2xYPImM8jDryx9tlU";
-    //var mapsrc="http://placehold.it/200x200";
+    var map_img_src="http://placehold.it/200x200";
     var external_link ="http://maps.google.com/maps?q=" + encodeURI(address);
 
     if ((this.props.node.type != "S" && typeof this.props.node.type !== "undefined") || typeof address == "undefined"){
@@ -144,6 +144,7 @@ var DayMap = React.createClass({
       //}
     })
 
+    var map_img_src="http://placehold.it/200x200";
     return (
       <div className="daymap" onClick={this.handleClick}>
         <img src={map_img_src}/>
@@ -202,8 +203,8 @@ var Node = React.createClass({
         <NodeIcon type={node.type}/>
         <div className="content">
           {line}
-          <h3 className="title">{node.title}</h3>&nbsp;&nbsp;&nbsp;
-          <h3 className="time">{node.time}</h3>
+          <h4 className="title">{node.title}</h4>&nbsp;&nbsp;&nbsp;
+          <h4 className="time">{node.time}</h4>
           <Map node={node}/>
           <div className="text">
             <p className="address">{node.address}</p>
