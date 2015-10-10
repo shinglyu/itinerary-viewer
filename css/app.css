@@ -31,18 +31,20 @@
 div.node{
   position:relative;
   max-width:50vw;
+  padding-bottom: 1em;
 }
 
 div.line {
-  
   position:absolute;
   background:#afdcf8;
   width:4px;
   height:100%;
-  margin-left:-28px;
-  z-index:-1;
+  top: 24px;
+  margin-left:6.5px;
+  /* z-index:-1;*/
   border: 1px solid;
-  border-radius: 10px;
+  border-top: 0px;
+  /*border-radius: 10px;*/
 }
 
 .timeline > li {
@@ -60,7 +62,7 @@ div.icon > i {
 
 div.content {
   padding-left: 15px;
-  min-height: 60px;
+  /*min-height: 60px;*/
   display:inline-block;
   vertical-align:top;
   width:85%;
@@ -76,13 +78,18 @@ div.content > h4{
   display:inline-block;
 }
 
-div.content > p {
-  margin-top:0px;
-  margin-bottom:0px;
+div.content p {
+  margin: 0px;
+  margin-left: 1em; 
 }
 div.content >  {
   padding-left: 1.5em;
   max-width: 50vw;
+}
+
+div.content i {
+  width:16px;
+  text-align:center;
 }
 
 div.content >  .text {
@@ -140,3 +147,9 @@ font-weight:normal;
   margin:3%;
   cursor: pointer;
 }
+
+.suggestions {
+  background-color: lightgrey;
+  border-radius: 20px;
+}
+

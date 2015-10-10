@@ -190,24 +190,38 @@ var Node = React.createClass({
     //console.log(node.description)
     var desc = <AutoLinkText data={node.description}/>
     //console.log(desc)
+    var sg_route_class="";
     if (node.type == "SG-route"){
       desc = <a href={node.description} target="_blank">Find route on Google Map</a>;
+      var sg_route_class="suggestions";
     }
 
     var suggestions;
     if (typeof this.props.config['planningMode'] !== "undefined"){
       suggestions = (<Suggestions node={node}/>)
     }
+    var map = <Map node={node}/>
+    var map = {};
+    var time = {};
+    if (typeof node.time !== "undefined" && node.time !== ""){
+        time = <p className="time"><i className="fa fa-clock-o"/>{node.time}</p>
+    }
+
+    var address = {};
+    if (node.address !== node.title){
+      address = <p className="address"><i className="fa fa-map-marker"/>{node.address}</p>
+    }
+
     return (
-      <div className="node">
+      <div className={"node " + sg_route_class} >
         <NodeIcon type={node.type}/>
+        {line}
         <div className="content">
-          {line}
           <h4 className="title">{node.title}</h4>&nbsp;&nbsp;&nbsp;
-          <h4 className="time">{node.time}</h4>
-          <Map node={node}/>
+          {map}
           <div className="text">
-            <p className="address">{node.address}</p>
+            {time}
+            {address}
             <p className="description">{desc}</p>
             {suggestions}
           </div>
