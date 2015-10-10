@@ -192,8 +192,15 @@ var Node = React.createClass({
     //console.log(desc)
     var sg_route_class="";
     if (node.type == "SG-route"){
-      desc = <a href={node.description} target="_blank">Find route on Google Map</a>;
-      var sg_route_class="suggestions";
+      return (
+        <div className="node suggestions" >
+          <NodeIcon type={node.type}/>
+          {line}
+          <div className="content">
+            <h4 className="title"><a href={node.description} target="_blank">Find route</a></h4>
+          </div>
+        </div>
+      );
     }
 
     var suggestions;
@@ -217,7 +224,7 @@ var Node = React.createClass({
         <NodeIcon type={node.type}/>
         {line}
         <div className="content">
-          <h4 className="title">{node.title}</h4>&nbsp;&nbsp;&nbsp;
+          <h4 className="title">{node.title}</h4>
           {map}
           <div className="text">
             {time}
@@ -249,6 +256,7 @@ var Day = React.createClass({
         nodes.splice(idx+1, 0, {
           "type": "SG-route",
           "title":"Find route",
+          "address":"Find route",
           "description":"http://maps.google.com/maps?saddr=" + encodeURI(nodes[idx]['address']) + "&daddr=" + encodeURI(nodes[idx+1]['address']) + "&dirflg=r"
         })
       }
@@ -262,7 +270,9 @@ var Day = React.createClass({
     //console.log(rawnodes)
     var nodes = this.fillEmptyTypes(rawnodes);
     //console.log(nodes)
-    var nodes = this.insertTransitSuggestions(nodes);
+    if(this.props.config['planningMode'] == 1){
+      var nodes = this.insertTransitSuggestions(nodes);
+    }
     //console.log(this)
     var config = this.props.config;
     //console.log(config)
