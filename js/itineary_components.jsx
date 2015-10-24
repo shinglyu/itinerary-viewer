@@ -8,13 +8,30 @@ var AutoLinkText = React.createClass({
     if (typeof this.props.data == "undefined"){
       return <div/>
     }
-    var text_blocks = this.props.data.split(" ")
+    var lines = this.props.data.split("\n")
+    console.log(lines)
+    lines_w_brs = []
+    for (var id in lines){
+      //console.log(line)
+      lines_w_brs.push(lines[id]);
+      lines_w_brs.push(<br/>);
+    }
+    
+    var text_blocks = lines_w_brs;
+    //var text_blocks = this.props.data.split(" ")
+    console.log(this.props.data)
+    console.log(text_blocks)
     var texts = text_blocks.map(function(text){
-      if (text.match(re)){
-        return <a href={text} target="_blank">{text}</a>
+      if (typeof text == "string"){
+        if (text.match(re)){
+          return <a href={text} target="_blank">{text}</a>
+        }
+        else {
+          return text + " "
+        }
       }
       else {
-        return text + " "
+        return text
       }
     })
 
@@ -182,7 +199,7 @@ var Node = React.createClass({
     //console.log("config:")
     //console.log(this.props.config)
     var node = this.props.node;
-    console.log(node)
+    //console.log(node)
     var line;
     if (this.props.drawVertLine){
       line = <div className="line"/>;
