@@ -84,26 +84,7 @@ var NodeIcon = React.createClass({
 var Map = React.createClass({
   render: function(){
     var address = undefined;
-    //console.log(qs)
-    //Rewrite this
-    /*
-    if (typeof qs['no_map'] == "undefined"){
-    */
-      if (typeof this.props.node.address !== "undefined"){
-        address = this.props.node.address;
-        //console.log("Used address " + address)
-       }
-      else {
-        //if (typeof this.props.node.title !== "undefined" && typeof qs['no_auto_map'] == "undefined"){
-        //TODO: disable auto infer 
-        if (typeof this.props.node.title !== "undefined"){
-          address = this.props.node.title;
-          //console.log("Used title" + address)
-        }
-      }
-/*
-    }
-    */
+
     var map_img_src="http://maps.googleapis.com/maps/api/staticmap?center=" + encodeURI(address) + 
     "&size=200x200" + 
     "&markers=size:small|color:red|label:A|" + encodeURI(address)
@@ -175,6 +156,10 @@ var Suggestions = React.createClass({
     var suggestions = []
     //console.log("Address")
     //console.log(this.props.node.address)
+    if (this.props.node.type == "S" && typeof this.props.node.address !== "undefined"){
+      suggestions.push(<li><a target="_blank" href={"https://maps.google.com/maps?q=" + encodeURI(this.props.node.address)}>Open map</a></li>)
+    }
+
     if (typeof this.props.node.address == "undefined" || this.props.node.address == this.props.node.title){
       suggestions.push(<li><a target="_blank" href={"https://www.google.com/search?q=" + encodeURI(this.props.node.title) + "+address"}>Find address</a></li>)
       //console.log(suggestions)
@@ -236,12 +221,16 @@ var Node = React.createClass({
       address = <p className="address"><i className="fa fa-map-marker"/>{node.address}</p>
     }
 
+    var titleNode = <h4 className="title">{node.title}</h4>
+    if (node.type == "T"){
+      titleNode = <p className="title">&nbsp;{node.title}</p> 
+    }
     return (
       <div className={"node " + sg_route_class} >
         <NodeIcon type={node.type}/>
         {line}
         <div className="content">
-          <h4 className="title">{node.title}</h4>
+          {titleNode}
           {map}
           <div className="text">
             {time}
@@ -266,6 +255,17 @@ var Day = React.createClass({
       }
       return node
     });
+  },
+  inferAddress: function(nodes){
+    return nodes.map(function(node){
+      if (node['type'] !== "S"){
+        return node;
+      }
+      if (typeof node['address'] == "undefined"){
+        node['address'] = node['title'];
+        return node
+      }
+    })
   },
   insertTransitSuggestions: function(nodes){
     for (var idx =0; idx < nodes.length-1; idx++){
