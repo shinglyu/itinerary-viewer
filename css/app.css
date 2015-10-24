@@ -119,7 +119,7 @@ div.container {
 
 .time {
 display:inline-block;
-width:4em;
+/*width:4em;*/
 margin:0px;
 font-weight:normal;
 }

@@ -91,7 +91,7 @@ var Map = React.createClass({
     "&size=200x200" + 
     "&markers=size:small|color:red|label:A|" + encodeURI(address)
     "&key=AIzaSyBGagqiIEihpnzPp_2xYPImM8jDryx9tlU";
-    var map_img_src="http://placehold.it/200x200";
+    //var map_img_src="http://placehold.it/200x200";
     var external_link ="http://maps.google.com/maps?q=" + encodeURI(address);
 
     if ((this.props.node.type != "S" && typeof this.props.node.type !== "undefined") || typeof address == "undefined"){
@@ -144,7 +144,7 @@ var DayMap = React.createClass({
       //}
     })
 
-    var map_img_src="http://placehold.it/200x200";
+    //var map_img_src="http://placehold.it/200x200";
     return (
       <div className="daymap" onClick={this.handleClick}>
         <img src={map_img_src}/>
@@ -270,9 +270,10 @@ var Day = React.createClass({
     //console.log(rawnodes)
     var nodes = this.fillEmptyTypes(rawnodes);
     //console.log(nodes)
-    if(this.props.config['planningMode'] == 1){
-      var nodes = this.insertTransitSuggestions(nodes);
+    if(typeof this.props.config['planningMode'] !== "undefined" && this.props.config['planningMode'][0] == "1"){ //BUG: python server will be "1/"
+      nodes = this.insertTransitSuggestions(nodes);
     }
+    console.log(nodes)
     //console.log(this)
     var config = this.props.config;
     //console.log(config)
