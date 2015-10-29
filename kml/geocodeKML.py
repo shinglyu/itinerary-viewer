@@ -3,6 +3,7 @@ import urllib
 import xml.dom.minidom
 import json
 import time
+import argparse
 
 waitTime=2
 
@@ -82,9 +83,14 @@ def parseAddresses(addressesText):
     addressDictLists = map(listToDict, addressLists)
     return addressDictLists
 if __name__ == '__main__':
-  addressesText = '''
-  Mozilla HQ; 331 E Evelyn Ave, Mountain View, CA 94041
-  Mozilla Paris; 16 Boulevard Montmartre, 75009 Paris
-  '''
+  parser = argparse.ArgumentParser()
+  parser.add_argument('filename', help='The input file')
+  args = parser.parse_args()
+  with open(args.filename, 'r') as f:
+      addressesText = f.read()
+  #addressesText = '''
+  #Mozilla HQ; 331 E Evelyn Ave, Mountain View, CA 94041
+  #Mozilla Paris; 16 Boulevard Montmartre, 75009 Paris
+  #'''
   createKML(parseAddresses(addressesText), 'google.kml')
 
