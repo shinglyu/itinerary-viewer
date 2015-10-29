@@ -26,7 +26,13 @@
   display:flex;
   flex-flow:column wrap;
   flex-wrap: wrap;
+  width:28em;
   /*max-height:90vh;*/
+}
+
+.container {
+  display:flex;
+  flex-wrap: wrap;
 }
 
 div.node{
@@ -133,8 +139,8 @@ div.content > .text > .description {
 }
 
 div.content > .map{
-min-width:200px;  
-float:right
+  min-width:200px;  
+  float:right
 }
 
 div.container {
@@ -142,19 +148,20 @@ div.container {
 }
 
 .time {
-display:inline-block;
-/*width:4em;*/
-margin:0px;
-font-weight:normal;
+  display:inline-block;
+  /*width:4em;*/
+  margin:0px;
+  font-weight:normal;
 }
 
 @media print  {
   div.container {
     -moz-columns:2 ;
     -moz-column-fill:balance;
+    display:block;
   }
-  .timeline{
 
+  .timeline{
     display:inline;
     vertical-align: top;
     border-bottom:1px solid;

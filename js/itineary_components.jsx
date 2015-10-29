@@ -318,7 +318,6 @@ var Days= React.createClass({
         <div>
           <Day nodes={this.props.days[date]} date={date} config={this.props.config}/>
           <DayMap nodes={this.props.days[date]}/>
-          <hr/>
         </div>
       )
     }
