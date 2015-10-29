@@ -25,7 +25,8 @@
 	position: relative;
   display:flex;
   flex-flow:column wrap;
-  max-height:90vh;
+  flex-wrap: wrap;
+  /*max-height:90vh;*/
 }
 
 div.node{
@@ -44,7 +45,7 @@ div.node.S {
   border-radius:0.2em;
 }
 
-div.node.T{
+div.node.T,div.node.suggestions{
   position:relative;
   /*max-width:50vw;*/
   /*width:30vw;*/
@@ -175,7 +176,12 @@ font-weight:normal;
 }
 
 .suggestions {
-  background-color: lightgrey;
-  border-radius: 20px;
+  /*background-color: lightgrey;*/
+  border-radius: 0.2em;
+  width:26em;
 }
 
+.suggestions > ul {
+  padding-left: 1.5em;
+  width:80%
+}
