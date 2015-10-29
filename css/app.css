@@ -30,12 +30,29 @@
 
 div.node{
   position:relative;
-  /*max-width:50vw;*/
-  width:30vw;
+  max-width:50vw;
+  /*width:30vw;*/
   padding-bottom: 1em;
+  margin:0.2em;
+  /*border: solid lightgrey;*/
+}
+
+div.node.S {
+  box-shadow: 0.1em 0.1em 0.5em lightgrey;
+}
+
+div.node.T{
+  position:relative;
+  max-width:50vw;
+  /*width:30vw;*/
+  padding-bottom: 1em;
+  margin-left: 3em;
+  border: none;
+  border-left: dotted;
 }
 
 div.line {
+  display:none;
   position:absolute;
   background:#afdcf8;
   width:4px;

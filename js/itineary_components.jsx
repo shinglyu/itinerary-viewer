@@ -223,10 +223,10 @@ var Node = React.createClass({
 
     var titleNode = <h4 className="title">{node.title}</h4>
     if (node.type == "T"){
-      titleNode = <p className="title">&nbsp;{node.title}</p> 
+      titleNode = <p className="title">{node.title}</p> 
     }
     return (
-      <div className={"node " + sg_route_class} >
+      <div className={"node " + sg_route_class + " " + this.props.node.type} >
         <NodeIcon type={node.type}/>
         {line}
         <div className="content">
