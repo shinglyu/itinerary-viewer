@@ -77,7 +77,8 @@ var NodeIcon = React.createClass({
         icon_name += "info"
         break;
     }
-    return (<div className={"icon " + "icon-" + this.props.type}><i className={"fa " + icon_name}/></div>)
+    return <div/>
+    //return (<div className={"icon " + "icon-" + this.props.type}><i className={"fa " + icon_name}/></div>)
   }
 });
 
