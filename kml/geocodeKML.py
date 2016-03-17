@@ -76,12 +76,18 @@ def createKML(addresses, fileName):
 
 def parseAddresses(addressesText):
     addressLines = addressesText.splitlines()
-    addressLines= filter(lambda x: x.strip() != '', addressLines)
+    addressLines = map(lambda x: x.split('#')[0], addressLines)
+    addressLines = filter(lambda x: x.strip() != '', addressLines)
+    #addressLines = filter(lambda x: not x.strip().startswith('#'), addressLines)
     addressLists = map(lambda x: x.split(';'), addressLines)
     def listToDict(l):
-        return {'name': l[0].strip(), 'address': l[1].strip()}
+        if len(l) == 1:
+            return {'name': l[0].strip(), 'address': l[0].strip()}
+        else:
+            return {'name': l[0].strip(), 'address': l[1].strip()}
     addressDictLists = map(listToDict, addressLists)
     return addressDictLists
+
 if __name__ == '__main__':
   parser = argparse.ArgumentParser()
   parser.add_argument('filename', help='The input file')
