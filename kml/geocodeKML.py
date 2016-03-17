@@ -39,12 +39,12 @@ def createKML(addresses, fileName):
   kmlDoc = xml.dom.minidom.Document()
 
   kmlElement = kmlDoc.createElementNS('http://earth.google.com/kml/2.2','kml')
-
-  kmlElement = kmlDoc.appendChild(kmlElement)
+kmlElement = kmlDoc.appendChild(kmlElement)
 
   documentElement = kmlDoc.createElement('Document')
   documentElement = kmlElement.appendChild(documentElement)
 
+  failedlist = []
   for idx, address in enumerate(addresses):
     placemarkElement = kmlDoc.createElement('Placemark')
 
@@ -63,16 +63,26 @@ def createKML(addresses, fileName):
     # This geocodes the address and adds it to a  element.
     print("Searching for location " + str(idx+1) + "/" + str(len(addresses)))
     coordinates = geocode(address['address'])
+
+    if coordinates == "":
+        failedlist.append("{}; {}".format(address['name'], address['address']))
+    else:
+        coorElement.appendChild(kmlDoc.createTextNode(coordinates))
+        pointElement.appendChild(coorElement)
+
+        documentElement.appendChild(placemarkElement)
+
     time.sleep(waitTime)
-    coorElement.appendChild(kmlDoc.createTextNode(coordinates))
-    pointElement.appendChild(coorElement)
 
-    documentElement.appendChild(placemarkElement)
-
+  print("==========")
   # This writes the KML Document to a file.
-  kmlFile = open(fileName, 'w')
-  kmlFile.write(kmlDoc.toprettyxml(' '))
-  kmlFile.close()
+  print("Saving search result to {}".format(fileName))
+  with open(fileName, 'w') as kmlFile:
+    kmlFile.write(kmlDoc.toprettyxml(' '))
+  failFilename = "{}.failed".format(fileName)
+  print("Saving failed searches to {}".format(failFilename))
+  with open(failFilename, 'w') as failedFile:
+    failedFile.write('\n'.join(failedlist))
 
 def parseAddresses(addressesText):
     addressLines = addressesText.splitlines()
@@ -92,7 +102,8 @@ if __name__ == '__main__':
   parser = argparse.ArgumentParser()
   parser.add_argument('filename', help='The input file')
   args = parser.parse_args()
-  with open(args.filename, 'r') as f:
+  #with open('{}/{}'.format(os.getcwd(), args.filename), 'r') as f:
+  with open('{}'.format(args.filename), 'r') as f:
       addressesText = f.read()
   #addressesText = '''
   #Mozilla HQ; 331 E Evelyn Ave, Mountain View, CA 94041
