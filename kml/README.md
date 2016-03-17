@@ -1,4 +1,8 @@
-#Usage
+Geocode KML
+=================
+List of location names => KML file that can be opend in map apps
+
+# Usage
 
 Run
 
@@ -11,21 +15,27 @@ or
 ```
 bash geocode.sh <your input txt> #Will open online kml viewer and nemo file manager
 ```
-
-A file called `google.kml` will be generated. You can import it to apps like MAPS.ME or Google My Map.
+# Output
+* `<your input>.kml`: a KML file that can be imported it to apps like MAPS.ME or Google My Map.
+* `<your input>.kml.failed`: a list of locations that failed to be extracted from 
 
 #Input file format
 
 ```
-title; address
-title; title
+title          # Title only, e.g. Tower of London
+title; address # Add exact address for better positioning accuracy
+# Text after a pond sign are comments, they are ignored
 ```
-If you don't know the address, simply repeat the title again.
 
 e.g.
-
 ```
+# My plan for Taipei 
 Taipei 101; No.x, Hsin-yi Rd. Taipei, Taiwan
-Taipei Main Train Station; Taipei Main Train Station
+Taipei Main Train Station 
 ```
 
+
+# Compatiable Apps
+* [Google My Map](https://www.google.com/mymaps/?hl=en_US&app=mp)
+* [MAPS.ME](http://maps.me/en/home)
+* Other apps that supports KML format
