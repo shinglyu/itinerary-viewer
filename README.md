@@ -1,6 +1,6 @@
 #Itinerary Viewer
 
-#[Production Site](https://shinglyu.github.io/itinerary-viewer)
+#[Live Demo](https://shinglyu.github.io/itinerary-viewer)
 
 # How to use locally
 ```
