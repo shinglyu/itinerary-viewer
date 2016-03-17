@@ -98,5 +98,5 @@ if __name__ == '__main__':
   #Mozilla HQ; 331 E Evelyn Ave, Mountain View, CA 94041
   #Mozilla Paris; 16 Boulevard Montmartre, 75009 Paris
   #'''
-  createKML(parseAddresses(addressesText), 'google.kml')
+  createKML(parseAddresses(addressesText), "{}.kml".format(args.filename))
 
