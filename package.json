@@ -1,0 +1,25 @@
+{
+  "name": "itineary-viewer",
+  "version": "0.0.1",
+  "description": "Pretty print plaintext itineary",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shinglyu/itinerary-viewer.git"
+  },
+  "author": "Shing Lyu",
+  "license": "MPLv2",
+  "scripts": {
+    "test": "mocha --compilers jsx:./test/preprocessor.js"
+  },
+  "bugs": {
+    "url": "https://github.com/shinglyu/itinerary-viewer/issues"
+  },
+  "dependencies": {
+    "react": "~0.13.3",
+    "react-tools": "~0.13.3",
+    "skin-deep": "~0.5.0",
+    "chai": "~3.2.0",
+    "mocha": "~2.3.2"
+  }
+}
