@@ -8,8 +8,8 @@
 * Maps for each location (disabled in demo because I don't have budget to pay for Google API)
 * Pretty printing (optimized CSS for printing)
 
-#[Live Demo (Planning Mode)](https://shinglyu.github.io/itinerary-viewer?planningMode=1)
-#[Live Demo (Printing Mode)](https://shinglyu.github.io/itinerary-viewer)
+#[Live Demo (Planning Mode)](https://shinglyu.github.io/itinerary-viewer/?planningMode=1)
+#[Live Demo (Printing Mode)](https://shinglyu.github.io/itinerary-viewer/)
 
 # How to use locally
 * Install bower and/or node.js + npm 
