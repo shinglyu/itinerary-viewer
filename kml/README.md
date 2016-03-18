@@ -17,7 +17,7 @@ bash geocode.sh <your input txt> #Will open online kml viewer and nemo file mana
 ```
 # Output
 * `<your input>.kml`: a KML file that can be imported it to apps like MAPS.ME or Google My Map.
-* `<your input>.kml.failed`: a list of locations that failed to be extracted from 
+* `<your input>.kml.failed`: a list of locations that can't be found using Google's geocode service. You may want to consider adding addresses for them or add them manually in your map app.
 
 #Input file format
 
@@ -35,7 +35,7 @@ Taipei Main Train Station
 ```
 
 
-# Compatiable Apps
+# Compatible Apps
 * [Google My Map](https://www.google.com/mymaps/?hl=en_US&app=mp)
 * [MAPS.ME](http://maps.me/en/home)
 * Other apps that supports KML format
