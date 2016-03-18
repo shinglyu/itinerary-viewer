@@ -314,12 +314,28 @@ var Day = React.createClass({
     }
     return nodes;
   },
+  inferTitleAndType: function(nodes){
+    return nodes.map(function(node){
+      if (!node.hasOwnProperty('title')){
+        if (node.hasOwnProperty('sight')){
+          node['title'] = node['sight'];
+          node['type'] = 'S';
+        }
+        if (node.hasOwnProperty('transit')){
+          node['title'] = node['transit'];
+          node['type'] = 'T';
+        }
+      }
+      return node;
+    });
+  },
   render: function(){
     var rawnodes = [{title: this.props.date, type:"D"}]
     rawnodes = rawnodes.concat(this.props.nodes)
 
     //console.log(rawnodes)
-    var nodes = this.fillEmptyTypes(rawnodes);
+    var nodes = this.inferTitleAndType(rawnodes);
+    nodes = this.fillEmptyTypes(nodes);
     //console.log(nodes)
     if(typeof this.props.config['planningMode'] !== "undefined" && this.props.config['planningMode'][0] == "1"){ //BUG: python server will be "1/"
       nodes = this.insertTransitSuggestions(nodes);
@@ -369,3 +385,5 @@ module.exports.Day = Day;
 module.exports.NodeIcon = NodeIcon;
 module.exports.Node = Node;
 module.exports.Suggestions = Suggestions;
+
+window.export.Days = Days;
