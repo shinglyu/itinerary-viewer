@@ -20,7 +20,6 @@
 
   - sight: Gastown, Vancouver
 
-  - sight: Gastown, Vancouver
 6/23:
   - sight: Stanley Park
     time: "11:50"
