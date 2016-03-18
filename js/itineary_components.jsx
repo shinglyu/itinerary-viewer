@@ -77,7 +77,8 @@ var NodeIcon = React.createClass({
         icon_name += "info"
         break;
     }
-    return (<div className={"icon " + "icon-" + this.props.type}><i className={"fa " + icon_name}/></div>)
+    return <div/>
+    //return (<div className={"icon " + "icon-" + this.props.type}><i className={"fa " + icon_name}/></div>)
   }
 });
 
@@ -223,10 +224,43 @@ var Node = React.createClass({
 
     var titleNode = <h4 className="title">{node.title}</h4>
     if (node.type == "T"){
-      titleNode = <p className="title">&nbsp;{node.title}</p> 
+      titleNode = <p className="title">{node.title}</p> 
+    }
+    else if (node.type == "D"){
+      var year = (new Date()).getFullYear()
+      var mmdd = node.title.split('/')
+      var date = new Date(year, mmdd[0]-1, mmdd[1])
+      var dayString = ""
+      switch (date.getDay()) {
+        case 0:
+          dayString = "日"
+          break;
+        case 1:
+          dayString = "一"
+          break;
+        case 2:
+          dayString = "二"
+          break;
+        case 3:
+          dayString = "三"
+          break;
+        case 4:
+          dayString = "四"
+          break;
+        case 5:
+          dayString = "五"
+          break;
+        case 6:
+          dayString = "六"
+          break;
+        default:
+          
+      }
+
+      titleNode = <h2 classname="title">{node.title + " (" + dayString + ")"}</h2>
     }
     return (
-      <div className={"node " + sg_route_class} >
+      <div className={"node " + sg_route_class + " " + this.props.node.type} >
         <NodeIcon type={node.type}/>
         {line}
         <div className="content">
@@ -317,7 +351,7 @@ var Day = React.createClass({
       )
     }) 
     return (
-      <div className="timeline">
+      <div className={"timeline " + this.props.no}>
         {nodes}
       </div>
     );
@@ -328,14 +362,15 @@ var Days= React.createClass({
   render: function(){
     //console.log(this.props.config)
     days = []
+    var grey = false;
     for (var date in this.props.days){
       days.push(
         <div>
-          <Day nodes={this.props.days[date]} date={date} config={this.props.config}/>
-          <DayMap nodes={this.props.days[date]}/>
-          <hr/>
+          <Day no={grey ? 'grey': ''} nodes={this.props.days[date]} date={date} config={this.props.config}/>
+          {/*<DayMap nodes={this.props.days[date]}/>*/}
         </div>
       )
+      grey = !grey
     }
 
     return (

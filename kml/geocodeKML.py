@@ -39,7 +39,7 @@ def createKML(addresses, fileName):
   kmlDoc = xml.dom.minidom.Document()
 
   kmlElement = kmlDoc.createElementNS('http://earth.google.com/kml/2.2','kml')
-kmlElement = kmlDoc.appendChild(kmlElement)
+  kmlElement = kmlDoc.appendChild(kmlElement)
 
   documentElement = kmlDoc.createElement('Document')
   documentElement = kmlElement.appendChild(documentElement)

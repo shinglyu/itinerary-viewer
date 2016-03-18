@@ -3,7 +3,7 @@
 	height: 20px;
 	text-align: center;
 	border-radius: 2px;
-	box-shadow: 0 0 0 4px #afdcf8;
+	/*box-shadow: 0 0 0 4px #afdcf8;*/
   left:20%;
   background: #FFFFFF;
 }
@@ -18,24 +18,58 @@
   border-radius: 0;
 }
 
-
 .timeline {
 	margin: 30px 0 0 0;
 	padding: 0;
 	position: relative;
   display:flex;
   flex-flow:column wrap;
-  max-height:90vh;
+  flex-wrap: wrap;
+  width:28em;
+  /*max-height:90vh;*/
+}
+
+.container {
+  display:flex;
+  flex-wrap: wrap;
 }
 
 div.node{
   position:relative;
   /*max-width:50vw;*/
-  width:30vw;
-  padding-bottom: 1em;
+  /*width:30vw;*/
+  /*padding-bottom: 1em;*/
+  margin:0.2em;
+  /*border: solid lightgrey;*/
+  max-width:30em;
+  padding:0.3em;
+}
+
+body {
+  background-color: lightgrey;
+}
+
+div.node.S {
+  box-shadow: 0.1em 0.1em 0.3em grey;
+  border-radius:0.2em;
+  background-color:white
+}
+
+div.node.T,div.node.suggestions{
+  position:relative;
+  /*max-width:50vw;*/
+  /*width:30vw;*/
+  /*padding-bottom: 1em;*/
+  /*padding-bottom: 0em;*/
+  width:auto;
+  border: none;
+  border-left: dotted;
+  left: 2em;
+  max-width:28em;
 }
 
 div.line {
+  display:none;
   position:absolute;
   background:#afdcf8;
   width:4px;
@@ -63,17 +97,19 @@ div.icon > i {
 }
 
 div.content {
-  padding-left: 15px;
+  /*padding-left: 15px;*/
   /*min-height: 60px;*/
+  /*max-width:100%;*/
+  overflow: auto;
   display:inline-block;
   vertical-align:top;
-  width:85%;
   white-space: normal;
   margin-top:5px;
 }
 
 .title {
   margin-top:0px;
+  margin-bottom: 0.5em;
   vertical-align:center;
 }
 
@@ -84,11 +120,7 @@ div.content > .title{
 
 div.content p {
   margin: 0px;
-  margin-left: 1em; 
-}
-div.content >  {
-  padding-left: 1.5em;
-  max-width: 50vw;
+  /*margin-left: 1em; */
 }
 
 div.content i {
@@ -97,21 +129,22 @@ div.content i {
 }
 
 div.content >  .text {
-  vertical-align: top;
+  margin-left:1em;
 }
 
 div.content > div.info_section > .text > .address{
   font-style: italic;
+  margin-left:1em;
 }
 
-div.content > .text > .description{
+div.content > .text > .description {
   margin-top:2%;
   color: grey;
 }
 
 div.content > .map{
-min-width:200px;  
-float:right
+  min-width:200px;  
+  float:right
 }
 
 div.container {
@@ -119,19 +152,20 @@ div.container {
 }
 
 .time {
-display:inline-block;
-/*width:4em;*/
-margin:0px;
-font-weight:normal;
+  display:inline-block;
+  /*width:4em;*/
+  margin:0px;
+  font-weight:normal;
 }
 
 @media print  {
   div.container {
     -moz-columns:2 ;
     -moz-column-fill:balance;
+    display:block;
   }
-  .timeline{
 
+  .timeline{
     display:inline;
     vertical-align: top;
     border-bottom:1px solid;
@@ -153,7 +187,12 @@ font-weight:normal;
 }
 
 .suggestions {
-  background-color: lightgrey;
-  border-radius: 20px;
+  /*background-color: lightgrey;*/
+  border-radius: 0.2em;
+  width:26em;
 }
 
+.suggestions > ul {
+  padding-left: 1.5em;
+  width:80%
+}
