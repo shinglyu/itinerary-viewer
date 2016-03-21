@@ -46,7 +46,12 @@ var Page = React.createClass({
     .then(function(text){
       //console.log(text)
       //console.log(this)
-      this.setState({"days": window.YAML.parse(text)})
+      try {
+        this.setState({"days": window.YAML.parse(text)})
+      }
+      catch (e) {
+        console.log(e)
+      }
     }.bind(this))
   },
   loadNewData: function(e){

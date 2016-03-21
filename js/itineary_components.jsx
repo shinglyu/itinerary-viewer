@@ -257,7 +257,7 @@ var Node = React.createClass({
           
       }
 
-      titleNode = <h2 classname="title">{node.title + " (" + dayString + ")"}</h2>
+      titleNode = <h2 className="title">{node.title + " (" + dayString + ")"}</h2>
     }
     return (
       <div className={"node " + sg_route_class + " " + this.props.node.type} >
