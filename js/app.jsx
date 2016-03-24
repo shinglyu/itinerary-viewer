@@ -67,6 +67,7 @@ var Page = React.createClass({
       <div>
         <FileSelector loadNewData={this.loadNewData}/>
         <Days days={this.state.days} config={this.state.config}/>
+        <Toolbar />
       </div>
     )
   }

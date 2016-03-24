@@ -196,3 +196,10 @@ div.container {
   padding-left: 1.5em;
   width:80%
 }
+
+/* Toolbar */
+.toolbar {
+  position: fixed;
+  right: 0px;
+  top: 0px;
+}
