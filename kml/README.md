@@ -10,6 +10,18 @@ Copy and paste your API key into the config.py as foollows:
 ```
 mapsKey = `YOUR_API_KEY_HERE`
 ```
+If you don't want to get an API key, you can replace this line in `geocodeKML.py`
+
+```
+mapsUrl = 'https://maps.googleapis.com/maps/api/place/textsearch/json?key={}&query='.format(config.mapsKey)
+```
+  with
+
+```
+mapsUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address='
+```
+
+But the accuracy will be much lower.
 
 # Usage
 
