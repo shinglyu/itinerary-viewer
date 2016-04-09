@@ -5,7 +5,7 @@ List of location names => KML file that can be opend in map apps
 # API Key
 This script requires a Google Place API key, you can obtain one by following [the instructions](https://developers.google.com/places/web-service/get-api-key)
 
-Copy and paste your API key into the config.py as foollows:
+Copy and paste your API key into the config.py as follows:
 
 ```
 mapsKey = `YOUR_API_KEY_HERE`
