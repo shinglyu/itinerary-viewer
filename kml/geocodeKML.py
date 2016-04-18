@@ -4,6 +4,7 @@ import xml.dom.minidom
 import json
 import time
 import argparse
+import config
 
 waitTime=2
 
@@ -12,10 +13,8 @@ def geocode(address, sensor=False):
  # address. It gets back a csv file, which it then parses and
  # returns a string with the longitude and latitude of the address.
 
- # This isn't an actual maps key, you'll have to get one yourself.
- # Sign up for one here: https://code.google.com/apis/console/
-  mapsKey = 'abcdefgh'
-  mapsUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address='
+  # mapsUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address='
+  mapsUrl = 'https://maps.googleapis.com/maps/api/place/textsearch/json?key={}&query='.format(config.mapsKey)
 
  # This joins the parts of the URL together into one string.
   url = ''.join([mapsUrl,urllib.quote(address),'&sensor=',str(sensor).lower()])

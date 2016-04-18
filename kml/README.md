@@ -2,6 +2,27 @@ Geocode KML
 =================
 List of location names => KML file that can be opend in map apps
 
+# API Key
+This script requires a Google Place API key, you can obtain one by following [the instructions](https://developers.google.com/places/web-service/get-api-key)
+
+Copy and paste your API key into the config.py as follows:
+
+```
+mapsKey = `YOUR_API_KEY_HERE`
+```
+If you don't want to get an API key, you can replace this line in `geocodeKML.py`
+
+```
+mapsUrl = 'https://maps.googleapis.com/maps/api/place/textsearch/json?key={}&query='.format(config.mapsKey)
+```
+  with
+
+```
+mapsUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address='
+```
+
+But the accuracy will be much lower.
+
 # Usage
 
 Run
