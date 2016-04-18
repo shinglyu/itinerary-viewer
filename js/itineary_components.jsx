@@ -157,17 +157,18 @@ var Suggestions = React.createClass({
     var suggestions = []
     //console.log("Address")
     //console.log(this.props.node.address)
-    if (this.props.node.type == "S" && typeof this.props.node.address !== "undefined"){
-      suggestions.push(<li><a target="_blank" href={"https://maps.google.com/maps?q=" + encodeURI(this.props.node.address)}>Open map</a></li>)
-    }
+    if (this.props.node.type == "S"){
+      if (this.props.node.type == "S" && typeof this.props.node.address !== "undefined"){
+        suggestions.push(<li><a target="_blank" href={"https://maps.google.com/maps?q=" + encodeURI(this.props.node.address)}>Open map</a></li>)
+      }
 
-    if (typeof this.props.node.address == "undefined" || this.props.node.address == this.props.node.title){
-      suggestions.push(<li><a target="_blank" href={"https://www.google.com/search?q=" + encodeURI(this.props.node.title) + "+address"}>Find address</a></li>)
-      //console.log(suggestions)
-    }
-    if (typeof this.props.node.description == "undefined" || this.props.node.description == ""){
+      if (typeof this.props.node.address == "undefined" || this.props.node.address == this.props.node.title){
+        suggestions.push(<li><a target="_blank" href={"https://www.google.com/search?q=" + encodeURI(this.props.node.title) + "+address"}>Find address</a></li>)
+        //console.log(suggestions)
+      }
       suggestions.push(<li><a target="_blank" href={"https://www.google.com/search?q=" + encodeURI(this.props.node.title)}>Find detail</a></li>)
-      //console.log(suggestions)
+      suggestions.push(<li><a target="_blank" href={"https://www.google.com/search?q=" + encodeURI("restaurant near " + this.props.node.title)}>Find nearby restaurant</a></li>)
+      suggestions.push(<li><a target="_blank" href={"https://www.google.com/search?q=" + encodeURI("things to do near " + this.props.node.title)}>Find nearby attractions</a></li>)
     }
     return (
       <div className="suggestions">
