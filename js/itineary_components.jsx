@@ -167,8 +167,8 @@ var Suggestions = React.createClass({
         //console.log(suggestions)
       }
       suggestions.push(<li><a target="_blank" href={"https://www.google.com/search?q=" + encodeURI(this.props.node.title)}>Find detail</a></li>)
-      suggestions.push(<li><a target="_blank" href={"https://www.google.com/search?q=" + encodeURI("restaurant near " + this.props.node.title)}>Find nearby restaurant</a></li>)
-      suggestions.push(<li><a target="_blank" href={"https://www.google.com/search?q=" + encodeURI("things to do near " + this.props.node.title)}>Find nearby attractions</a></li>)
+      suggestions.push(<li><a target="_blank" href={"https://www.google.com/search?q=" + encodeURI("restaurant near " + this.props.node.title)}>Nearby restaurant</a></li>)
+      suggestions.push(<li><a target="_blank" href={"https://www.google.com/search?q=" + encodeURI("things to do near " + this.props.node.title)}>Nearby attractions</a></li>)
     }
     return (
       <div className="suggestions">
