@@ -65,7 +65,11 @@ div.node.T,div.node.suggestions{
   border: none;
   border-left: dotted;
   left: 2em;
-  max-width:28em;
+  max-width:25em;
+}
+
+div.node.T p,a,span {
+  max-width:25em;
 }
 
 div.line {
@@ -158,24 +162,6 @@ div.container {
   font-weight:normal;
 }
 
-@media print  {
-  div.container {
-    -moz-columns:2 ;
-    -moz-column-fill:balance;
-    display:block;
-  }
-
-  .timeline{
-    display:inline;
-    vertical-align: top;
-    border-bottom:1px solid;
-    padding-bottom:10px;
-  }
-
-  div.node{
-    display:iblock;
-  }
-}
 
 .daymap {
   text-align:center;
@@ -202,4 +188,27 @@ div.container {
   position: fixed;
   right: 0px;
   top: 0px;
+}
+
+@media print  {
+  div.container {
+    -moz-columns:2 ;
+    -moz-column-fill:balance;
+    display:block;
+  }
+
+  .timeline{
+    display:inline;
+    vertical-align: top;
+    border-bottom:1px solid;
+    padding-bottom:10px;
+  }
+
+  div.node{
+    display:iblock;
+  }
+
+  .toolbar, .fileSelector {
+    display: none;
+  }
 }
