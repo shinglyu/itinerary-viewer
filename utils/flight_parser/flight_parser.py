@@ -1,8 +1,18 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import argparse
+import codecs
 from datetime import datetime
+import json
 
+def json_serial(obj):
+    """JSON serializer for objects not serializable by default json code"""
+
+    if isinstance(obj, datetime):
+        serial = obj.isoformat()
+        return serial
+    raise TypeError ("Type not serializable")
 
 def parse_swire_quote(text):
     lines = text.splitlines()
@@ -43,3 +53,17 @@ def parse_swire_quote(text):
         "booking_id": booking_id,
         "flights": flights
     }
+
+
+def main():
+    parser = argparse.ArgumentParser(description='Parse text flight itinearies into JSON.')
+    parser.add_argument('filename', help='the text file containing the flight itineary')
+
+    args = parser.parse_args()
+    with codecs.open(args.filename, 'rb', 'utf-8') as f:
+        text = unicode(f.read())
+
+    print(json.dumps(parse_swire_quote(text), default=json_serial))
+
+if __name__ == "__main__":
+    main()
