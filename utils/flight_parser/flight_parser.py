@@ -6,6 +6,8 @@ import codecs
 from datetime import datetime
 import json
 
+import formatter
+
 def json_serial(obj):
     """JSON serializer for objects not serializable by default json code"""
 
@@ -58,12 +60,16 @@ def parse_swire_quote(text):
 def main():
     parser = argparse.ArgumentParser(description='Parse text flight itinearies into JSON.')
     parser.add_argument('filename', help='the text file containing the flight itineary')
+    parser.add_argument('-o', '--output', choices=['json', 'yaml'], help='the output format (default: raw json)')
 
     args = parser.parse_args()
     with codecs.open(args.filename, 'rb', 'utf-8') as f:
         text = unicode(f.read())
 
-    print(json.dumps(parse_swire_quote(text), default=json_serial))
+    if args.output == "yaml":
+        print(formatter.format_yaml(parse_swire_quote(text)).encode('utf-8'))
+    else:
+        print(json.dumps(parse_swire_quote(text), default=json_serial))
 
 if __name__ == "__main__":
     main()
