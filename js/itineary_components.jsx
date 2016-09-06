@@ -326,6 +326,10 @@ var Day = React.createClass({
           node['title'] = node['transit'];
           node['type'] = 'T';
         }
+        if (node.hasOwnProperty('note')){
+          node['title'] = node['note'];
+          node['type'] = 'N';
+        }
       }
       return node;
     });

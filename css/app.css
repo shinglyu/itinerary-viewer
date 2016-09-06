@@ -29,6 +29,15 @@ div.node.S {
   border-radius:0.2em;
   background-color:white
 }
+div.node.N {
+  box-shadow: 0.1em 0.1em 0.3em grey;
+  border-radius:0.2em;
+  background-color:white
+}
+
+div.node.N > div.content > .title {
+  font-weight: normal;
+}
 
 div.node.T,div.node.suggestions{
   border-left: dotted;
