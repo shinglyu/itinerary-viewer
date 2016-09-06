@@ -158,23 +158,23 @@ var Suggestions = React.createClass({
     //console.log("Address")
     //console.log(this.props.node.address)
     if (this.props.node.type == "S"){
+      // address = title when rendering DayMap
       if (this.props.node.type == "S" && typeof this.props.node.address !== "undefined"){
-        suggestions.push(<li><a target="_blank" href={"https://maps.google.com/maps?q=" + encodeURI(this.props.node.address)}>Open map</a></li>)
+        suggestions.push(<a target="_blank" href={"https://maps.google.com/maps?q=" + encodeURI(this.props.node.address)}>map</a>)
       }
+      suggestions.push(<span> | </span>)
 
-      if (typeof this.props.node.address == "undefined" || this.props.node.address == this.props.node.title){
-        suggestions.push(<li><a target="_blank" href={"https://www.google.com/search?q=" + encodeURI(this.props.node.title) + "+address"}>Find address</a></li>)
-        //console.log(suggestions)
-      }
-      suggestions.push(<li><a target="_blank" href={"https://www.google.com/search?q=" + encodeURI(this.props.node.title)}>Find detail</a></li>)
-      suggestions.push(<li><a target="_blank" href={"https://www.google.com/search?q=" + encodeURI("restaurant near " + this.props.node.title)}>Nearby restaurant</a></li>)
-      suggestions.push(<li><a target="_blank" href={"https://www.google.com/search?q=" + encodeURI("things to do near " + this.props.node.title)}>Nearby attractions</a></li>)
+      suggestions.push(<a target="_blank" href={"https://www.google.com/search?q=" + encodeURI(this.props.node.title)}>detail</a>)
+      suggestions.push(<span> | </span>)
+      suggestions.push(<a target="_blank" href={"https://www.google.com/search?q=" + encodeURI(this.props.node.title) + "+address"}>address</a>)
+      suggestions.push(<span> | </span>)
+      suggestions.push(<a target="_blank" href={"https://www.google.com/search?q=" + encodeURI("restaurant near " + this.props.node.title)}>food</a>)
+      suggestions.push(<span> | </span>)
+      suggestions.push(<a target="_blank" href={"https://www.google.com/search?q=" + encodeURI("things to do near " + this.props.node.title)}>sights</a>)
     }
     return (
       <div className="suggestions">
-        <ul>
-          {suggestions}
-        </ul>
+        {suggestions}
       </div>
     )
   }
@@ -201,7 +201,7 @@ var Node = React.createClass({
           <NodeIcon type={node.type}/>
           {line}
           <div className="content">
-            <h4 className="title"><a href={node.description} target="_blank">Find route</a></h4>
+            <a href={node.description} target="_blank">direction?</a>
           </div>
         </div>
       );
