@@ -25,10 +25,16 @@ But the accuracy will be much lower.
 
 # Usage
 
-Run
+First, run 
 
 ```
-python geocodeKML.py <your input txt>
+./yml_to_list.sh <your itineary yml> > data/<input txt>
+```
+
+Manually cleanup the entries you don't want, then
+
+```
+python geocodeKML.py data/<your input txt>
 ```
 
 or
