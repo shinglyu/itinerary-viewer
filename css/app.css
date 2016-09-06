@@ -79,6 +79,14 @@ div.content > .text > .description {
 }
 
 @media print  {
+  @page {
+    size: auto;
+    margin: 10mm;
+  }
+  body {
+    margin: 0mm;
+  }
+
   div.container {
     columns:2 ;
     -moz-columns:2 ;
@@ -96,6 +104,7 @@ div.content > .text > .description {
 
   div.node {
     width: 20em;
+    padding-bottom: 2em; /* note taking area */
   }
 
   div.node.T,div.node.suggestions{
