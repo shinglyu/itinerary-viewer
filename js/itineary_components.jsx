@@ -42,46 +42,6 @@ var AutoLinkText = React.createClass({
 });
 
 
-var NodeIcon = React.createClass({
-  render: function(){
-    var icon_name="fa-"
-
-    if (typeof this.props.type == "undefined") {
-      var nodetype = "S";
-    }
-    else {
-      //var nodetype = this.props.type[0];
-      var nodetype = this.props.type;
-    }
-
-    switch (nodetype){
-      case "S":
-        icon_name += "street-view"
-        break;
-      case "T":
-        icon_name += "subway"
-        break;
-      case "F":
-        icon_name += "cutlery"
-        break;
-      case "N":
-        icon_name += "info"
-        break;
-      case "D":
-        icon_name += "calendar"
-        break;
-      case "SG-route":
-        icon_name += "map-signs"
-        break;
-      default:
-        icon_name += "info"
-        break;
-    }
-    return <div/>
-    //return (<div className={"icon " + "icon-" + this.props.type}><i className={"fa " + icon_name}/></div>)
-  }
-});
-
 var Map = React.createClass({
   render: function(){
     var address = undefined;
@@ -183,23 +143,12 @@ var Suggestions = React.createClass({
 
 var Node = React.createClass({
   render: function(){
-    //console.log("config:")
-    //console.log(this.props.config)
     var node = this.props.node;
-    //console.log(node)
-    var line;
-    if (this.props.drawVertLine){
-      line = <div className="line"/>;
-    }
-    //console.log(node.description)
     var desc = <AutoLinkText data={node.description}/>
-    //console.log(desc)
     var sg_route_class="";
     if (node.type == "SG-route"){
       return (
         <div className="node suggestions" >
-          <NodeIcon type={node.type}/>
-          {line}
           <div className="content">
             <a href={node.description} target="_blank">direction?</a>
           </div>
@@ -270,8 +219,6 @@ var Node = React.createClass({
     }
     return (
       <div className={"node " + sg_route_class + " " + this.props.node.type} >
-        <NodeIcon type={node.type}/>
-        {line}
         <div className="content">
           {titleNode}
           {map}
@@ -367,7 +314,6 @@ var Day = React.createClass({
     //console.log(config)
     nodes = nodes.map(function(node, index, array){
       return (
-        //<Node node={node} drawVertLine={(index != array.length-1)}  />
         <Node node={node} config={config} drawVertLine={(index != array.length-1)}  />
       )
     }) 

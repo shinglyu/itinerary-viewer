@@ -8,29 +8,24 @@ body {
 }
 
 .timeline {
-	margin: 30px 0 0.5em 0.5em;
-	padding: 0;
+  margin: 0.5em;
 	position: relative;
   display:flex;
   flex-flow:column wrap;
   flex-wrap: wrap;
-  max-width:28em;
+  max-width:33vw;
 }
 
 div.node {
   max-width:28em;
   /*min-width:20em;*/
   margin: 0.2em;
+  padding: 0.2em 0.5em 0.2em 0.5em;
 }
 
 
-div.node.S {
-  box-shadow: 0.1em 0.1em 0.3em grey;
-  border-radius:0.2em;
-  background-color:white
-}
-div.node.N {
-  box-shadow: 0.1em 0.1em 0.3em grey;
+div.node.S, div.node.N {
+  box-shadow: -0.15em -0.15em 0.2em grey;
   border-radius:0.2em;
   background-color:white
 }
@@ -41,7 +36,7 @@ div.node.N > div.content > .title {
 
 div.node.T,div.node.suggestions{
   border-left: dotted;
-  padding-left: 2em;
+  padding-left: 1em;
 }
 
 div.content h4,p,a,i{
@@ -53,9 +48,6 @@ div.content i{
   width: 1em;
 }
 
-div.content >  .title {
-  padding-left: 0.5em;
-}
 div.content >  .text {
   padding-left:1em;
 }
