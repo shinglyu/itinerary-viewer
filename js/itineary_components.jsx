@@ -255,10 +255,18 @@ var Node = React.createClass({
           dayString = "六"
           break;
         default:
-          
+          dayString = ""
+          break;
       }
 
-      titleNode = <h2 className="title">{node.title + " (" + dayString + ")"}</h2>
+      if (dayString == ""){
+        titleNode = <h2 className="title">{node.title}</h2>
+      }
+      else {
+        titleNode = <h2 className="title">{node.title + " (" + dayString + ")"}</h2>
+
+      }
+
     }
     return (
       <div className={"node " + sg_route_class + " " + this.props.node.type} >
