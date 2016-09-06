@@ -2,6 +2,10 @@ body {
   background-color: lightgrey;
 }
 
+h1, h2, h3, h4, p, a, i {
+  margin: 0.2em;
+}
+
 .container {
   display:flex;
   flex-wrap: wrap;
@@ -9,7 +13,7 @@ body {
 
 .timeline {
   margin: 0.5em;
-	position: relative;
+	/*position: relative;*/
   display:flex;
   flex-flow:column wrap;
   flex-wrap: wrap;
@@ -39,17 +43,12 @@ div.node.T,div.node.suggestions{
   padding-left: 1em;
 }
 
-div.content h4,p,a,i{
-  margin-top: 0.2em;
-  margin-bottom: 0.2em;
-}
-
 div.content i{
   width: 1em;
 }
 
 div.content >  .text {
-  padding-left:1em;
+  padding-left: 1em;
 }
 
 div.content > .text > .address{
@@ -61,7 +60,16 @@ div.content > .text > .description {
   color: grey;
 }
 
+div.node.D {
+  position: sticky;
+  top: 0px;
+  background-color: rgba(211,211,211,0.6);
+}
 
+div.node.D h2{
+  margin: 0px;
+  
+}
 
 /* Toolbar */
 .toolbar {
@@ -74,9 +82,6 @@ div.content > .text > .description {
   @page {
     size: auto;
     margin: 10mm;
-  }
-  body {
-    margin: 0mm;
   }
 
   div.container {
@@ -97,6 +102,15 @@ div.content > .text > .description {
   div.node {
     width: 20em;
     padding-bottom: 2em; /* note taking area */
+    page-break-inside: avoid;
+  }
+
+  div.node.S, div.node.N {
+    border-top: 1px solid lightgrey;
+  }
+
+  div.node.D {
+    position: static;
   }
 
   div.node.T,div.node.suggestions{
