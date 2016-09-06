@@ -311,14 +311,22 @@ var Day = React.createClass({
     })
   },
   insertTransitSuggestions: function(nodes){
+    function createSGNode(from, to) {
+      return {
+            "type": "SG-route",
+            "title":"Find route",
+            "address":"Find route",
+            "description":"http://maps.google.com/maps?saddr=" + encodeURI(from) + "&daddr=" + encodeURI(to) + "&dirflg=r"
+      }
+    }
     for (var idx =0; idx < nodes.length-1; idx++){
-      if (nodes[idx]['type'] == "S" && nodes[idx+1]['type'] == "S"){
-        nodes.splice(idx+1, 0, {
-          "type": "SG-route",
-          "title":"Find route",
-          "address":"Find route",
-          "description":"http://maps.google.com/maps?saddr=" + encodeURI(nodes[idx]['address']) + "&daddr=" + encodeURI(nodes[idx+1]['address']) + "&dirflg=r"
-        })
+      if (nodes[idx]['type'] == "S" && nodes[idx+1]['type'] == "S") {
+        nodes.splice(idx+1, 0, createSGNode(nodes[idx]['address'], nodes[idx+1]['address']))
+      }
+    }
+    for (var idx =0; idx < nodes.length-2; idx++){
+      if (nodes[idx]['type'] == "S" && nodes[idx+1]['type'] == "T" && nodes[idx+2]['type'] == "S") {
+        nodes.splice(idx+1, 0, createSGNode(nodes[idx]['address'], nodes[idx+2]['address']))
       }
     }
     return nodes;
