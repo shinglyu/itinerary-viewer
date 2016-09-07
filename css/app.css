@@ -1,32 +1,9 @@
-.icon {
-	width: 20px;
-	height: 20px;
-	text-align: center;
-	border-radius: 2px;
-	/*box-shadow: 0 0 0 4px #afdcf8;*/
-  left:20%;
-  background: #FFFFFF;
+body {
+  background-color: lightgrey;
 }
 
-.icon-D {
-  border-radius: 10%;
-}
-
-.icon-T {
-  box-shadow: none;
-  background: white;
-  border-radius: 0;
-}
-
-.timeline {
-	margin: 30px 0 0 0;
-	padding: 0;
-	position: relative;
-  display:flex;
-  flex-flow:column wrap;
-  flex-wrap: wrap;
-  width:28em;
-  /*max-height:90vh;*/
+h1, h2, h3, h4, p, a, i {
+  margin: 0.2em;
 }
 
 .container {
@@ -34,147 +11,123 @@
   flex-wrap: wrap;
 }
 
-div.node{
-  position:relative;
-  /*max-width:50vw;*/
-  /*width:30vw;*/
-  /*padding-bottom: 1em;*/
-  margin:0.2em;
-  /*border: solid lightgrey;*/
-  max-width:30em;
-  padding:0.3em;
+.timeline {
+  margin: 0.5em;
+	/*position: relative;*/
+  display:flex;
+  flex-flow:column wrap;
+  flex-wrap: wrap;
+  max-width:33vw;
 }
 
-body {
-  background-color: lightgrey;
+div.node {
+  max-width:28em;
+  /*min-width:20em;*/
+  margin: 0.2em;
+  padding: 0.2em 0.5em 0.2em 0.5em;
 }
 
-div.node.S {
-  box-shadow: 0.1em 0.1em 0.3em grey;
+
+div.node.S, div.node.N {
+  box-shadow: -0.15em -0.15em 0.2em grey;
   border-radius:0.2em;
   background-color:white
 }
 
+div.node.N > div.content > .title {
+  font-weight: normal;
+}
+
 div.node.T,div.node.suggestions{
-  position:relative;
-  /*max-width:50vw;*/
-  /*width:30vw;*/
-  /*padding-bottom: 1em;*/
-  /*padding-bottom: 0em;*/
-  width:auto;
-  border: none;
   border-left: dotted;
-  left: 2em;
-  max-width:28em;
+  padding-left: 1em;
 }
 
-div.line {
-  display:none;
-  position:absolute;
-  background:#afdcf8;
-  width:4px;
-  height:100%;
-  top: 29px;
-  margin-left:7px;
-  /* z-index:-1;*/
-  border: 1px solid;
-  border-top: 0px;
-  /*border-radius: 10px;*/
-}
-
-.timeline > li {
-  display: flex;
-  white-space:normal;
-}
-
-div.icon {
-  display:inline-block;
-  margin-top:6px;
-}
-
-div.icon > i {
-  margin-top:2px;
-}
-
-div.content {
-  /*padding-left: 15px;*/
-  /*min-height: 60px;*/
-  /*max-width:100%;*/
-  overflow: auto;
-  display:inline-block;
-  vertical-align:top;
-  white-space: normal;
-  margin-top:5px;
-}
-
-.title {
-  margin-top:0px;
-  margin-bottom: 0.5em;
-  vertical-align:center;
-}
-
-div.content > .title{
-  margin-bottom: 1%;
-  display:inline-block;
-}
-
-div.content p {
-  margin: 0px;
-  /*margin-left: 1em; */
-}
-
-div.content i {
-  width:16px;
-  text-align:center;
+div.content i{
+  width: 1em;
 }
 
 div.content >  .text {
-  margin-left:1em;
+  padding-left: 1em;
 }
 
-div.content > div.info_section > .text > .address{
+div.content > .text > .address{
   font-style: italic;
-  margin-left:1em;
 }
 
 div.content > .text > .description {
-  margin-top:2%;
+  /*margin-top:2%;*/
   color: grey;
 }
 
-div.content > .map{
-  min-width:200px;  
-  float:right
+div.node.D {
+  position: sticky;
+  top: 0px;
+  background-color: rgba(211,211,211,0.6);
 }
 
-div.container {
-  white-space:nowrap;
+div.node.D h2{
+  margin: 0px;
+  
 }
 
-.time {
-  display:inline-block;
-  /*width:4em;*/
-  margin:0px;
-  font-weight:normal;
+/* Toolbar */
+.toolbar {
+  position: fixed;
+  right: 0px;
+  top: 0px;
 }
 
 @media print  {
+  @page {
+    size: auto;
+    margin: 10mm;
+  }
+
   div.container {
+    columns:2 ;
     -moz-columns:2 ;
+    -webkit-columns:2 ;
     -moz-column-fill:balance;
     display:block;
   }
 
   .timeline{
     display:inline;
-    vertical-align: top;
+    /*vertical-align: top;*/
     border-bottom:1px solid;
-    padding-bottom:10px;
+    /*padding-bottom:10px;*/
   }
 
-  div.node{
-    display:iblock;
+  div.node {
+    width: 20em;
+    padding-bottom: 2em; /* note taking area */
+    page-break-inside: avoid;
   }
+
+  div.node.S, div.node.N {
+    border-top: 1px solid lightgrey;
+  }
+
+  div.node.D {
+    position: static;
+  }
+
+  div.node.T,div.node.suggestions{
+    border-left: dotted;
+    padding-left: 0.5em;
+  }
+
+  .toolbar, .fileSelector {
+    display: none;
+  }
+}
+
+/* disabled */
+
+div.content > .map{
+  min-width:200px;  
+  float:right
 }
 
 .daymap {
@@ -184,22 +137,4 @@ div.container {
 .daymap > img{
   margin:3%;
   cursor: pointer;
-}
-
-.suggestions {
-  /*background-color: lightgrey;*/
-  border-radius: 0.2em;
-  width:26em;
-}
-
-.suggestions > ul {
-  padding-left: 1.5em;
-  width:80%
-}
-
-/* Toolbar */
-.toolbar {
-  position: fixed;
-  right: 0px;
-  top: 0px;
 }
