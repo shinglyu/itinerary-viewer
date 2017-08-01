@@ -4,7 +4,7 @@ var Toolbar = React.createClass({
       window.location.href = window.location.href.replace("planningMode=1", "");
     }
     else {
-      console.log(window.location.href.indexOf("?"))
+      //console.log(window.location.href.indexOf("?"))
       if (window.location.href.indexOf("\?") > 0){
         window.location.href = window.location.href + "&planningMode=1";
       }

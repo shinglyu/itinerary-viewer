@@ -28,7 +28,7 @@ var Page = React.createClass({
      })(window.location.search.substr(1).split('&'));
 
 
-     console.log(qs)
+     //console.log(qs)
      return {days:{"Please select a plan file":[]}, config:qs}
   },
   componentDidMount: function(){
@@ -50,7 +50,7 @@ var Page = React.createClass({
         this.setState({"days": window.YAML.parse(text)})
       }
       catch (e) {
-        console.log(e)
+        //console.log(e)
       }
     }.bind(this))
   },
@@ -62,7 +62,7 @@ var Page = React.createClass({
     reader.readAsText(e.target.files[0])
   },
   render: function(){
-    console.log(this.state.config)
+    //console.log(this.state.config)
     return (
       <div>
         <FileSelector loadNewData={this.loadNewData}/>

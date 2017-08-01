@@ -9,7 +9,7 @@ var AutoLinkText = React.createClass({
       return <div/>
     }
     var lines = this.props.data.split("\n")
-    console.log(lines)
+    //console.log(lines)
     lines_w_brs = []
     for (var id in lines){
       //console.log(line)
@@ -19,8 +19,8 @@ var AutoLinkText = React.createClass({
     
     var text_blocks = lines_w_brs;
     //var text_blocks = this.props.data.split(" ")
-    console.log(this.props.data)
-    console.log(text_blocks)
+    //console.log(this.props.data)
+    //console.log(text_blocks)
     var texts = text_blocks.map(function(text){
       if (typeof text == "string"){
         if (text.match(re)){
@@ -279,7 +279,10 @@ var Day = React.createClass({
     return nodes;
   },
   inferTitleAndType: function(nodes){
+    //console.log("Infer")
+    //console.log(nodes)
     return nodes.map(function(node){
+      //console.log(node);
       if (!node.hasOwnProperty('title')){
         if (node.hasOwnProperty('sight')){
           node['title'] = node['sight'];
@@ -308,7 +311,7 @@ var Day = React.createClass({
     if(typeof this.props.config['planningMode'] !== "undefined" && this.props.config['planningMode'][0] == "1"){ //BUG: python server will be "1/"
       nodes = this.insertTransitSuggestions(nodes);
     }
-    console.log(nodes)
+    //console.log(nodes)
     //console.log(this)
     var config = this.props.config;
     //console.log(config)
