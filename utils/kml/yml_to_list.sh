@@ -2,6 +2,7 @@
 grep -e "sight\|address" "${1}" \
   | sed "s/\s*- sight://" \
   | sed -e :a -e '$!N;s/\n\s*address:/; /;ta;P;D' \
+  | sed "s/(opt)\s*//g" \
   | sort \
   | uniq
 
