@@ -1,4 +1,4 @@
 echo $1
 python geocodeKML.py $1
-firefox http://ivanrublev.me/kml/ &
-nemo . &
+sensible-browser http://ivanrublev.me/kml/ &
+nautilus . &

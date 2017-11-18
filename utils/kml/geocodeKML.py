@@ -1,10 +1,13 @@
+# -*- coding: utf-8 -*-
 # From https://developers.google.com/kml/articles/geocodingforkml
-import urllib
-import xml.dom.minidom
-import json
-import time
 import argparse
 import config
+import io
+import json
+import time
+import urllib
+import unicodedata
+import xml.dom.minidom
 
 waitTime=2
 
@@ -17,7 +20,7 @@ def geocode(address, sensor=False):
   mapsUrl = 'https://maps.googleapis.com/maps/api/place/textsearch/json?key={}&query='.format(config.mapsKey)
 
  # This joins the parts of the URL together into one string.
-  url = ''.join([mapsUrl,urllib.quote(address),'&sensor=',str(sensor).lower()])
+  url = ''.join([mapsUrl,urllib.quote(address.encode('utf-8')),'&sensor=',str(sensor).lower()])
 #'&key=',mapsKey])
   jsonOutput = str(urllib.urlopen(url).read ()) # get the response
   # fix the output so that the json.loads function will handle it correctly
@@ -77,7 +80,7 @@ def createKML(addresses, fileName):
   # This writes the KML Document to a file.
   print("Saving search result to {}".format(fileName))
   with open(fileName, 'w') as kmlFile:
-    kmlFile.write(kmlDoc.toprettyxml(' '))
+    kmlFile.write(kmlDoc.toprettyxml(' ', '\n', 'UTF-8'))
   failFilename = "{}.failed".format(fileName)
   print("Saving failed searches to {}".format(failFilename))
   with open(failFilename, 'w') as failedFile:
@@ -102,7 +105,7 @@ if __name__ == '__main__':
   parser.add_argument('filename', help='The input file')
   args = parser.parse_args()
   #with open('{}/{}'.format(os.getcwd(), args.filename), 'r') as f:
-  with open('{}'.format(args.filename), 'r') as f:
+  with io.open('{}'.format(args.filename), 'r', encoding='utf-8') as f:
       addressesText = f.read()
   #addressesText = '''
   #Mozilla HQ; 331 E Evelyn Ave, Mountain View, CA 94041
