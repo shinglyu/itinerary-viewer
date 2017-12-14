@@ -18,14 +18,8 @@
 * Use the `utils/clustering` tool to cluster sights by distance.
 
 # How to use locally
-* Install bower and/or node.js + npm 
-```
-bower install
-npm install -g live-server # or python -m SimpleHTTPServer
-```
 
-```
-ln -s <your yml file> source_files/default.yml
-live-server 
-```
+* Run `./bin/install.sh`
+* If node, npm or bower is not installed, uncomment the lines in `./bin/install.sh`
+* Run with `./bin/itinerary-viewer <path/to/file.yml>`
 
