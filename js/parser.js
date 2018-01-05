@@ -21,12 +21,12 @@ var parser = {
   },
   parseDay: function(day) {
     var lines = day.split('\n').map(function(str){return str.trim()}).filter(function(line) {return line !== ""})
-    console.log(this.parseLine)
+    //console.log(this.parseLine)
     return lines.map(this.parseLine, this)
   },
   parse: function(txt) {
     var days = txt.split('-----').map(function(str){return str.trim()})
-    console.log(this.parseDay)
+    //console.log(this.parseDay)
     return days.map(this.parseDay, this)
   },
 }

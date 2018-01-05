@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+if [ -z "$1" ]
+  then
+    echo "No input file. Usage: itinerary-viewer <yml>"
+    exit
+fi
+
+TMP_FILE_LOCAL="source_files/temp.yml"
+TMP_FILE="${DIR}/../${TMP_FILE_LOCAL}"
+
+mv "${TMP_FILE}" "${TMP_FILE}.bk"
+# rm "${TMP_FILE}"
+echo "Creating symbolic link for ${1} in ${TMP_FILE}"
+ln -s "$(pwd)/${1}" "${TMP_FILE}"
+
+cd "${DIR}/../"
+${DIR}/../run.sh "${TMP_FILE_LOCAL}"
+
+
+

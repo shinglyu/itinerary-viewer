@@ -9,7 +9,7 @@ var AutoLinkText = React.createClass({
       return <div/>
     }
     var lines = this.props.data.split("\n")
-    console.log(lines)
+    //console.log(lines)
     lines_w_brs = []
     for (var id in lines){
       //console.log(line)
@@ -19,8 +19,8 @@ var AutoLinkText = React.createClass({
     
     var text_blocks = lines_w_brs;
     //var text_blocks = this.props.data.split(" ")
-    console.log(this.props.data)
-    console.log(text_blocks)
+    //console.log(this.props.data)
+    //console.log(text_blocks)
     var texts = text_blocks.map(function(text){
       if (typeof text == "string"){
         if (text.match(re)){
@@ -41,46 +41,6 @@ var AutoLinkText = React.createClass({
   }
 });
 
-
-var NodeIcon = React.createClass({
-  render: function(){
-    var icon_name="fa-"
-
-    if (typeof this.props.type == "undefined") {
-      var nodetype = "S";
-    }
-    else {
-      //var nodetype = this.props.type[0];
-      var nodetype = this.props.type;
-    }
-
-    switch (nodetype){
-      case "S":
-        icon_name += "street-view"
-        break;
-      case "T":
-        icon_name += "subway"
-        break;
-      case "F":
-        icon_name += "cutlery"
-        break;
-      case "N":
-        icon_name += "info"
-        break;
-      case "D":
-        icon_name += "calendar"
-        break;
-      case "SG-route":
-        icon_name += "map-signs"
-        break;
-      default:
-        icon_name += "info"
-        break;
-    }
-    return <div/>
-    //return (<div className={"icon " + "icon-" + this.props.type}><i className={"fa " + icon_name}/></div>)
-  }
-});
 
 var Map = React.createClass({
   render: function(){
@@ -157,23 +117,24 @@ var Suggestions = React.createClass({
     var suggestions = []
     //console.log("Address")
     //console.log(this.props.node.address)
-    if (this.props.node.type == "S" && typeof this.props.node.address !== "undefined"){
-      suggestions.push(<li><a target="_blank" href={"https://maps.google.com/maps?q=" + encodeURI(this.props.node.address)}>Open map</a></li>)
-    }
+    if (this.props.node.type == "S"){
+      // address = title when rendering DayMap
+      if (this.props.node.type == "S" && typeof this.props.node.address !== "undefined"){
+        suggestions.push(<a target="_blank" href={"https://maps.google.com/maps?q=" + encodeURI(this.props.node.address)}>map</a>)
+      }
+      suggestions.push(<span> | </span>)
 
-    if (typeof this.props.node.address == "undefined" || this.props.node.address == this.props.node.title){
-      suggestions.push(<li><a target="_blank" href={"https://www.google.com/search?q=" + encodeURI(this.props.node.title) + "+address"}>Find address</a></li>)
-      //console.log(suggestions)
-    }
-    if (typeof this.props.node.description == "undefined" || this.props.node.description == ""){
-      suggestions.push(<li><a target="_blank" href={"https://www.google.com/search?q=" + encodeURI(this.props.node.title)}>Find detail</a></li>)
-      //console.log(suggestions)
+      suggestions.push(<a target="_blank" href={"https://www.google.com/search?q=" + encodeURI(this.props.node.title)}>detail</a>)
+      suggestions.push(<span> | </span>)
+      suggestions.push(<a target="_blank" href={"https://www.google.com/search?q=" + encodeURI(this.props.node.title) + "+address"}>address</a>)
+      suggestions.push(<span> | </span>)
+      suggestions.push(<a target="_blank" href={"https://www.google.com/search?q=" + encodeURI("restaurant near " + this.props.node.title)}>food</a>)
+      suggestions.push(<span> | </span>)
+      suggestions.push(<a target="_blank" href={"https://www.google.com/search?q=" + encodeURI("things to do near " + this.props.node.title)}>sights</a>)
     }
     return (
       <div className="suggestions">
-        <ul>
-          {suggestions}
-        </ul>
+        {suggestions}
       </div>
     )
   }
@@ -182,25 +143,14 @@ var Suggestions = React.createClass({
 
 var Node = React.createClass({
   render: function(){
-    //console.log("config:")
-    //console.log(this.props.config)
     var node = this.props.node;
-    //console.log(node)
-    var line;
-    if (this.props.drawVertLine){
-      line = <div className="line"/>;
-    }
-    //console.log(node.description)
     var desc = <AutoLinkText data={node.description}/>
-    //console.log(desc)
     var sg_route_class="";
     if (node.type == "SG-route"){
       return (
         <div className="node suggestions" >
-          <NodeIcon type={node.type}/>
-          {line}
           <div className="content">
-            <h4 className="title"><a href={node.description} target="_blank">Find route</a></h4>
+            <a href={node.description} target="_blank">direction?</a>
           </div>
         </div>
       );
@@ -254,15 +204,21 @@ var Node = React.createClass({
           dayString = "六"
           break;
         default:
-          
+          dayString = ""
+          break;
       }
 
-      titleNode = <h2 classname="title">{node.title + " (" + dayString + ")"}</h2>
+      if (dayString == ""){
+        titleNode = <h2 className="title">{node.title}</h2>
+      }
+      else {
+        titleNode = <h2 className="title">{node.title + " (" + dayString + ")"}</h2>
+
+      }
+
     }
     return (
       <div className={"node " + sg_route_class + " " + this.props.node.type} >
-        <NodeIcon type={node.type}/>
-        {line}
         <div className="content">
           {titleNode}
           {map}
@@ -302,20 +258,31 @@ var Day = React.createClass({
     })
   },
   insertTransitSuggestions: function(nodes){
+    function createSGNode(from, to) {
+      return {
+            "type": "SG-route",
+            "title":"Find route",
+            "address":"Find route",
+            "description":"http://maps.google.com/maps?saddr=" + encodeURI(from) + "&daddr=" + encodeURI(to) + "&dirflg=r"
+      }
+    }
     for (var idx =0; idx < nodes.length-1; idx++){
-      if (nodes[idx]['type'] == "S" && nodes[idx+1]['type'] == "S"){
-        nodes.splice(idx+1, 0, {
-          "type": "SG-route",
-          "title":"Find route",
-          "address":"Find route",
-          "description":"http://maps.google.com/maps?saddr=" + encodeURI(nodes[idx]['address']) + "&daddr=" + encodeURI(nodes[idx+1]['address']) + "&dirflg=r"
-        })
+      if (nodes[idx]['type'] == "S" && nodes[idx+1]['type'] == "S") {
+        nodes.splice(idx+1, 0, createSGNode(nodes[idx]['address'], nodes[idx+1]['address']))
+      }
+    }
+    for (var idx =0; idx < nodes.length-2; idx++){
+      if (nodes[idx]['type'] == "S" && nodes[idx+1]['type'] == "T" && nodes[idx+2]['type'] == "S") {
+        nodes.splice(idx+1, 0, createSGNode(nodes[idx]['address'], nodes[idx+2]['address']))
       }
     }
     return nodes;
   },
   inferTitleAndType: function(nodes){
+    //console.log("Infer")
+    //console.log(nodes)
     return nodes.map(function(node){
+      //console.log(node);
       if (!node.hasOwnProperty('title')){
         if (node.hasOwnProperty('sight')){
           node['title'] = node['sight'];
@@ -324,6 +291,10 @@ var Day = React.createClass({
         if (node.hasOwnProperty('transit')){
           node['title'] = node['transit'];
           node['type'] = 'T';
+        }
+        if (node.hasOwnProperty('note')){
+          node['title'] = node['note'];
+          node['type'] = 'N';
         }
       }
       return node;
@@ -340,13 +311,12 @@ var Day = React.createClass({
     if(typeof this.props.config['planningMode'] !== "undefined" && this.props.config['planningMode'][0] == "1"){ //BUG: python server will be "1/"
       nodes = this.insertTransitSuggestions(nodes);
     }
-    console.log(nodes)
+    //console.log(nodes)
     //console.log(this)
     var config = this.props.config;
     //console.log(config)
     nodes = nodes.map(function(node, index, array){
       return (
-        //<Node node={node} drawVertLine={(index != array.length-1)}  />
         <Node node={node} config={config} drawVertLine={(index != array.length-1)}  />
       )
     }) 
