@@ -1,31 +1,468 @@
 # This file is a travle plan for https://shinglyu.github.io/TravelPlanViewer
+9/3:                  #Each day start with a "<date>:"
+  - transit: 松山機場 國光 1840 
+    time: 14:15
+    description: 125 NTD 50 min
+  - transit: (Optional) 市府轉運站 大有巴士 1960
+    description: 145 NTD 1.5 hr
 
-6/22:                  #Each day start with a "<date>:"
-  - sight: YVR Airport # Each item in a day start with a "-" and is idented
-    time: "11:50"      # Time, must be quoted 
+  - sight: TPE Airport, Terminal 2
+    address: 桃園國際機場
                        # Maps will shown based on the address you provide
-    address: "3211 Grant McConachie Way, Richmond, BC V7B 0A4加拿大" 
-    description: "+1 604-207-7077" #Put any notes in description section
 
-  - transit: SkyTrain Canada Line
-    description: http://www.translink.ca/-/media/Documents/schedules_and_maps/transit_maps/SkyTrainSystemMap.pdf
+  - transit: Singapore Aireline 879
+    time: 17:45
 
-  - sight: SkyTrain Waterfront Station 
-    time: "13:30"
-    address: 601 West Cordova Street, Vancouver 439 Granville Street, Vancouver
+  - sight: Singapore, Terminal 3
+    time: 22:10
 
-  - sight: Vencouver MozSpace
-    time: 13:45
-    address: 163 W Hastings St, Suite 209 Vancouver, BC V6B 1H5 Canada 
+  - transit: Singapore Aireline 322
+    time: 23:30
 
-  - sight: Gastown, Vancouver
 
-6/23:
-  - sight: Stanley Park
-    time: "11:50"
-    description: "Great view!"
+# =========================================================
+9/4:
+  - sight: LHR Airport, Terminal 2
+    time: 5:55
+  - transit: Heathrow Express -> London Paddington
+    description: |
+      https://www.heathrowexpress.com/
+      Timetable: https://www.heathrowexpress.com/timetable-schedule/heathrow-london
+      05:12, 05:33, 48, 03, 18, 33
+      Heathrow Express will be included in BritRail Pass
+      National Rail Enquiries App
+      http://sultt.pixnet.net/blog/post/26878514-%E8%8B%B1%E5%9C%8B%E6%9D%B1%E5%8D%97%E5%8D%80%E7%81%AB%E8%BB%8A%E9%80%9A%E8%A1%8C%E8%AD%89-britrail-london-plus-pass%E4%BD%BF
 
-  - sight: YVR Airport
-    time: "18:50"
-    address: "3211 Grant McConachie Way, Richmond, BC V7B 0A4加拿大"
-    description: "+1 604-207-7077"
+  - sight: London Paddington
+
+  - transit: Edgware Road => Bakerloo to Elephant & Castle => Charing Cross Underground Station
+
+  - sight: Pick up London Pass
+    address: The London Pass Redemption Desk, 11a Charing Cross Road, London, WC2H 0EP
+    time: 10:00~16:30
+    description: (Nearest Underground Station: Leicester Square, take Exit 1)
+
+
+  - sight: The National Gallery, London
+    description: | 
+      ~ 9pm on Fri
+      Free admission
+
+  - sight: (optional)The National Potrait Gallery, London
+    description: Free admission
+
+  - sight: Charing Cross Station
+  - transit: (Optional) Southeastern to Waterloo East Rail
+  - transit: Walk through Waterloo Bridge
+
+  - sight: Southbank Centre
+    description: http://www.southbankcentre.co.uk/visitor-info/directions-and-opening-times
+  - sight: The London Eye
+  - sight: (Optional) Imperial War Museum
+    description: Free admission
+  - sight: Millennium Bridge
+  - sight: Tate Modern
+    description: |
+      Free admission
+      ~ 10 pm on Sat
+  - sight: Shakespeare's Globe
+  - sight: Cinema Museum
+  - sight: Southwark Cathedral
+  - sight: (Optional) Hay's Galleria
+  - sight: Hotel
+
+
+  # - transit: Elephant & Castle Sta. => Northern to High Barnet => London Bridge => Jubliee to Stanford => Bermondsey
+  - transit: London Bridge => Jubliee to Stanford => Bermondsey
+
+  #- title: Giselle
+  #  address: Palais Garnier
+  #  time: "19:30"
+  #  description: "https://www.operadeparis.fr/en/ticketing/calendar?modal=1&month=6&year=2016"
+  #
+  #- title: Madam Butterfly
+  #  address: London Coliseum
+  #  time: "19:30"
+  #  description: "http://www.timeout.com/london/opera-classical-music/madam-butterfly-1#tab_panel_3"
+  #
+  #- title: La Traviata 
+  #  address: Opera Bastille
+  #  time: "19:30"
+  #  description: "https://www.operadeparis.fr/en/ticketing/calendar?modal=1&month=6&year=2016"
+
+  - sight: Hotel
+9/5:
+  - sight: Hotel
+
+  - sight: Bermondsey Station
+  - transit: Jubliee to Wembley Park
+  - sight: Bond Street Station
+  - sight: Wigmore Hall
+  - title: The Wallace Collection
+  - title: Daunt Books
+    time: 10:00~17:00
+  - title: The Sherlock Holmes Museum
+  - title: London Central Mosque
+  - title: (Optional) Abbey Rd. Studio
+  - title: (Optional) ZSL London Zoo
+    description: in London Pass
+  - title: Regent's Park
+  - sight: Baker Street Station or Great Portland Street
+  - transit: Hammersmith & City to Barking
+  - sight: Moorgate Station
+  - title: Museum of London
+    description: Free admission
+  - title: Barbican Centre
+    description: ~10pm Thu
+  - title: St. Bartholomew the Great
+  - title: St. Paul's Cathedral 
+    description: ~10pm Thu
+  - transit: (Optional) St Paul's station =>  Central to Hainault => Bank Station
+  - transit: Bank Station => Northen to Morden => London Bridge => Jubliee to Stanford => Bermondsey
+
+
+  #- title: Giselle
+  #  address: Palais Garnier
+  #  time: "19:30"
+  #  description: "https://www.operadeparis.fr/en/ticketing/calendar?modal=1&month=6&year=2016"
+
+  - sight: Hotel
+# =========================================================
+9/6:
+  - sight: Hotel
+  - transit: Anchor Street (Stop GQ) => 1 Tottenham Court Road => Drury Lane (Stop S)
+  - transit: (Optional) Bermondsey => Jubliee to Stanmore => Waterloo Station => Northern to Edgware => Tottenham Court Road Station
+
+  - title: British Museum
+    description: |
+      Free admission
+      ~ 8 pm on Fri
+      http://www.britishmuseum.org/visiting/planning_your_visit/object_trails/3_hours.aspx
+  - sight: Russel Square
+  - sight: (backup) Cartoon Museum
+  - sight: St. Paul's Church
+  - sight: Covent Garden Piazza
+  - sight: London Film Museum
+    description: Ticket £14.50
+  - sight: London Transport Museum
+    description: in London Pass
+  - sight: Saint Martin's Courtyard
+  - sight: Seven Dials
+  - sight: Neal Street
+  - sight: Royal Opera House
+
+  - title: Nabucco *
+    address: The Royal Opera House
+    time: "19:30"
+    description: |
+      http://www.roh.org.uk/events/f9m7r
+      Booking starts on 4/12
+      ~ £5-35
+
+  - transit: Aldwych Somerset House (Stop S) => 1 Canada Water => Anchor Street (Stop PB)
+
+  - sight: Hotel
+# =========================================================
+9/7:
+  - sight: Using London Pass
+  - sight: Hotel
+  - sight: Palace of Westminster
+  - sight: Big Ben
+  - sight: Westminster Abbey
+    description: in London Pass
+  - sight: Churchill War Rooms
+    description: in London Pass
+  - sight: 10th, Downing Street
+  - sight: The Banqueting House
+    description: in London Pass
+  - sight: Household Cavalry Museum
+    description: in London Pass
+
+  - sight: (Optional) Piccadilly Circus
+    
+  - sight: Trafalgar Square
+  - sight: (optional)The National Gallery, London
+    description: | 
+      ~ 9pm on Fri
+      Free admission
+
+  - sight: (optional)The National Potrait Gallery, London
+    description: Free admission
+  - sight: St Martin-in-the-Fields
+    description: 6/7 13:00 Lunchtime Concert
+  - sight: Charing Cross Station
+
+  - title: Tristan und Isolde *
+    address: London Coliseum
+    time: "17:00"
+    description: |
+      http://www.timeout.com/london/music/tristan-and-isolde#tab_panel_3
+      https://www.eno.org/whats-on/tristan-and-isolde/?action=book
+      ~ £20 
+  - sight: Hotel
+
+# =========================================================
+9/8:
+  - sight: Using London Pass
+  - transit: Hop on Hop off Bus
+    description: https://www.londonpass.com/images_lib/265281302_hoho-map-2015.jpg
+  - sight: Hotel
+  - sight : Buckingham's Palace
+  - sight: The Queen's Gallery
+    description: in London Pass
+  - sight: The Guards Museum
+    description: in London Pass
+
+  - sight: Redeem Hop-on-hop-off ticket
+    address: 11a Charing Cross Road, London, WC2H 0EP
+  - sight: (Optional) Redeem Hop-on-hop-off ticket
+    address: Golden Tours Visitor Centre: 4, Fountain Square, 123-151 Buckingham, Palace Road, London, SW1W 9SH
+
+  - sight: Redeem Hop-on-hop-off ticket
+    address: Tooley Street Tourist stop, opposite London Bridge Experience
+    time: 9:00-15:00
+  - sight: HMS Belfast
+    description: in London Pass
+  - sight: Shakespeare's Globe
+    description: |
+      in London Pass
+      http://www.shakespearesglobe.com/exhibition/exhibition-tour-opening-hours
+  - sight: Design Museum
+    description: in London Pass
+  - sight: Tower Bridge, London
+    description: in London Pass
+  - sight: Tower of London
+    description: in London Pass
+  - sight: (Optional) Redeem Hop-on-hop-off ticket
+    address: Tower Hill Tourist bus stop, opposite Tower Hill Station
+    time: 9:00-15:00
+  - sight: Backups
+  - sight: V&A museum
+  - sight: Natural History Museum
+  - sight: Royal Albert Hall
+    description: in London Pass
+  - sight: Kensinton Palace
+    description: in London Pass
+  - sight: Golden Tours Visitor Centre
+    address: 4, Fountain Square, 123-151 Buckingham, Palace Road, London, SW1W 9SH
+    
+
+# =========================================================
+9/9:
+  - sight: Using London Pass
+  - sight: Hotel
+  - transit: (Optional) Bermondsey => Jubliee => London Bridge
+  - sight : Tower Pier
+  - transit: Thames River Cruise (Hop-on hop-off)
+    time: 9:50
+    description: |
+      Timetable: https://www.londonpass.com/images_lib/67179019_CCTimetableSummer2016.jpg
+      ~ 30 min to Greenwich
+  - transit: (backup)Thames Clippers
+
+  - sight: Greenwich Pier
+    description: http://rainieis.tw/blog/post/29977232-%5B%E8%8B%B1%E5%9C%8B%5D-%E5%80%AB%E6%95%A6-london-@-%E6%A0%BC%E6%9E%97%E5%A8%81%E6%B2%BB-greenwich-%E5%A5%BD%E5%A4%A9%E6%B0%A3%E4%B8%80
+  - sight: Cutty Sark
+    description: in London Pass
+  - sight: Queen's House
+  - sight: National Maritime Museum
+    desciption: free admission
+  - sight: Fan Museum
+    description: in London Pass
+  - sight: Royal Observatory Greenwich
+    description: in London Pass
+  - sight: Wernher Collection at Ranger’s House
+    description: in London Pass
+
+  - transit: (Optional) National Maritime Museum (F) => 286 to Sidcup => Elthan Church Well Hall Road (G)
+  - sight: (Optional)Eltham Palace
+    description: in London Pass
+  - transit: (Optional) Greenwich => Southeastern to London Cannon Street => Woolwich Arsenal
+  - sight: (Optional) Firepower Royal Artillery Museum
+    description: in London Pass
+
+  #- title: Nabucco
+  #  address: The Royal Opera House
+  #  time: "19:30"
+  #  description: http://www.roh.org.uk/events/f9m7r
+
+  - sight: Hotel
+# =========================================================
+9/10:
+  - sight: Hotel
+  - transit: Bermondsey => Jubliee to Stanmore => Westminster Station => District to Ealing Broadway => Victoria Station
+  - sight: London Victoria Station
+  - transit: Gatwick Express, Platform 13
+    time: 9:00
+    description: 09:54
+  - sight: Brighton (East Sussex)
+  - sight: Royal Pavillion
+  - sight: Brighton Museum & Art Gallery
+  - sight: Brighton Pier
+  - sight: Churchill Square
+  - sight: The Lanes
+  - sight: North Street Bus Stop (C)
+  - transit: Coaster 12 to Eastbourne => o/s Park Centre
+  - sight: (Optional) Seven Sisters
+  - sight: Brighton (East Sussex)
+  - transit: Thameslink, Platform 3
+    time: 18:02
+    description: 19:05
+  - sight: London Victoria Station
+  - sight: Hotel
+
+# =========================================================
+9/11:
+  - sight: Hotel
+
+  - transit: Bermondsey => Jubliee to Stanmore => Baker Street Station => Hammersmith & City to Hammersmith => Paddington
+
+  - sight: London Paddington Station
+  - transit: Great Western Railway, Platform 2
+    time: 8:51
+    description: 9:52
+  - transit: (backup) Great Western Railway, Platform 10 => Didcot Parkway, Platform 3 (9:50)
+    time: 9:00
+    description: 10:06
+  - sight: Oxford Station
+
+  - sight: Oxford Castle
+  - sight: Carfax Tower
+  - sight: Christ Church
+  - sight: Magdalen College
+  - sight: Botanic Garden
+  - sight: University Church of St Mary the Virgin
+  - sight: All Souls College
+  - sight: Radcliffe Camera
+  - sight: Bodleian Library
+  - sight: Sheldonian Theatre
+  - sight: Bridge of Sighs
+  - sight: Trinity College
+  - sight: Museum of Natural History
+  - sight: Oxford University Parks
+  - sight: Ashmolean Museum
+
+
+  - sight: University of Oxford
+
+  - sight: Oxford Station
+  - transit: Great Western Railway, Platform 4
+    time: 18:31
+    description: 19:29
+  - transit: (backup) Great Western Railway, Platform 3 => Reading, Platform 11 (18:54)
+    time: 18:16
+    description: 19:24
+  - sight: London Paddington Station
+  - sight: http://thylovelyplanet.blogspot.tw/2014/05/OxfordBicesterVillage2013.html
+  #- title: Giselle
+  #address: Palais Garnier
+  #time: "19:30"
+  #description: https://www.operadeparis.fr/en/ticketing/calendar?modal=1&month=6&year=2016
+  #- title: La Traviata 
+  #address: Opera Bastille
+  #time: "19:30"
+  #description: "https://www.operadeparis.fr/en/ticketing/calendar?modal=1&month=6&year=2016"
+# =========================================================
+9/12:
+  - sight: Hotel
+  - transit: Bermondsey => Jubliee to Stanmore => London Bridge => Northern to High Barnet => Kin's Cross St. Pancras London
+  - sight: London Kings Cross Station
+  - transit: Great Northern Train, Platform 0
+    time: 9:14
+    description: 10:06
+  - transit: (backup) Great Northern Train, Platform 6
+    time: 9:44
+    description: 10:30
+  - sight: Cambridge Station
+  - sight: University of Cambridge
+    description: |
+      http://wei102299.pixnet.net/blog/post/281304257-%E5%80%AB%E6%95%A6%E5%88%B0%E5%8A%8D%E6%A9%8B%E2%99%A5%E4%B8%80%E6%97%A5%E9%81%8A%E8%A1%8C%E7%A8%8B%E5%8F%8A%E4%BA%A4%E9%80%9A
+      http://www.cam.ac.uk/files/visitor_guide.pdf
+  - sight: Botanic Garden
+  - sight: Zitzwilliam Museum
+  - sight: Peterhouse College
+  - sight: Museum of Archaeology and Anthropology
+  - sight: Queen's Colleage
+    description: Math bridge
+  - sight: King's Colleage
+  - sight: Trinity Colleage
+  - sight: St. John's Colleage
+  - sight: Jesus Green
+  #- title: Giselle
+  #address: Palais Garnier
+  #time: "19:30"
+  #description: https://www.operadeparis.fr/en/ticketing/calendar?modal=1&month=6&year=2016
+  - sight: Cambridge Station
+  - transit: Great Northern Train, Platform 7
+    time: 18:25
+    description: 19:36
+  - transit: (backup) Great Northern Train, Platform 8
+    time: 18:45
+    description: 19:39
+  - sight: London Kings Cross Station
+  - sight: Airbnb
+    address: 17 Frankland Close, Greater London, SE16 2HD, United Kingdom
+  - sight: http://thylovelyplanet.blogspot.tw/2014/05/CambridgeEly2013.html
+# =========================================================
+9/13:
+  - sight: Airbnb
+    address: 17 Frankland Close, Greater London, SE16 2HD, United Kingdom
+  - transit: Bermondsey => Jubliee to Stanmore => Baker Street Station => Bakerloo to Harrow & Wealdstone => Edgware Road
+  - sight: Hilton London Metropole
+  - sight: Hyde Park
+  - sight: Kensington Palace
+    description: in London Pass
+  - sight: The Albert Memorial
+  - sight: Royal Albert Hall
+    description: in London Pass
+  - sight: Royal College of Music
+  - sight: Science Museum
+    description: Free admission
+  - sight: Natural History Museum
+    description: Free admission
+  - sight: Victoria and Albert Museum
+  # - title: Nabucco
+  #   address: The Royal Opera House
+  #  time: "19:30"
+  #  description: http://www.roh.org.uk/events/f9m7r
+  - sight: Rolling Bridge
+# =========================================================
+9/14:
+  - sight: Hotel
+  - sight: London Paddington Station
+  - transit: Great Western Railway, Platform 11 => Slough, Platform 1 (09:22)
+    time: 9:15
+    description: 10:06
+  - transit: (Backup)Great Western Railway, Platform 11 => Slough, Platform 1 (10:12)
+    time: 9:42
+    description: 10:18
+  - sight: Windsor & Eton Central
+  - sight: map
+    description: http://www.windsor.gov.uk/dbimgs/windsormap2016Final14122015.pdf
+  - sight: Windosor Castle
+  - sight: Eton College
+
+  - sight: Windsor & Eton Central
+  - transit: Great Western Railway, Platform 1 => Slough, Platform 3 (18:37)
+    time: 18:22
+    description: 19:02
+  - transit: (Backup) Great Western Railway, Platform 1 => Slough, Platform 5 (19:18)
+    time: 19:02
+    description: 19:49
+  - sight: London Paddington Station
+  - sight: Hotel
+# =========================================================
+9/15:
+  - sight: Hotel
+  - transit: Heathrow Express
+  - sight: LHR Ariport
+  - transit: Singapore Airline 317
+    time: 11:25
+9/16:
+  - sight: Singapore, Terminal 3
+    time: 7:30 
+  - transit: Singapore Airline 878
+    time: 11:55
+  - sight: TPE Airport, Terminal 2
+    time: 16:40
+
