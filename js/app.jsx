@@ -1,14 +1,3 @@
-var FileSelector = React.createClass({
-  render: function(){
-    return (
-      <div className="fileSelector">
-        <input type="file" id="file" onChange={this.props.loadNewData}/>
-        <a href="./example.yaml.txt">Download an example</a>
-      </div>
-    )
-  }
-})
-
 /* Thanks http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript */
 //Get query string
 var Page = React.createClass({
@@ -32,40 +21,31 @@ var Page = React.createClass({
      return {days:{"Please select a plan file":[]}, config:qs}
   },
   componentDidMount: function(){
-    var source = ""
-    if (typeof this.state.config['file'] == "undefined"){
-      source = "source_files/default.yml";
-    }
-    else {
-      source = this.state.config['file']
-    }
-    fetch(source)
-    .then(function(resp){
-      return resp.text()
-    })
-    .then(function(text){
-      //console.log(text)
-      //console.log(this)
-      try {
-        this.setState({"days": window.YAML.parse(text)})
-      }
-      catch (e) {
-        //console.log(e)
-      }
-    }.bind(this))
-  },
-  loadNewData: function(e){
-    var reader = new FileReader();
-    reader.onload = function(e){
-      this.setState({"days": window.YAML.parse(e.target.result)})
-    }.bind(this);
-    reader.readAsText(e.target.files[0])
+    var base_url = "http://localhost:3000/"
+    var file = this.state.config['file'];
+    console.log(file)
+
+    fetch(base_url + file)
+      .then(function(resp){
+        console.log(resp)
+        return resp.json()
+      })
+      .then(function(days){
+        //console.log(text)
+        console.log(days)
+        try {
+          this.setState({"days": days})
+        }
+        catch (e) {
+          console.error(e)
+          //console.log(e)
+        }
+      }.bind(this))
   },
   render: function(){
     //console.log(this.state.config)
     return (
       <div>
-        <FileSelector loadNewData={this.loadNewData}/>
         <Days days={this.state.days} config={this.state.config}/>
         <Toolbar />
       </div>
