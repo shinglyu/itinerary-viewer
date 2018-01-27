@@ -8,16 +8,13 @@ if [ -z "$1" ]
     exit
 fi
 
-TMP_FILE_LOCAL="source_files/temp.yml"
-TMP_FILE="${DIR}/../${TMP_FILE_LOCAL}"
+SOURCE=$(basename "${1}" '.yml')
 
-mv "${TMP_FILE}" "${TMP_FILE}.bk"
-# rm "${TMP_FILE}"
-echo "Creating symbolic link for ${1} in ${TMP_FILE}"
-ln -s "$(pwd)/${1}" "${TMP_FILE}"
-
+trap 'jobs; kill %1;' SIGINT
+# In pwd
+${DIR}/run_backend.sh &
 cd "${DIR}/../"
-${DIR}/../run.sh "${TMP_FILE_LOCAL}"
+${DIR}/run_frontend.sh ${SOURCE}
 
 
 
