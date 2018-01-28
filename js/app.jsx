@@ -31,7 +31,8 @@ var Page = React.createClass({
         return resp.json()
       })
       .then(function(days){
-        //console.log(text)
+        
+        console.log("from server")
         console.log(days)
         try {
           this.setState({"days": days})
@@ -42,11 +43,31 @@ var Page = React.createClass({
         }
       }.bind(this))
   },
+  save: function(days) {
+    this.setState({"days": days});
+
+    console.log("save")
+    console.log(days)
+    var request =  new Request(base_url + this.state.config['file'], {
+      method: 'PUT', 
+      body: JSON.stringify(days)
+    });
+    fetch(request)
+      .then(function(resp){
+        if (resp.status == 200) {
+          console.log("Saved")
+        }
+        else {
+          alert('Saving failed, please check the console for the error')
+          // TODO: get the body as text and print it out
+        }
+      });
+  },
   render: function(){
     
     return (
       <div>
-        <Days days={this.state.days} config={this.state.config}/>
+        <Days days={this.state.days} config={this.state.config} save={this.save}/>
         <Toolbar />
       </div>
     )

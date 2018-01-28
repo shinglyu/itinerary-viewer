@@ -328,6 +328,14 @@ var Day = React.createClass({
 });
 
 var Days= React.createClass({
+  testSave: function() {
+    // Assume v2
+    console.log(this.props.days[0])
+    var newDays = this.props.days.slice(); //clone
+    newDays[0].itinerary.push({"sight": "TEST"});
+    this.props.save(newDays);
+  },
+
   render: function(){
     
     var days = [];
@@ -337,6 +345,7 @@ var Days= React.createClass({
     }
     else if (Array.isArray(this.props.days)) {
       // v2
+      console.log(this.props.days)
       for (var day of this.props.days){
         days.push(
           <div>
@@ -362,6 +371,7 @@ var Days= React.createClass({
 
     return (
       <div className="container">
+      <button onClick={this.testSave}/>
       {days}
       </div>
     )
