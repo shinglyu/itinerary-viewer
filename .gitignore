@@ -1,3 +1,5 @@
 bower_components/
 source_files/*
 node_modules
+utils/kml/config.py
+*.pyc
