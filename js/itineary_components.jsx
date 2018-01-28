@@ -331,16 +331,34 @@ var Day = React.createClass({
 var Days= React.createClass({
   render: function(){
     //console.log(this.props.config)
-    days = []
+    var days = [];
     var grey = false;
-    for (var date in this.props.days){
-      days.push(
-        <div>
-          <Day no={grey ? 'grey': ''} nodes={this.props.days[date]} date={date} config={this.props.config}/>
-          {/*<DayMap nodes={this.props.days[date]}/>*/}
-        </div>
-      )
-      grey = !grey
+    if (this.props.days === undefined) {
+      return
+    }
+    else if (Array.isArray(this.props.days)) {
+      // v2
+      for (var day of this.props.days){
+        days.push(
+          <div>
+            <Day no={grey ? 'grey': ''} nodes={day.itinerary} date={day.date} config={this.props.config}/>
+            {/*<DayMap nodes={this.props.days[date]}/>*/}
+          </div>
+        )
+        grey = !grey
+      }
+    }
+    else {
+      // v1, the top level is an object (hashmap)
+      for (var date in this.props.days){
+        days.push(
+          <div>
+            <Day no={grey ? 'grey': ''} nodes={this.props.days[date]} date={date} config={this.props.config}/>
+            {/*<DayMap nodes={this.props.days[date]}/>*/}
+          </div>
+        )
+        grey = !grey
+      }
     }
 
     return (
