@@ -1,18 +1,14 @@
-if (typeof require !== "undefined"){
-  var React = require('react')
-}
 //https://www.google.com.tw/maps/dir/University+of+Taipei,+Zhongzheng+District,+Taipei+City,+Taiwan/%E5%8F%B0%E5%8C%97%E5%B8%82%E4%BF%A1%E7%BE%A9%E5%8D%80%E8%87%BA%E5%8C%97101%E8%B3%BC%E7%89%A9%E4%B8%AD%E5%BF%83/@25.0321477,121.5204559,14z/data=!3m1!4b1!4m13!4m12!1m5!1m1!1s0x3442a9a02f53dd45:0x38f05d6edd6d3845!2m2!1d121.5138046!2d25.0366038!1m5!1m1!1s0x3442abb6da80a7ad:0xacc4d11dc963103c!2m2!1d121.56481!2d25.033718
-var AutoLinkText = React.createClass({
-  render: function(){
+class AutoLinkText extends React.Component {
+  render(){
     var re = /(http[s]?:\/\/[^\s]*)/g; 
     if (typeof this.props.data == "undefined"){
-      return <div/>
+      return <span/>
     }
     var lines = this.props.data.split("\n")
     
-    lines_w_brs = []
+    let lines_w_brs = []
     for (var id in lines){
-      
       lines_w_brs.push(lines[id]);
       lines_w_brs.push(<br/>);
     }
@@ -21,17 +17,17 @@ var AutoLinkText = React.createClass({
     //var text_blocks = this.props.data.split(" ")
     
     
-    var texts = text_blocks.map(function(text){
+    var texts = text_blocks.map(function(text, index){
       if (typeof text == "string"){
         if (text.match(re)){
-          return <a href={text} target="_blank">{text}</a>
+          return <a href={text} target="_blank" key={index}>{text}</a>
         }
         else {
-          return text + " "
+          return <span key={index}>{text + " "}</span>
         }
       }
       else {
-        return text
+        return <span key={index}>{text}</span>
       }
     })
 
@@ -39,11 +35,11 @@ var AutoLinkText = React.createClass({
       <span>{texts}</span>
     )
   }
-});
+}
 
 
-var Map = React.createClass({
-  render: function(){
+class Map extends React.Component {
+  render(){
     var address = undefined;
 
     var map_img_src="http://maps.googleapis.com/maps/api/staticmap?center=" + encodeURI(address) + 
@@ -66,19 +62,19 @@ var Map = React.createClass({
       )
     }
   }
-})
+}
 
-var DayMap = React.createClass({
-  getInitialState: function(){
+class DayMap extends React.Component {
+  getInitialState(){
     return {"size": "300x300"};
-  },
+  }
 
-  handleClick: function(){
+  handleClick(){
     // FIXME: what't the upper limit?
     this.setState({"size": "1200x1200"});
-  },
+  }
 
-  render: function(){
+  render(){
     //FIXME: ES6
 
     var map_img_src="https://maps.googleapis.com/maps/api/staticmap?" + 
@@ -110,10 +106,10 @@ var DayMap = React.createClass({
       </div>
     )
   }
-})
+}
 
-var Suggestions = React.createClass({
-  render: function(){
+class Suggestions extends React.Component {
+  render(){
     var suggestions = []
     
     
@@ -139,10 +135,10 @@ var Suggestions = React.createClass({
     )
   }
 
-})
+}
 
-var Node = React.createClass({
-  render: function(){
+class Node extends React.Component {
+  render(){
     var node = this.props.node;
     var desc = <AutoLinkText data={node.description}/>
     var sg_route_class="";
@@ -160,14 +156,14 @@ var Node = React.createClass({
     if (typeof this.props.config['planningMode'] !== "undefined"){
       suggestions = (<Suggestions node={node}/>)
     }
-    var map = <Map node={node}/>
-    var map = {};
-    var time = {};
+    //var map = <Map node={node}/>
+    var map = [];
+    var time = [];
     if (typeof node.time !== "undefined" && node.time !== ""){
         time = <p className="time"><i className="fa fa-clock-o"/>{node.time}</p>
     }
 
-    var address = {};
+    var address = [];
     if (node.address !== node.title){
       address = <p className="address"><i className="fa fa-map-marker"/>{node.address}</p>
     }
@@ -231,11 +227,13 @@ var Node = React.createClass({
         </div>
       </div>
     );
-  }
-})
 
-var Day = React.createClass({
-  fillEmptyTypes: function(nodes){
+    //return <p> placeholder</p>
+  }
+}
+
+class Day extends React.Component {
+  fillEmptyTypes(nodes){
     return nodes.map(function(node){ 
       if (typeof node['type'] == "undefined") {
         node['type'] = "S";
@@ -245,8 +243,8 @@ var Day = React.createClass({
       }
       return node
     });
-  },
-  inferAddress: function(nodes){
+  }
+  inferAddress(nodes){
     return nodes.map(function(node){
       if (node['type'] !== "S"){
         return node;
@@ -256,8 +254,8 @@ var Day = React.createClass({
         return node
       }
     })
-  },
-  insertTransitSuggestions: function(nodes){
+  }
+  insertTransitSuggestions(nodes){
     function createSGNode(from, to) {
       return {
             "type": "SG-route",
@@ -277,8 +275,8 @@ var Day = React.createClass({
       }
     }
     return nodes;
-  },
-  inferTitleAndType: function(nodes){
+  }
+  inferTitleAndType(nodes){
     
     
     return nodes.map(function(node){
@@ -299,8 +297,8 @@ var Day = React.createClass({
       }
       return node;
     });
-  },
-  render: function(){
+  }
+  render(){
     var rawnodes = [{title: this.props.date, type:"D"}]
     rawnodes = rawnodes.concat(JSON.parse(JSON.stringify(this.props.nodes))); // Copy here to avoid modifying the props
 
@@ -316,7 +314,7 @@ var Day = React.createClass({
     
     nodes = nodes.map(function(node, index, array){
       return (
-        <Node node={node} config={config} drawVertLine={(index != array.length-1)}  />
+        <Node key={index} node={node} config={config} drawVertLine={(index != array.length-1)}  />
       )
     }) 
     return (
@@ -325,10 +323,10 @@ var Day = React.createClass({
       </div>
     );
   }
-});
+}
 
-var Days= React.createClass({
-  render: function(){
+class Days extends React.Component {
+  render(){
     
     var days = [];
     var grey = false;
@@ -337,9 +335,9 @@ var Days= React.createClass({
     }
     else if (Array.isArray(this.props.days)) {
       // v2
-      for (var day of this.props.days){
+      for (let [idx, day] of this.props.days.entries()){
         days.push(
-          <div>
+          <div key={idx}>
             <Day no={grey ? 'grey': ''} nodes={day.itinerary} date={day.date} config={this.props.config}/>
             {/*<DayMap nodes={this.props.days[date]}/>*/}
           </div>
@@ -351,8 +349,8 @@ var Days= React.createClass({
       // v1, the top level is an object (hashmap)
       for (var date in this.props.days){
         days.push(
-          <div>
-            <Day no={grey ? 'grey': ''} nodes={this.props.days[date]} date={date} config={this.props.config}/>
+          <div key={date}>
+            {/*<Day no={grey ? 'grey': ''} nodes={this.props.days[date]} date={date} config={this.props.config}/>*/}
             {/*<DayMap nodes={this.props.days[date]}/>*/}
           </div>
         )
@@ -366,11 +364,5 @@ var Days= React.createClass({
       </div>
     )
   }
-});
+}
 
-module.exports.Day = Day;
-module.exports.NodeIcon = NodeIcon;
-module.exports.Node = Node;
-module.exports.Suggestions = Suggestions;
-
-window.export.Days = Days;

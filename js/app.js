@@ -1,8 +1,10 @@
 /* Thanks http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript */
 //Get query string
 const base_url = "http://localhost:3000/"
-var Page = React.createClass({
-  getInitialState: function(){
+//var Page = React.createClass({
+class Page extends React.Component {
+  constructor(props){
+    super(props);
      var qs = (function(a) {
        if (a == "") return {};
        var b = {};
@@ -17,11 +19,9 @@ var Page = React.createClass({
        return b;
      })(window.location.search.substr(1).split('&'));
 
-
-     
-     return {days:{"Please select a plan file":[]}, config:qs}
-  },
-  componentDidMount: function(){
+     this.state = {days:{}, config:qs};
+  }
+  componentDidMount(){
     //var base_url = "http://localhost:3000/"
     var file = this.state.config['file'];
 
@@ -41,8 +41,8 @@ var Page = React.createClass({
           
         }
       }.bind(this))
-  },
-  render: function(){
+  }
+  render(){
     
     return (
       <div>
@@ -51,7 +51,6 @@ var Page = React.createClass({
       </div>
     )
   }
-})
+}
 
-React.render(<Page/>, document.body);
-
+ReactDOM.render(<Page/>, document.getElementById('root'));
