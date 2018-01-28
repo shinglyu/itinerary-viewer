@@ -9,18 +9,18 @@ var AutoLinkText = React.createClass({
       return <div/>
     }
     var lines = this.props.data.split("\n")
-    //console.log(lines)
+    
     lines_w_brs = []
     for (var id in lines){
-      //console.log(line)
+      
       lines_w_brs.push(lines[id]);
       lines_w_brs.push(<br/>);
     }
     
     var text_blocks = lines_w_brs;
     //var text_blocks = this.props.data.split(" ")
-    //console.log(this.props.data)
-    //console.log(text_blocks)
+    
+    
     var texts = text_blocks.map(function(text){
       if (typeof text == "string"){
         if (text.match(re)){
@@ -115,8 +115,8 @@ var DayMap = React.createClass({
 var Suggestions = React.createClass({
   render: function(){
     var suggestions = []
-    //console.log("Address")
-    //console.log(this.props.node.address)
+    
+    
     if (this.props.node.type == "S"){
       // address = title when rendering DayMap
       if (this.props.node.type == "S" && typeof this.props.node.address !== "undefined"){
@@ -279,10 +279,10 @@ var Day = React.createClass({
     return nodes;
   },
   inferTitleAndType: function(nodes){
-    //console.log("Infer")
-    //console.log(nodes)
+    
+    
     return nodes.map(function(node){
-      //console.log(node);
+      
       if (!node.hasOwnProperty('title')){
         if (node.hasOwnProperty('sight')){
           node['title'] = node['sight'];
@@ -302,19 +302,18 @@ var Day = React.createClass({
   },
   render: function(){
     var rawnodes = [{title: this.props.date, type:"D"}]
-    rawnodes = rawnodes.concat(this.props.nodes)
+    rawnodes = rawnodes.concat(JSON.parse(JSON.stringify(this.props.nodes))); // Copy here to avoid modifying the props
 
-    //console.log(rawnodes)
     var nodes = this.inferTitleAndType(rawnodes);
     nodes = this.fillEmptyTypes(nodes);
-    //console.log(nodes)
+    
     if(typeof this.props.config['planningMode'] !== "undefined" && this.props.config['planningMode'][0] == "1"){ //BUG: python server will be "1/"
       nodes = this.insertTransitSuggestions(nodes);
     }
-    //console.log(nodes)
-    //console.log(this)
+    
+    
     var config = this.props.config;
-    //console.log(config)
+    
     nodes = nodes.map(function(node, index, array){
       return (
         <Node node={node} config={config} drawVertLine={(index != array.length-1)}  />
@@ -330,11 +329,11 @@ var Day = React.createClass({
 
 var Days= React.createClass({
   render: function(){
-    //console.log(this.props.config)
+    
     var days = [];
     var grey = false;
     if (this.props.days === undefined) {
-      return
+      return;
     }
     else if (Array.isArray(this.props.days)) {
       // v2
