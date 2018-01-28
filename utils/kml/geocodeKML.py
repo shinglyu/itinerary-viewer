@@ -27,8 +27,13 @@ def geocode(address, sensor=False):
   jsonOutput=jsonOutput.replace ("\\n", "")
   result = json.loads(jsonOutput) # converts jsonOutput into a dictionary
   # check status is ok i.e. we have results (don't want to get exceptions)
+  if result['status'] == 'OVER_QUERY_LIMIT':
+    print("Exceeded API limit, force stop. Please try again later when the query limit is reset")
+    quit()
+
   if result['status'] != "OK":
     print("Search failed for " + address)
+    print(result)
     return ""
   coordinates=result['results'][0]['geometry']['location'] # extract the geometry
   # return str(coordinates['lat'])+','+str(coordinates['lng'])
@@ -67,7 +72,7 @@ def createKML(addresses, fileName):
     coordinates = geocode(address['address'])
 
     if coordinates == "":
-        failedlist.append("{}; {}".format(address['name'], address['address']))
+        failedlist.append(u"{}; {}".format(address['name'], address['address']))
     else:
         coorElement.appendChild(kmlDoc.createTextNode(coordinates))
         pointElement.appendChild(coorElement)
@@ -83,7 +88,7 @@ def createKML(addresses, fileName):
     kmlFile.write(kmlDoc.toprettyxml(' ', '\n', 'UTF-8'))
   failFilename = "{}.failed".format(fileName)
   print("Saving failed searches to {}".format(failFilename))
-  with open(failFilename, 'w') as failedFile:
+  with io.open(failFilename, 'w', encoding='utf-8') as failedFile:
     failedFile.write('\n'.join(failedlist))
 
 def parseAddresses(addressesText):
