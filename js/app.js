@@ -29,18 +29,24 @@ class Page extends React.Component {
       .then(function(resp){
         console.log(resp)
         return resp.json()
+      }, function(err){
+        alert("Fail to load: " + err)
       })
       .then(function(days){
-        //console.log(text)
-        console.log(days)
-        try {
-          this.setState({"days": days})
+          //console.log(text)
+          console.log(days)
+          try {
+            this.setState({"days": days})
+          }
+          catch (e) {
+            console.error(e)
+            
+          }
+        }.bind(this),
+        function(err) {
+          alert("Error while loading json: " + err)
         }
-        catch (e) {
-          console.error(e)
-          
-        }
-      }.bind(this))
+      )
   }
   render(){
     
