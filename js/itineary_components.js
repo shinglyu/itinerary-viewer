@@ -350,7 +350,7 @@ class Days extends React.Component {
       for (var date in this.props.days){
         days.push(
           <div key={date}>
-            {/*<Day no={grey ? 'grey': ''} nodes={this.props.days[date]} date={date} config={this.props.config}/>*/}
+            {<Day no={grey ? 'grey': ''} nodes={this.props.days[date]} date={date} config={this.props.config}/>}
             {/*<DayMap nodes={this.props.days[date]}/>*/}
           </div>
         )
