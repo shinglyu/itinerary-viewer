@@ -31,6 +31,9 @@ div.node {
   max-width:20em;
   margin: 0.2em;
   padding: 0.1em;
+  /* force long URLs to wrap */
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 div.node.S > .content > .title:before {
