@@ -8,6 +8,10 @@
     right: 0px;
     top: 0px;
   }
+
+  .container > div {
+    border-bottom: 1px dashed grey;
+  }
 }
 
 h1, h2, h3, h4, p, a, i {
