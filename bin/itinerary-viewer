@@ -2,19 +2,30 @@
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-if [ -z "$1" ]
+if [ -z "${1}" ]
   then
     echo "No input file. Usage: itinerary-viewer <yml>"
     exit
 fi
 
-SOURCE=$(basename "${1}" '.yml')
+case "${1}" in
+new|init)
+  echo "${2}"
+  if [ -z "${2}" ]
+  then
+    FILENAME="itinerary"
+  else
+    FILENAME="${2}"
+  fi
+  cp "${DIR}/../source_files/v2.yml" "./${FILENAME}.yml"
+  ;;
+*)
+  SOURCE=$(basename "${1}" '.yml')
 
-trap 'jobs; kill %1;' SIGINT
-# In pwd
-${DIR}/run_backend.sh &
-cd "${DIR}/../"
-${DIR}/run_frontend.sh ${SOURCE}
-
-
-
+  trap 'jobs; kill %1;' SIGINT
+  # In pwd
+  ${DIR}/run_backend.sh &
+  cd "${DIR}/../"
+  ${DIR}/run_frontend.sh ${SOURCE}
+  ;;
+esac
