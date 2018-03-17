@@ -1,4 +1,5 @@
 //https://www.google.com.tw/maps/dir/University+of+Taipei,+Zhongzheng+District,+Taipei+City,+Taiwan/%E5%8F%B0%E5%8C%97%E5%B8%82%E4%BF%A1%E7%BE%A9%E5%8D%80%E8%87%BA%E5%8C%97101%E8%B3%BC%E7%89%A9%E4%B8%AD%E5%BF%83/@25.0321477,121.5204559,14z/data=!3m1!4b1!4m13!4m12!1m5!1m1!1s0x3442a9a02f53dd45:0x38f05d6edd6d3845!2m2!1d121.5138046!2d25.0366038!1m5!1m1!1s0x3442abb6da80a7ad:0xacc4d11dc963103c!2m2!1d121.56481!2d25.033718
+//<script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>h
 class AutoLinkText extends React.Component {
   render(){
     var re = /(http[s]?:\/\/[^\s]*)/g; 
@@ -277,8 +278,6 @@ class Day extends React.Component {
     return nodes;
   }
   inferTitleAndType(nodes){
-    
-    
     return nodes.map(function(node){
       
       if (!node.hasOwnProperty('title')){
@@ -299,6 +298,7 @@ class Day extends React.Component {
     });
   }
   render(){
+    // Creating the date title node
     var rawnodes = [{title: this.props.date, type:"D"}]
     rawnodes = rawnodes.concat(JSON.parse(JSON.stringify(this.props.nodes))); // Copy here to avoid modifying the props
 
@@ -336,9 +336,10 @@ class Days extends React.Component {
     else if (Array.isArray(this.props.days)) {
       // v2
       for (let [idx, day] of this.props.days.entries()){
+        let nodes = (day.itinerary === null) ? [{"title": "No plan for today", "type": "N"}] : day.itinerary;
         days.push(
           <div key={idx}>
-            <Day no={grey ? 'grey': ''} nodes={day.itinerary} date={day.date} config={this.props.config}/>
+            <Day no={grey ? 'grey': ''} nodes={nodes} date={day.date} config={this.props.config}/>
             {/*<DayMap nodes={this.props.days[date]}/>*/}
           </div>
         )
