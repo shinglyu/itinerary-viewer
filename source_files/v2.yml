@@ -1,33 +1,25 @@
-# This file is a travle plan for https://shinglyu.github.io/TravelPlanViewer
-
-- date: 6/22                  #Each day start with a "<date>:"
+---
+- date: 6/22
   itinerary:
-  - sight: YVR Airport # Each item in a day start with a "-" and is idented
-    time: "11:50"      # Time, must be quoted 
-                       # Maps will shown based on the address you provide
-    address: "3211 Grant McConachie Way, Richmond, BC V7B 0A4加拿大" 
-    description: "+1 604-207-7077" #Put any notes in description section
-
-  - transit: SkyTrain Canada Line
-    description: http://www.translink.ca/-/media/Documents/schedules_and_maps/transit_maps/SkyTrainSystemMap.pdf
-
-  - sight: SkyTrain Waterfront Station 
-    time: "13:30"
-    address: 601 West Cordova Street, Vancouver 439 Granville Street, Vancouver
-
-  - sight: Vencouver MozSpace
-    time: 13:45
-    address: 163 W Hastings St, Suite 209 Vancouver, BC V6B 1H5 Canada 
-
-  - sight: Gastown, Vancouver
-
+    - address: "3211 Grant McConachie Way, Richmond, BC V7B 0A4加拿大"
+      description: "+1 604-207-7077"
+      sight: TestYVR Airport
+      time: "11:50"
+    - description: "http://www.translink.ca/-/media/Documents/schedules_and_maps/transit_maps/SkyTrainSystemMap.pdf"
+      transit: SkyTrain Canada Line
+    - address: "601 West Cordova Street, Vancouver 439 Granville Street, Vancouver"
+      sight: SkyTrain Waterfront Station
+      time: "13:30"
+    - address: "163 W Hastings St, Suite 209 Vancouver, BC V6B 1H5 Canada"
+      sight: Vencouver MozSpace
+      time: "13:45"
+    - sight: "Gastown, Vancouver"
 - date: 6/23
   itinerary:
-  - sight: Stanley Park
-    time: "11:50"
-    description: "Great view!"
-
-  - sight: YVR Airport
-    time: "18:50"
-    address: "3211 Grant McConachie Way, Richmond, BC V7B 0A4加拿大"
-    description: "+1 604-207-7077"
+    - description: "Great view! http://www.google.com Haha"
+      sight: Stanley Park
+      time: "11:50"
+    - address: "3211 Grant McConachie Way, Richmond, BC V7B 0A4加拿大"
+      description: "+1 604-207-7077"
+      sight: YVR Airport
+      time: "18:50"
