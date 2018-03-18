@@ -9,7 +9,7 @@ import urllib
 import unicodedata
 import xml.dom.minidom
 
-waitTime=2
+waitTime=1
 
 def geocode(address, sensor=False):
  # This function queries the Google Maps API geocoder with an
@@ -28,8 +28,9 @@ def geocode(address, sensor=False):
   result = json.loads(jsonOutput) # converts jsonOutput into a dictionary
   # check status is ok i.e. we have results (don't want to get exceptions)
   if result['status'] == 'OVER_QUERY_LIMIT':
-    print("Exceeded API limit, force stop. Please try again later when the query limit is reset")
-    quit()
+    print("Exceeded API limit, skipping. Please try again later when the query limit is reset")
+    return ""
+    # quit()
 
   if result['status'] != "OK":
     print("Search failed for " + address)
@@ -67,7 +68,7 @@ def createKML(addresses, fileName):
     placemarkElement.appendChild(pointElement)
     coorElement = kmlDoc.createElement('coordinates')
 
-    # This geocodes the address and adds it to a  element.
+    # This geocodes the address and adds it to an element.
     print("Searching for location " + str(idx+1) + "/" + str(len(addresses)))
     coordinates = geocode(address['address'])
 
