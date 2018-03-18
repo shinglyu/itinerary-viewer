@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<head>
+</head>
+<body>
+  <h1>Select the day of departure:</h1>
+  <input id="date" type="date">
+
+  <script src="ics.deps.min.js" charset="utf-8"></script>
+  <script src="ics.min.js" charset="utf-8"></script>
+
+  <script type="text/javascript">
+    let default_hour = 9;
+    document.getElementById("date").addEventListener("change", (evt) => {
+      let departure_date = new Date(evt.target.value);
+
+      departure_date.setHours(default_hour);
+
+      cal = ics();
+      cal.addEvent('Travel', '(Created  by Itinerary Viewer)', '', departure_date, departure_date);
+      cal.download("travel_checklist");
+    })
+  </script>
+</body>
+</html>
