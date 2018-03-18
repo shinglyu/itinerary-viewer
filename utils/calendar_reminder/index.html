@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<head>
+</head>
+<body>
+  <h2>1. Select the day of departure:</h2>
+  <input id="date" type="date">
+
+  <h2>2. The following events will be created:</h2>
+  <ul id="checklist"></ul>
+  <h2>3. Download the <code>travel_checklist.ics</code> file and import it to your calendar app</h2>
+  <ul>
+    <li><a href="https://calendar.google.com/calendar/r/settings/export" target="_blank">Google Calendar</a></li>
+  </ul>
+
+
+  <script src="ics.deps.min.js" charset="utf-8"></script>
+  <script src="ics.min.js" charset="utf-8"></script>
+
+  <script src="checklist.js" charset="utf-8"></script>
+
+  <script type="text/javascript">
+    /* Displaying the checklist */
+    let checklistDisplay = document.getElementById("checklist");
+    for (let item of CHECKLIST) {
+      let itemText = document.createElement('li');
+      let plural = (item["time_before"]/DAY > 1)
+      itemText.textContent = item["time_before"]/DAY + " day" + (plural ? "s": "") + " before: " + item["title"];
+      checklistDisplay.appendChild(itemText);
+    }
+
+    /* Calendar generation */
+    const DEFAULT_HOUR = 9;
+    const DEFAULT_LOCATION = '';
+
+    function addChecklistEvent(departureDate, item, ics_file) {
+      if (! (departureDate instanceof Date)) { throw new Error("Input must be a Date object");}
+      let time = new Date(departureDate - item['time_before']);
+      departureDate.setHours(DEFAULT_HOUR);
+      ics_file.addEvent(item['title'], item['description'], DEFAULT_LOCATION, time, time);
+    }
+
+    document.getElementById("date").addEventListener("change", (evt) => {
+      let departureDate = new Date(evt.target.value);
+
+      departureDate.setHours(DEFAULT_HOUR);
+
+      cal = ics();
+      for (let item of CHECKLIST) {
+        addChecklistEvent(departureDate, item, cal);
+      }
+      cal.download("travel_checklist");
+    })
+  </script>
+</body>
+</html>
