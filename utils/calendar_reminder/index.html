@@ -8,15 +8,28 @@
   <script src="ics.deps.min.js" charset="utf-8"></script>
   <script src="ics.min.js" charset="utf-8"></script>
 
-  <script type="text/javascript">
-    let default_hour = 9;
-    document.getElementById("date").addEventListener("change", (evt) => {
-      let departure_date = new Date(evt.target.value);
+  <script src="checklist.js" charset="utf-8"></script>
 
-      departure_date.setHours(default_hour);
+  <script type="text/javascript">
+    const DEFAULT_HOUR = 9;
+    const DEFAULT_LOCATION = '';
+
+    function addChecklistEvent(departureDate, item, ics_file) {
+      if (! (departureDate instanceof Date)) { throw new Error("Input must be a Date object");}
+      let time = new Date(departureDate - item['time_before']);
+      departureDate.setHours(DEFAULT_HOUR);
+      ics_file.addEvent(item['title'], item['description'], DEFAULT_LOCATION, time, time);
+    }
+
+    document.getElementById("date").addEventListener("change", (evt) => {
+      let departureDate = new Date(evt.target.value);
+
+      departureDate.setHours(DEFAULT_HOUR);
 
       cal = ics();
-      cal.addEvent('Travel', '(Created  by Itinerary Viewer)', '', departure_date, departure_date);
+      for (let item of CHECKLIST) {
+        addChecklistEvent(departureDate, item, cal);
+      }
       cal.download("travel_checklist");
     })
   </script>
