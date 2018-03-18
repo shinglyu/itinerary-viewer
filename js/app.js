@@ -27,6 +27,10 @@ class Page extends React.Component {
 
     fetch(base_url + file)
       .then(function(resp){
+        if (!resp.ok) {
+          alert("Fail to find the itinerary file, please check the URL again.");
+          return;
+        }
         console.log(resp)
         return resp.json()
       }, function(err){
