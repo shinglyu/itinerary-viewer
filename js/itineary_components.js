@@ -39,6 +39,7 @@ class AutoLinkText extends React.Component {
 }
 
 
+/*
 class Map extends React.Component {
   render(){
     var address = undefined;
@@ -108,6 +109,7 @@ class DayMap extends React.Component {
     )
   }
 }
+*/
 
 class Suggestions extends React.Component {
   render(){
