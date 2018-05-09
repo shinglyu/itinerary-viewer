@@ -1,7 +1,7 @@
 /* Thanks http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript */
 //Get query string
 const base_url = "http://localhost:3000/"
-//var Page = React.createClass({
+
 class Page extends React.Component {
   constructor(props){
     super(props);
@@ -19,7 +19,25 @@ class Page extends React.Component {
        return b;
      })(window.location.search.substr(1).split('&'));
 
-     this.state = {days:{}, config:qs};
+     this.state = {
+       days: {}, 
+       config: qs,
+       map_markers: [{'lat': 0, 'lng': 0}],
+     };
+  }
+  showSingleAddress(address) {
+    fetch('https://maps.googleapis.com/maps/api/geocode/json?address=' + encodeURI(address) + '&key=' + maps_embed_api_key)
+      .then((resp) => resp.json())
+      .then((resp) => {
+        if (resp.results.length === 0) {
+          alert('Can\'t find ' + address);
+        } else {
+          this.setState({
+            map_markers: [resp.results[0].geometry.location]
+          })
+        }
+
+      });
   }
   componentDidMount(){
     //var base_url = "http://localhost:3000/"
@@ -51,12 +69,16 @@ class Page extends React.Component {
           alert("Error while loading json: " + err)
         }
       )
+    console.log(this)
+    this.showSingleAddress('dubai airport')
   }
+
   render(){
-    
+    console.log(this.state.map_markers)
     return (
-      <div>
+      <div className="page">
         <Days days={this.state.days} config={this.state.config}/>
+        <DynamicMap markers={this.state.map_markers}/>
         <Toolbar />
       </div>
     )

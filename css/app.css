@@ -138,18 +138,18 @@ div.content > .text > .description {
   }
 }
 
-/* disabled */
-
-div.content > .map{
-  min-width:200px;  
-  float:right
+/* New BEM starts here */
+.map {
+  width: 50vw;
+  height: 95vh;
+  align-self: flex-start;
+  position: sticky !important;
+  top: 10px ;
 }
 
-.daymap {
-  text-align:center;
+.page {
+  display: flex;
 }
 
-.daymap > img{
-  margin:3%;
-  cursor: pointer;
+.days {
 }

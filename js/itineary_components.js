@@ -38,79 +38,6 @@ class AutoLinkText extends React.Component {
   }
 }
 
-
-/*
-class Map extends React.Component {
-  render(){
-    var address = undefined;
-
-    var map_img_src="http://maps.googleapis.com/maps/api/staticmap?center=" + encodeURI(address) + 
-    "&size=200x200" + 
-    "&markers=size:small|color:red|label:A|" + encodeURI(address)
-    "&key=AIzaSyBGagqiIEihpnzPp_2xYPImM8jDryx9tlU";
-    //var map_img_src="http://placehold.it/200x200";
-    var external_link ="http://maps.google.com/maps?q=" + encodeURI(address);
-
-    if ((this.props.node.type != "S" && typeof this.props.node.type !== "undefined") || typeof address == "undefined"){
-      return <div/>
-    }
-    else {
-      return (
-        <div className="map">
-          <a href={external_link} target="_blank">
-            <img src={map_img_src}/>
-          </a>
-        </div>
-      )
-    }
-  }
-}
-
-class DayMap extends React.Component {
-  getInitialState(){
-    return {"size": "300x300"};
-  }
-
-  handleClick(){
-    // FIXME: what't the upper limit?
-    this.setState({"size": "1200x1200"});
-  }
-
-  render(){
-    //FIXME: ES6
-
-    var map_img_src="https://maps.googleapis.com/maps/api/staticmap?" + 
-    "&size=" + this.state['size']
-    "&key=AIzaSyBGagqiIEihpnzPp_2xYPImM8jDryx9tlU";
-    //var mapsrc="http://placehold.it/200x200";
-    //
-    this.props.nodes.map(function(node){
-      //if (typeof qs['no_map'] == "undefined"){
-        if (typeof node.address !== "undefined" && (node.type == "S" || typeof node.type == "undefined")){
-          address = node.address;
-          map_img_src += "&markers=size:small|color:red|label:A|" + encodeURI(address)  
-        }
-        else {
-          //if (typeof node.title !== "undefined" && typeof qs['no_auto_map'] == "undefined" && (node.type == "S" || typeof node.type == "undefined")){
-          //TODO:disable auto infer
-          if (typeof node.title !== "undefined"){
-            address = node.title;
-            map_img_src += "&markers=size:small|color:red|label:A|" + encodeURI(address)  
-          }
-        }
-      //}
-    })
-
-    //var map_img_src="http://placehold.it/200x200";
-    return (
-      <div className="daymap" onClick={this.handleClick}>
-        <img src={map_img_src}/>
-      </div>
-    )
-  }
-}
-*/
-
 class Suggestions extends React.Component {
   render(){
     var suggestions = []
@@ -362,7 +289,7 @@ class Days extends React.Component {
     }
 
     return (
-      <div className="container">
+      <div className="days container">
       {days}
       </div>
     )
