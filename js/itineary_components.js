@@ -250,7 +250,7 @@ class Day extends React.Component {
     
     nodes = nodes.map(function(node, index, array){
       return (
-        <Node key={index} node={node} config={config} drawVertLine={(index != array.length-1)} {...this.props} />
+        <Node key={index} node={node} drawVertLine={(index != array.length-1)} {...this.props} />
       )
     }, this) 
     return (
@@ -275,7 +275,7 @@ class Days extends React.Component {
         let nodes = (day.itinerary === null) ? [{"title": "No plan for today", "type": "N"}] : day.itinerary;
         days.push(
           <div key={idx}>
-            <Day no={grey ? 'grey': ''} nodes={nodes} date={day.date} config={this.props.config} {...this.props} />
+            <Day no={grey ? 'grey': ''} nodes={nodes} date={day.date} {...this.props} />
             {/*<DayMap nodes={this.props.days[date]}/>*/}
           </div>
         )
@@ -287,7 +287,7 @@ class Days extends React.Component {
       for (var date in this.props.days){
         days.push(
           <div key={date}>
-            {<Day no={grey ? 'grey': ''} nodes={this.props.days[date]} date={date} config={this.props.config}/>}
+            {<Day no={grey ? 'grey': ''} nodes={this.props.days[date]} date={date} {...this.props}/>}
             {/*<DayMap nodes={this.props.days[date]}/>*/}
           </div>
         )
