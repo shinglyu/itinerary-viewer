@@ -25,18 +25,20 @@ class Page extends React.Component {
        map_markers: [{'lat': 0, 'lng': 0}],
      };
   }
-  showSingleAddress(address) {
+  // Use public class fields syntax to get over the this binding problem
+  showSingleAddress = (address) => {
+    console.log(this)
     fetch('https://maps.googleapis.com/maps/api/geocode/json?address=' + encodeURI(address) + '&key=' + maps_embed_api_key)
       .then((resp) => resp.json())
       .then((resp) => {
         if (resp.results.length === 0) {
           alert('Can\'t find ' + address);
         } else {
+          console.log(this)
           this.setState({
             map_markers: [resp.results[0].geometry.location]
           })
         }
-
       });
   }
   componentDidMount(){
@@ -49,14 +51,11 @@ class Page extends React.Component {
           alert("Fail to find the itinerary file, please check the URL again.");
           return;
         }
-        console.log(resp)
         return resp.json()
       }, function(err){
         alert("Fail to load: " + err)
       })
       .then(function(days){
-          //console.log(text)
-          console.log(days)
           try {
             this.setState({"days": days})
           }
@@ -69,15 +68,12 @@ class Page extends React.Component {
           alert("Error while loading json: " + err)
         }
       )
-    console.log(this)
-    this.showSingleAddress('dubai airport')
   }
 
   render(){
-    console.log(this.state.map_markers)
     return (
       <div className="page">
-        <Days days={this.state.days} config={this.state.config}/>
+        <Days days={this.state.days} config={this.state.config} showSingleAddress={this.showSingleAddress}/>
         <DynamicMap markers={this.state.map_markers}/>
         <Toolbar />
       </div>

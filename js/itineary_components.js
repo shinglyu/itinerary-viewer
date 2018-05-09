@@ -39,28 +39,35 @@ class AutoLinkText extends React.Component {
 }
 
 class Suggestions extends React.Component {
+  constructor(props) {
+    super(props);
+    this._showOnMap = this._showOnMap.bind(this);
+  }
+  _showOnMap(e) {
+    e.preventDefault();
+    console.log("In showonmap")
+    console.log(this)
+    this.props.showSingleAddress(this.props.node.address);
+  }
   render(){
     var suggestions = []
     
-    
+    let in_page_map_link, map_link;
     if (this.props.node.type == "S"){
       // address = title when rendering DayMap
       if (this.props.node.type == "S" && typeof this.props.node.address !== "undefined"){
-        suggestions.push(<a target="_blank" href={"https://maps.google.com/maps?q=" + encodeURI(this.props.node.address)}>map</a>)
+        in_page_map_link = (<a className="suggestions__item" href="#" onClick={this._showOnMap.bind(this)}>show</a>);
+        map_link = (<a className="suggestions__item" target="_blank" href={"https://maps.google.com/maps?q=" + encodeURI(this.props.node.address)}>map</a>);
       }
-      suggestions.push(<span> | </span>)
-
-      suggestions.push(<a target="_blank" href={"https://www.google.com/search?q=" + encodeURI(this.props.node.title)}>detail</a>)
-      suggestions.push(<span> | </span>)
-      suggestions.push(<a target="_blank" href={"https://www.google.com/search?q=" + encodeURI(this.props.node.title) + "+address"}>address</a>)
-      suggestions.push(<span> | </span>)
-      suggestions.push(<a target="_blank" href={"https://www.google.com/search?q=" + encodeURI("restaurant near " + this.props.node.title)}>food</a>)
-      suggestions.push(<span> | </span>)
-      suggestions.push(<a target="_blank" href={"https://www.google.com/search?q=" + encodeURI("things to do near " + this.props.node.title)}>sights</a>)
     }
     return (
       <div className="suggestions">
-        {suggestions}
+        {in_page_map_link}
+        {map_link}
+        <a className="suggestions__item" target="_blank" href={"https://www.google.com/search?q=" + encodeURI(this.props.node.title)}>detail</a>
+        <a className="suggestions__item" target="_blank" href={"https://www.google.com/search?q=" + encodeURI(this.props.node.title) + "+address"}>address</a>
+        <a className="suggestions__item" target="_blank" href={"https://www.google.com/search?q=" + encodeURI("restaurant near " + this.props.node.title)}>food</a>
+        <a className="suggestions__item" target="_blank" href={"https://www.google.com/search?q=" + encodeURI("things to do near " + this.props.node.title)}>sights</a>
       </div>
     )
   }
@@ -84,7 +91,7 @@ class Node extends React.Component {
 
     var suggestions;
     if (typeof this.props.config['planningMode'] !== "undefined"){
-      suggestions = (<Suggestions node={node}/>)
+      suggestions = (<Suggestions node={node} showSingleAddress={this.props.showSingleAddress}/>)
     }
     //var map = <Map node={node}/>
     var map = [];
@@ -243,9 +250,9 @@ class Day extends React.Component {
     
     nodes = nodes.map(function(node, index, array){
       return (
-        <Node key={index} node={node} config={config} drawVertLine={(index != array.length-1)}  />
+        <Node key={index} node={node} config={config} drawVertLine={(index != array.length-1)} {...this.props} />
       )
-    }) 
+    }, this) 
     return (
       <div className={"timeline " + this.props.no}>
         {nodes}
@@ -268,7 +275,7 @@ class Days extends React.Component {
         let nodes = (day.itinerary === null) ? [{"title": "No plan for today", "type": "N"}] : day.itinerary;
         days.push(
           <div key={idx}>
-            <Day no={grey ? 'grey': ''} nodes={nodes} date={day.date} config={this.props.config}/>
+            <Day no={grey ? 'grey': ''} nodes={nodes} date={day.date} config={this.props.config} {...this.props} />
             {/*<DayMap nodes={this.props.days[date]}/>*/}
           </div>
         )

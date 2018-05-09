@@ -151,5 +151,9 @@ div.content > .text > .description {
   display: flex;
 }
 
-.days {
+.suggestions__item + .suggestions__item:before {
+  content: "| ";
+  white-space: pre;
+  display: inline-block;
+  text-decoration: none;
 }
