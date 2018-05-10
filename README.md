@@ -30,3 +30,12 @@ Besides the web-based planner, this tool also comes with a set of useful scripts
 * If node, npm or bower is not installed, uncomment the lines in `./bin/install.sh`
 * Run with `./bin/itinerary-viewer <path/to/file.yml>`
 
+# Tests
+* Install yarn:
+
+        curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+        echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+        sudo apt-get update
+        sudo apt-get install yarn
+
+* Install jest and other testing libraries
