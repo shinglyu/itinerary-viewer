@@ -1,0 +1,29 @@
+type not specified: 
+https://www.google.com.tw/maps/dir/%E8%87%BA%E7%81%A3%E5%A4%A7%E5%AD%B8+10617%E5%8F%B0%E5%8C%97%E5%B8%82%E5%A4%A7%E5%AE%89%E5%8D%80%E7%BE%85%E6%96%AF%E7%A6%8F%E8%B7%AF%E5%9B%9B%E6%AE%B51%E8%99%9F/%E5%8F%B0%E5%8C%97101%E5%A4%A7%E6%A8%93+110%E5%8F%B0%E5%8C%97%E5%B8%82%E4%BF%A1%E7%BE%A9%E5%8D%80/@25.0264346,121.5410724,15z/data=!3m1!4b1!4m13!4m12!1m5!1m1!1s0x3442a989fe322ea9:0x21750404ee1d7f66!2m2!1d121.5397518!2d25.0173405!1m5!1m1!1s0x3442abb6da9c9e1f:0x1206bcf082fd10a6!2m2!1d121.5644722!2d25.0339639
+
+https://www.google.com.tw/maps/dir/
+%E8%87%BA%E7%81%A3%E5%A4%A7%E5%AD%B8+10617%E5%8F%B0%E5%8C%97%E5%B8%82%E5%A4%A7%E5%AE%89%E5%8D%80%E7%BE%85%E6%96%AF%E7%A6%8F%E8%B7%AF%E5%9B%9B%E6%AE%B51%E8%99%9F/
+%E5%8F%B0%E5%8C%97101%E5%A4%A7%E6%A8%93+110%E5%8F%B0%E5%8C%97%E5%B8%82%E4%BF%A1%E7%BE%A9%E5%8D%80/
+@25.0264346,121.5410724,15z/
+data=!3m1!4b1!4m13!4m12!1m5!1m1!1s0x3442a989fe322ea9:0x21750404ee1d7f66!2m2!1d121.5397518!2d25.0173405!1m5!1m1!1s0x3442abb6da9c9e1f:0x1206bcf082fd10a6!2m2!1d121.5644722!2d25.0339639
+
+
+public transit:
+https://www.google.com.tw/maps/dir/%E8%87%BA%E7%81%A3%E5%A4%A7%E5%AD%B8+10617%E5%8F%B0%E5%8C%97%E5%B8%82%E5%A4%A7%E5%AE%89%E5%8D%80%E7%BE%85%E6%96%AF%E7%A6%8F%E8%B7%AF%E5%9B%9B%E6%AE%B51%E8%99%9F/%E5%8F%B0%E5%8C%97101%E5%A4%A7%E6%A8%93+110%E5%8F%B0%E5%8C%97%E5%B8%82%E4%BF%A1%E7%BE%A9%E5%8D%80/@25.0264346,121.5410724,15z/data=!4m14!4m13!1m5!1m1!1s0x3442a989fe322ea9:0x21750404ee1d7f66!2m2!1d121.5397518!2d25.0173405!1m5!1m1!1s0x3442abb6da9c9e1f:0x1206bcf082fd10a6!2m2!1d121.5644722!2d25.0339639!3e3
+
+https://www.google.com.tw/maps/dir/
+%E8%87%BA%E7%81%A3%E5%A4%A7%E5%AD%B8+10617%E5%8F%B0%E5%8C%97%E5%B8%82%E5%A4%A7%E5%AE%89%E5%8D%80%E7%BE%85%E6%96%AF%E7%A6%8F%E8%B7%AF%E5%9B%9B%E6%AE%B51%E8%99%9F/
+%E5%8F%B0%E5%8C%97101%E5%A4%A7%E6%A8%93+110%E5%8F%B0%E5%8C%97%E5%B8%82%E4%BF%A1%E7%BE%A9%E5%8D%80/
+@25.0264346,121.5410724,15z/
+data=!4m14!4m13!1m5!1m1!1s0x3442a989fe322ea9:0x21750404ee1d7f66!2m2!1d121.5397518!2d25.0173405!1m5!1m1!1s0x3442abb6da9c9e1f:0x1206bcf082fd10a6!2m2!1d121.5644722!2d25.0339639!3e3
+
+
+https://www.google.com.tw/maps/dir/桃園車站/桃園機場/
+http://maps.google.com/maps?saddr=London+UK&daddr=Birmingham+UK&dirflg=r
+
+dirflg=h - Switches on "Avoid Highways" route finding mode.
+dirflg=t - Switches on "Avoid Tolls" route finding mode.
+dirflg=r - Switches on "Public Transit" - only works in some areas.
+dirflg=w - Switches to walking directions - still in beta.
+dirflg=d - Switches to driving directions.
+
