@@ -45,6 +45,7 @@ class DynamicMap extends React.Component {
           position: center,
           map: this.map
         }));
+        // TODO: display a InfoWindow
         bounds.extend(center);
       }
       this.map.fitBounds(bounds);

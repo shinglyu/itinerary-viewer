@@ -82,7 +82,7 @@ class DaySuggestions extends React.Component {
   render(){
     return (
       <div className='suggestions'>
-        <a className='suggestions__item' href='#' onClick={this._showAllOnMap}>show</a>
+        <a className='suggestions__item' href='#' onClick={this._showAllOnMap}>show on map</a>
       </div>
     )
   }
