@@ -22,7 +22,7 @@ class Page extends React.Component {
      this.state = {
        days: {}, 
        config: qs,
-       map_markers: [{'lat': 0, 'lng': 0}],
+       map_markers: [{'lat': 52.3792, 'lng': 4.8994}], // Amsterdam
      };
   }
   // Use public class fields syntax to get over the this binding problem
