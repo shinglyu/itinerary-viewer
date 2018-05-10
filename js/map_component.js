@@ -28,13 +28,27 @@ class DynamicMap extends React.Component {
   componentDidUpdate() {
     this._clearAllMarkers();
 
-    // Only supports the first marker
-    var center = new google.maps.LatLng(this.props.markers[0]['lat'], this.props.markers[0]['lng']);
-    this.markers.push(new google.maps.Marker({
-      position: center,
-      map: this.map
-    }));
-    this.map.panTo(center);
+    if (this.props.markers.length === 1) {
+      // Show a single marker and center
+      var center = new google.maps.LatLng(this.props.markers[0]['lat'], this.props.markers[0]['lng']);
+      this.markers.push(new google.maps.Marker({
+        position: center,
+        map: this.map
+      }));
+      this.map.panTo(center);
+    } else {
+      // Show all markers and center
+      var bounds = new google.maps.LatLngBounds();
+      for (let marker of this.props.markers) {
+        var center = new google.maps.LatLng(marker['lat'], marker['lng']);
+        this.markers.push(new google.maps.Marker({
+          position: center,
+          map: this.map
+        }));
+        bounds.extend(center);
+      }
+      this.map.fitBounds(bounds);
+    }
   }
 
   render() {

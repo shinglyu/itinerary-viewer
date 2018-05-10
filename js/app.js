@@ -26,21 +26,35 @@ class Page extends React.Component {
      };
   }
   // Use public class fields syntax to get over the this binding problem
-  showSingleAddress = (address) => {
-    console.log(this)
-    fetch('https://maps.googleapis.com/maps/api/geocode/json?address=' + encodeURI(address) + '&key=' + maps_embed_api_key)
-      .then((resp) => resp.json())
-      .then((resp) => {
-        if (resp.results.length === 0) {
-          alert('Can\'t find ' + address);
-        } else {
-          console.log(this)
-          this.setState({
-            map_markers: [resp.results[0].geometry.location]
-          })
-        }
+  showSingleAddress = async (address) => {
+    let geocoder = new CachedGeoCoder();
+    let location = await geocoder.geocode(address);
+    
+    if (location === null) {
+      alert("Can't find " + address);
+    } else {
+      this.setState({
+        map_markers: [location]
       });
+    }
   }
+
+  // Use public class fields syntax to get over the this binding problem
+  showMultipleAddresses = async (addresses) => {
+    let geocoder = new CachedGeoCoder();
+    let locations = await geocoder.geocodeMultiple(addresses);
+    
+    let valid_locations = locations.filter((x) => x !== null)
+    if (locations.every((x) => x === null)) {
+      alert("Can't find all the addresses" + address);
+    // TODO: show a non-blocking warning if some of the addresses failes to decode
+    } else {
+      this.setState({
+        map_markers: valid_locations
+      })
+    }
+  }
+
   componentDidMount(){
     //var base_url = "http://localhost:3000/"
     var file = this.state.config['file'];
@@ -73,7 +87,7 @@ class Page extends React.Component {
   render(){
     return (
       <div className="page">
-        <Days days={this.state.days} config={this.state.config} showSingleAddress={this.showSingleAddress}/>
+        <Days days={this.state.days} config={this.state.config} showSingleAddress={this.showSingleAddress} showMultipleAddresses={this.showMultipleAddresses}/>
         <DynamicMap markers={this.state.map_markers}/>
         <Toolbar />
       </div>
