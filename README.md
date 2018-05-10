@@ -2,6 +2,8 @@
 
 A web-based trip planner, write your plan in YAML and have a nice looking printable itinerary.
 
+![demo](doc/demo.png)
+
 ## Demo:
 * [Demo (Planning Mode)](https://shinglyu.github.io/itinerary-viewer/?planningMode=1)
 * [Printable PDF](https://shinglyu.github.io/itinerary-viewer/demo_itinerary.pdf)
