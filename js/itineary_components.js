@@ -57,7 +57,7 @@ class Suggestions extends React.Component {
       // address = title when rendering DayMap
       if (this.props.node.type == "S" && typeof this.props.node.address !== "undefined"){
         in_page_map_link = (<a className="suggestions__item" href="#" onClick={this._showOnMap.bind(this)}>show</a>);
-        map_link = (<a className="suggestions__item" target="_blank" href={"https://maps.google.com/maps?q=" + encodeURI(this.props.node.address)}>map</a>);
+        map_link = (<a className="suggestions__item" target="_blank" href={"https://maps.google.com/maps?q=" + encodeURI(this.props.node.address)}> &#9404;map</a>);
       }
     }
     return (
